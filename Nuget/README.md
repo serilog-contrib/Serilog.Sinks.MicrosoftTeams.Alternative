@@ -52,4 +52,5 @@ Do not hesitate to create [issues](https://github.com/SeppPenner/Serilog.Sinks.M
 Change history
 --------------
 
+* **Version 1.0.0.1 (2019-06-21)** : Added option for minimal log level.
 * **Version 1.0.0.0 (2019-06-21)** : 1.0 release.

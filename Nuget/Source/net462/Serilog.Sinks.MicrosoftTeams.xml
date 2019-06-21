@@ -222,7 +222,7 @@
             The default batch size limit.
             </summary>
         </member>
-        <member name="M:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.#ctor(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.TimeSpan},System.IFormatProvider)">
+        <member name="M:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.#ctor(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.TimeSpan},System.IFormatProvider,Serilog.Events.LogEventLevel)">
             <summary>
             Create an instance of the Microsoft Teams options container.
             </summary>
@@ -233,6 +233,7 @@
             <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
             provided.</param>
             <param name="formatProvider">The format provider used for formatting the message.</param>
+            <param name="minimumLogEventLevel">The minimum log event level to use.</param>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.WebHookUri">
             <summary>
@@ -257,6 +258,11 @@
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.FormatProvider">
             <summary>
             The format provider used for formatting the message.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.MinimumLogEventLevel">
+            <summary>
+            Gets the minimum log event level.
             </summary>
         </member>
     </members>

@@ -60,6 +60,11 @@ namespace Serilog.Sinks.MicrosoftTeams
 
             foreach (var logEvent in events)
             {
+                if (logEvent.Level < _options.MinimumLogEventLevel)
+                {
+                    continue;
+                }
+
                 var foundSameLogEvent = messagesToSend.FirstOrDefault(l => l.LogEvent.Exception.Message == logEvent.Exception.Message);
 
                 if (foundSameLogEvent == null)
