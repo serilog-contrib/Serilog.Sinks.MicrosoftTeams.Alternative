@@ -4,7 +4,7 @@ Serilog.Sinks.MicrosoftTeams
 Serilog.Sinks.MicrosoftTeams is a library to save logging information from [Serilog](https://github.com/serilog/serilog) to [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software).
 The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/0ggd9vc0fw9gc92c?svg=true)](https://ci.appveyor.com/project/SeppPenner/Serilog.Sinks.MicrosoftTeams)
+[![Build status](https://ci.appveyor.com/api/projects/status/x4l2tdvyj7gv51qo?svg=true)](https://ci.appveyor.com/project/SeppPenner/serilog-sinks-microsoftteams)
 [![GitHub issues](https://img.shields.io/github/issues/SeppPenner/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/issues)
 [![GitHub forks](https://img.shields.io/github/forks/SeppPenner/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/network)
 [![GitHub stars](https://img.shields.io/github/stars/SeppPenner/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/stargazers)
