@@ -10,11 +10,11 @@
     <PackageProjectUrl>https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/blob/master/License.txt</PackageLicenseUrl>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
-    <Version>1.1.0</Version>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
+    <Version>1.2.0</Version>
     <PackageTags>c# csharp serilog teams microsoft-teams microsoft sink logging log</PackageTags>
-    <PackageReleaseNotes>Added option for minimal log level.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed icon in nuget package.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
