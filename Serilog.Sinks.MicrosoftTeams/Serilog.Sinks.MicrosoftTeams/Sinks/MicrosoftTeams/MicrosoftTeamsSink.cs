@@ -175,21 +175,34 @@ namespace Serilog.Sinks.MicrosoftTeams
                 };
             }
 
-            yield return new MicrosoftTeamsMessageFact
-                             {
-                                 Name = "FirstOccurence",
-                                 Value = logEvent.FirstOccurance.ToString(
-                                     "dd.MM.yyyy HH:mm:sszzz",
-                                     _options.FormatProvider)
-                             };
+            if (logEvent.FirstOccurance != logEvent.LastOccurance)
+            {
+                yield return new MicrosoftTeamsMessageFact
+                                 {
+                                     Name = "First occurence",
+                                     Value = logEvent.FirstOccurance.ToString(
+                                         "dd.MM.yyyy HH:mm:sszzz",
+                                         _options.FormatProvider)
+                                 };
 
-            yield return new MicrosoftTeamsMessageFact
-                             {
-                                 Name = "LastOccurance",
-                                 Value = logEvent.LastOccurance.ToString(
-                                     "dd.MM.yyyy HH:mm:sszzz",
-                                     _options.FormatProvider)
-                             };
+                yield return new MicrosoftTeamsMessageFact
+                                 {
+                                     Name = "Last occurance",
+                                     Value = logEvent.LastOccurance.ToString(
+                                         "dd.MM.yyyy HH:mm:sszzz",
+                                         _options.FormatProvider)
+                                 };
+            }
+            else
+            {
+                yield return new MicrosoftTeamsMessageFact
+                                 {
+                                     Name = "Occured on",
+                                     Value = logEvent.FirstOccurance.ToString(
+                                         "dd.MM.yyyy HH:mm:sszzz",
+                                         _options.FormatProvider)
+                                 };
+            }
         }
 
         /// <summary>
