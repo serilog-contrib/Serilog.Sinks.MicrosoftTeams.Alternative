@@ -14,7 +14,7 @@
     <FileVersion>1.0.2.1</FileVersion>
     <Version>1.0.2.1</Version>
     <PackageTags>c# csharp serilog teams microsoft-teams microsoft sink logging log</PackageTags>
-    <PackageReleaseNotes>Fixed icon in nuget package.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added option to only show from and to dates when the dates are not equal.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
