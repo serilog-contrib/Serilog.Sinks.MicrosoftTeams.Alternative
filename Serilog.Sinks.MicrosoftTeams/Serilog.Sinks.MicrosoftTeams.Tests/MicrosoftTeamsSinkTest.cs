@@ -52,8 +52,9 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
 
             for (var i = 0; i < messageCount; i++)
             {
+                var occuredOn = actualMessages[i]["sections"][0]["facts"].Last.Last.Last.ToString();
                 var expectedMessage = TestHelper.CreateMessage(templates[i], renderedMessages[i], logEventLevel,
-                    color, i);
+                    color, i, occuredOn);
                 actualMessages[i].ShouldBe(expectedMessage);
             }
         }

@@ -74,7 +74,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
         }
 
         public static JObject CreateMessage(string template, string renderedMessage, LogEventLevel logEventLevel,
-            string color, int counter)
+            string color, int counter, string occuredOn)
         {
             return new JObject
             {
@@ -104,6 +104,11 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
                             {
                                 ["name"] = "counter",
                                 ["value"] = counter
+                            },
+                            new JObject
+                            {
+                                ["name"] = "Occured on",
+                                ["value"] = occuredOn
                             }
                         }
                     },
