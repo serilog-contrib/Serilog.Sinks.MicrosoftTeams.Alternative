@@ -30,8 +30,9 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// provided.</param>
         /// <param name="formatProvider">The format provider used for formatting the message.</param>
         /// <param name="minimumLogEventLevel">The minimum log event level to use.</param>
+        /// <param name="omitPropertiesSection">Indicates whether properties section should be omitted or not.</param>
         public MicrosoftTeamsSinkOptions(string webHookUri, string title, int? batchSizeLimit = null,
-            TimeSpan? period = null, IFormatProvider formatProvider = null, LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose)
+            TimeSpan? period = null, IFormatProvider formatProvider = null, LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose, bool omitPropertiesSection = false)
         {
             if (webHookUri == null)
             {
@@ -49,6 +50,7 @@ namespace Serilog.Sinks.MicrosoftTeams
             Period = period ?? DefaultPeriod;
             FormatProvider = formatProvider;
             MinimumLogEventLevel = minimumLogEventLevel;
+            OmitPropertiesSection = omitPropertiesSection;
         }
 
         /// <summary>
@@ -80,5 +82,10 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// Gets the minimum log event level.
         /// </summary>
         public LogEventLevel MinimumLogEventLevel { get; }
+
+        /// <summary>
+        /// Indicates whether properties section should be omitted or not 
+        /// </summary>
+        public bool OmitPropertiesSection { get; }
     }
 }

@@ -30,11 +30,11 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
             return await taskToComplete.ConfigureAwait(false);
         }
 
-        public static ILogger CreateLogger()
+        public static ILogger CreateLogger(bool omitPropertiesSection = false)
         {
             var logger = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
-                .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHook, "Integration Tests"), LogEventLevel.Verbose)
+                .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHook, "Integration Tests", omitPropertiesSection: omitPropertiesSection), LogEventLevel.Verbose)
                 .CreateLogger();
 
             return logger;
@@ -113,6 +113,18 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
                         }
                     },
                 }
+            };
+        }
+
+        public static JObject CreateMessage(string renderedMessage, string color)
+        {
+            return new JObject
+            {
+                ["@type"] = "MessageCard",
+                ["@context"] = "http://schema.org/extensions",
+                ["title"] = "Integration Tests",
+                ["text"] = renderedMessage,
+                ["themeColor"] = color
             };
         }
     }

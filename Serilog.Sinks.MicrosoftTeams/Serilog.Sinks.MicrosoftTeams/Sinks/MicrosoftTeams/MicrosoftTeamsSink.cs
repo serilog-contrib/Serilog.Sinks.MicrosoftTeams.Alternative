@@ -129,7 +129,7 @@ namespace Serilog.Sinks.MicrosoftTeams
                 Title = _options.Title,
                 Text = renderedMessage,
                 Color = GetAttachmentColor(logEvent.LogEvent.Level),
-                Sections = new[]
+                Sections = _options.OmitPropertiesSection ? null : new[]
                 {
                     new MicrosoftTeamsMessageSection
                     {
