@@ -1,9 +1,8 @@
 using System;
+using Serilog.Events;
 
 namespace Serilog.Sinks.MicrosoftTeams
 {
-    using Serilog.Events;
-
     /// <summary>
     /// Container for all Microsoft Teams sink configurations.
     /// </summary>
@@ -22,7 +21,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// <summary>
         /// Create an instance of the Microsoft Teams options container.
         /// </summary>
-        /// <param name="webHookUri">The incoming webhook URI to the Microsoft Teams channel.</param>
+        /// <param name="webHookUri">The incoming web hook URI to the Microsoft Teams channel.</param>
         /// <param name="title">The title of messages.</param>
         /// <param name="batchSizeLimit">The maximum number of events to post in a single batch; defaults to 1 if
         /// not provided i.e. no batching by default.</param>
@@ -30,7 +29,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// provided.</param>
         /// <param name="formatProvider">The format provider used for formatting the message.</param>
         /// <param name="minimumLogEventLevel">The minimum log event level to use.</param>
-        /// <param name="omitPropertiesSection">Indicates whether properties section should be omitted or not.</param>
+        /// <param name="omitPropertiesSection">Indicates whether the properties section should be omitted or not.</param>
         public MicrosoftTeamsSinkOptions(string webHookUri, string title, int? batchSizeLimit = null,
             TimeSpan? period = null, IFormatProvider formatProvider = null, LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose, bool omitPropertiesSection = false)
         {
@@ -54,7 +53,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         }
 
         /// <summary>
-        /// The incoming webhook URI to the Microsoft Teams channel.
+        /// The incoming web hook URI to the Microsoft Teams channel.
         /// </summary>
         public string WebHookUri { get; }
 
@@ -84,7 +83,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         public LogEventLevel MinimumLogEventLevel { get; }
 
         /// <summary>
-        /// Indicates whether properties section should be omitted or not.
+        /// Indicates whether the properties section should be omitted or not.
         /// </summary>
         public bool OmitPropertiesSection { get; }
     }

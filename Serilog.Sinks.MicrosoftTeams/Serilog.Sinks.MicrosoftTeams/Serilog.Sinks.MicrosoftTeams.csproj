@@ -11,7 +11,7 @@
     <RepositoryUrl>https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/blob/master/License.txt</PackageLicenseUrl>
     <PackageTags>c# csharp serilog teams microsoft-teams microsoft sink logging log</PackageTags>
-    <PackageReleaseNotes>Added option to only show from and to dates when the dates are not equal.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added option for omitting properties section in message.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 

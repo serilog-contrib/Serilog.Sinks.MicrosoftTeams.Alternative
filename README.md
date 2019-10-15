@@ -44,7 +44,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
 |formatProvider|The `IFormatProvider` to use. Supplies culture-specific formatting information. Check https://docs.microsoft.com/en-us/dotnet/api/system.iformatprovider?view=netframework-4.8.|`new CultureInfo("de-DE")`|`null`|
 |batchSizeLimit|The maximum number of events to include in a single batch.|`batchSizeLimit: 40`|`30`|
 |restrictedToMinimumLevel|The minimum level of the logging.|`restrictedToMinimumLevel: LogEventLevel.Verbose`|`LogEventLevel.Verbose`|
-|omitPropertiesSection|Indicates whether properties section should be omitted or not.|`omitPropertiesSection:true`|`false`|
+|omitPropertiesSection|Indicates whether the properties section should be omitted or not.|`omitPropertiesSection: true`|`false`|
 
 ## Further information:
 This project is a fork of https://github.com/DixonDs/serilog-sinks-teams but is maintained.
@@ -54,7 +54,7 @@ Change history
 --------------
 
 
-* **Version 1.0.3.0 (2019-10-14)** : Added option for omitting Properties section in message.
+* **Version 1.0.3.0 (2019-10-14)** : Added option for omitting properties section in message.
 * **Version 1.0.2.1 (2019-06-24)** : Added option to only show from and to dates when the dates are not equal.
 * **Version 1.0.2.0 (2019-06-23)** : Fixed icon in nuget package.
 * **Version 1.0.0.1 (2019-06-21)** : Added option for minimal log level.

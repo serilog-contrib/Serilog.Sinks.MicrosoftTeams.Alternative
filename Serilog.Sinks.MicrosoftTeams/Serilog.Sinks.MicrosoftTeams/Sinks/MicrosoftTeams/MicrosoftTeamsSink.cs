@@ -73,19 +73,19 @@ namespace Serilog.Sinks.MicrosoftTeams
                         new ExtendedLogEvent
                             {
                                 LogEvent = logEvent,
-                                FirstOccurance = logEvent.Timestamp,
-                                LastOccurance = logEvent.Timestamp
+                                FirstOccurence = logEvent.Timestamp,
+                                LastOccurence = logEvent.Timestamp
                             });
                 }
                 else
                 {
-                    if (foundSameLogEvent.FirstOccurance > logEvent.Timestamp)
+                    if (foundSameLogEvent.FirstOccurence > logEvent.Timestamp)
                     {
-                        foundSameLogEvent.FirstOccurance = logEvent.Timestamp;
+                        foundSameLogEvent.FirstOccurence = logEvent.Timestamp;
                     }
-                    else if (foundSameLogEvent.LastOccurance < logEvent.Timestamp)
+                    else if (foundSameLogEvent.LastOccurence < logEvent.Timestamp)
                     {
-                        foundSameLogEvent.LastOccurance = logEvent.Timestamp;
+                        foundSameLogEvent.LastOccurence = logEvent.Timestamp;
                     }
                 }
             }
@@ -175,20 +175,20 @@ namespace Serilog.Sinks.MicrosoftTeams
                 };
             }
 
-            if (logEvent.FirstOccurance != logEvent.LastOccurance)
+            if (logEvent.FirstOccurence != logEvent.LastOccurence)
             {
                 yield return new MicrosoftTeamsMessageFact
                                  {
                                      Name = "First occurence",
-                                     Value = logEvent.FirstOccurance.ToString(
+                                     Value = logEvent.FirstOccurence.ToString(
                                          "dd.MM.yyyy HH:mm:sszzz",
                                          _options.FormatProvider)
                                  };
 
                 yield return new MicrosoftTeamsMessageFact
                                  {
-                                     Name = "Last occurance",
-                                     Value = logEvent.LastOccurance.ToString(
+                                     Name = "Last occurence",
+                                     Value = logEvent.LastOccurence.ToString(
                                          "dd.MM.yyyy HH:mm:sszzz",
                                          _options.FormatProvider)
                                  };
@@ -198,7 +198,7 @@ namespace Serilog.Sinks.MicrosoftTeams
                 yield return new MicrosoftTeamsMessageFact
                                  {
                                      Name = "Occured on",
-                                     Value = logEvent.FirstOccurance.ToString(
+                                     Value = logEvent.FirstOccurence.ToString(
                                          "dd.MM.yyyy HH:mm:sszzz",
                                          _options.FormatProvider)
                                  };
@@ -209,7 +209,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// Gets the color of the attachment.
         /// </summary>
         /// <param name="level">The level.</param>
-        /// <returns>The attachement color as <see cref="string"/>.</returns>
+        /// <returns>The attachment color as <see cref="string"/>.</returns>
         private static string GetAttachmentColor(LogEventLevel level)
         {
             switch (level)
