@@ -1,11 +1,10 @@
-﻿
+﻿using Serilog.Events;
+using System;
+
 namespace Serilog.Sinks.MicrosoftTeams
 {
-    using Serilog.Events;
-    using System;
-
     /// <summary>
-    /// Added a new class to store the first and last occurance timestamps.
+    /// Added a new class to store the first and last occurence timestamps.
     /// </summary>
     public class ExtendedLogEvent
     {
@@ -19,13 +18,13 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// <summary>
         /// Initializes a new instance of the <see cref="ExtendedLogEvent"/> class.
         /// </summary>
-        /// <param name="firstOccurance">The first occurance.</param>
-        /// <param name="lastOccurance">The last occurance.</param>
+        /// <param name="firstOccurence">The first occurence.</param>
+        /// <param name="lastOccurence">The last occurence.</param>
         /// <param name="logEvent">The log event.</param>
-        public ExtendedLogEvent(DateTime firstOccurance, DateTime lastOccurance, LogEvent logEvent)
+        public ExtendedLogEvent(DateTime firstOccurence, DateTime lastOccurence, LogEvent logEvent)
         {
-            FirstOccurance = firstOccurance;
-            LastOccurance = lastOccurance;
+            FirstOccurence = firstOccurence;
+            LastOccurence = lastOccurence;
             LogEvent = logEvent;
         }
 
@@ -35,13 +34,13 @@ namespace Serilog.Sinks.MicrosoftTeams
         public LogEvent LogEvent { get; set; }
 
         /// <summary>
-        /// Gets or sets the first occurance.
+        /// Gets or sets the first occurence.
         /// </summary>
-        public DateTimeOffset FirstOccurance { get; set; }
+        public DateTimeOffset FirstOccurence { get; set; }
 
         /// <summary>
-        /// Gets or sets the last occurance.
+        /// Gets or sets the last occurence.
         /// </summary>
-        public DateTimeOffset LastOccurance { get; set; }
+        public DateTimeOffset LastOccurence { get; set; }
     }
 }
