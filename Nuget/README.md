@@ -54,7 +54,7 @@ Change history
 --------------
 
 
-* **Version 1.0.3.0 (2019-10-14)** : Added option for omitting properties section in message.
+* **Version 1.0.3.0 (2019-10-15)** : Added option for omitting properties section in message, added GitVersionTask, updated nuget packages.
 * **Version 1.0.2.1 (2019-06-24)** : Added option to only show from and to dates when the dates are not equal.
 * **Version 1.0.2.0 (2019-06-23)** : Fixed icon in nuget package.
 * **Version 1.0.0.1 (2019-06-21)** : Added option for minimal log level.

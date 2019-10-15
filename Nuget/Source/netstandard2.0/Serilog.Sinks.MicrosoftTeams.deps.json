@@ -7,11 +7,12 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Serilog.Sinks.MicrosoftTeams/1.0.3.0": {
+      "Serilog.Sinks.MicrosoftTeams/1.0.3": {
         "dependencies": {
+          "GitVersionTask": "5.0.1",
           "NETStandard.Library": "2.0.3",
           "Newtonsoft.Json": "12.0.2",
-          "Serilog": "2.8.0",
+          "Serilog": "2.9.0",
           "Serilog.Sinks.PeriodicBatching": "2.2.0",
           "System.Net.Http": "4.3.4"
         },
@@ -19,6 +20,7 @@
           "Serilog.Sinks.MicrosoftTeams.dll": {}
         }
       },
+      "GitVersionTask/5.0.1": {},
       "Microsoft.NETCore.Platforms/1.1.1": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
       "NETStandard.Library/2.0.3": {
@@ -76,20 +78,17 @@
       "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
       "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
       "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
-      "Serilog/2.8.0": {
-        "dependencies": {
-          "System.Collections.NonGeneric": "4.3.0"
-        },
+      "Serilog/2.9.0": {
         "runtime": {
           "lib/netstandard2.0/Serilog.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.8.0.0"
+            "fileVersion": "2.9.0.0"
           }
         }
       },
       "Serilog.Sinks.PeriodicBatching/2.2.0": {
         "dependencies": {
-          "Serilog": "2.8.0",
+          "Serilog": "2.9.0",
           "System.Collections.Concurrent": "4.3.0",
           "System.Threading.Timer": "4.0.1"
         },
@@ -124,22 +123,6 @@
           "lib/netstandard1.3/System.Collections.Concurrent.dll": {
             "assemblyVersion": "4.0.13.0",
             "fileVersion": "4.6.24705.1"
-          }
-        }
-      },
-      "System.Collections.NonGeneric/4.3.0": {
-        "dependencies": {
-          "System.Diagnostics.Debug": "4.3.0",
-          "System.Globalization": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Threading": "4.3.0"
-        },
-        "runtime": {
-          "lib/netstandard1.3/System.Collections.NonGeneric.dll": {
-            "assemblyVersion": "4.0.2.0",
-            "fileVersion": "4.6.24702.1"
           }
         }
       },
@@ -522,10 +505,17 @@
     }
   },
   "libraries": {
-    "Serilog.Sinks.MicrosoftTeams/1.0.3.0": {
+    "Serilog.Sinks.MicrosoftTeams/1.0.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "GitVersionTask/5.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-i1nn6L9fTRhv2GOuJB7BqIhdUe0Y9KK3UEblY17LxOQHfHNIsNztSSdsyGzDf15n5mueTWUYCgc0uLXBTcSP3w==",
+      "path": "gitversiontask/5.0.1",
+      "hashPath": "gitversiontask.5.0.1.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.1": {
       "type": "package",
@@ -660,12 +650,12 @@
       "path": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.2",
       "hashPath": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512"
     },
-    "Serilog/2.8.0": {
+    "Serilog/2.9.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-zjuKXW5IQws43IHX7VY9nURsaCiBYh2kyJCWLJRSWrTsx/syBKHV8MibWe2A+QH3Er0AiwA+OJmO3DhFJDY1+A==",
-      "path": "serilog/2.8.0",
-      "hashPath": "serilog.2.8.0.nupkg.sha512"
+      "sha512": "sha512-QzcrD33A3+CsVvwi1I5CSei67ikQnkGrw7SscgL+vZTghaC2aNYg8fiUcedXHzKJFNjgje9rBjzwYGQTKEaXaA==",
+      "path": "serilog/2.9.0",
+      "hashPath": "serilog.2.9.0.nupkg.sha512"
     },
     "Serilog.Sinks.PeriodicBatching/2.2.0": {
       "type": "package",
@@ -687,13 +677,6 @@
       "sha512": "sha512-ztl69Xp0Y/UXCL+3v3tEU+lIy+bvjKNUmopn1wep/a291pVPK7dxBd6T7WnlQqRog+d1a/hSsgRsmFnIBKTPLQ==",
       "path": "system.collections.concurrent/4.3.0",
       "hashPath": "system.collections.concurrent.4.3.0.nupkg.sha512"
-    },
-    "System.Collections.NonGeneric/4.3.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-LE/oChpRvkSi3U25u0KnJcI44JeDZ1QJCyN4qFDx2uusEypdqR24w7lKYw21eYe5esuCBuc862wRmpF63Yy1KQ==",
-      "path": "system.collections.nongeneric/4.3.0",
-      "hashPath": "system.collections.nongeneric.4.3.0.nupkg.sha512"
     },
     "System.Diagnostics.Debug/4.3.0": {
       "type": "package",

@@ -43,7 +43,7 @@
         </member>
         <member name="T:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent">
             <summary>
-            Added a new class to store the first and last occurance timestamps.
+            Added a new class to store the first and last occurence timestamps.
             </summary>
         </member>
         <member name="M:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent.#ctor">
@@ -55,8 +55,8 @@
             <summary>
             Initializes a new instance of the <see cref="T:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent"/> class.
             </summary>
-            <param name="firstOccurance">The first occurance.</param>
-            <param name="lastOccurance">The last occurance.</param>
+            <param name="firstOccurence">The first occurence.</param>
+            <param name="lastOccurence">The last occurence.</param>
             <param name="logEvent">The log event.</param>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent.LogEvent">
@@ -64,14 +64,14 @@
             Gets or sets the log event.
             </summary>
         </member>
-        <member name="P:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent.FirstOccurance">
+        <member name="P:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent.FirstOccurence">
             <summary>
-            Gets or sets the first occurance.
+            Gets or sets the first occurence.
             </summary>
         </member>
-        <member name="P:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent.LastOccurance">
+        <member name="P:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent.LastOccurence">
             <summary>
-            Gets or sets the last occurance.
+            Gets or sets the last occurence.
             </summary>
         </member>
         <member name="T:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsMessageCard">
@@ -205,7 +205,7 @@
             Gets the color of the attachment.
             </summary>
             <param name="level">The level.</param>
-            <returns>The attachement color as <see cref="T:System.String"/>.</returns>
+            <returns>The attachment color as <see cref="T:System.String"/>.</returns>
         </member>
         <member name="T:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions">
             <summary>
@@ -226,7 +226,7 @@
             <summary>
             Create an instance of the Microsoft Teams options container.
             </summary>
-            <param name="webHookUri">The incoming webhook URI to the Microsoft Teams channel.</param>
+            <param name="webHookUri">The incoming web hook URI to the Microsoft Teams channel.</param>
             <param name="title">The title of messages.</param>
             <param name="batchSizeLimit">The maximum number of events to post in a single batch; defaults to 1 if
             not provided i.e. no batching by default.</param>
@@ -234,11 +234,11 @@
             provided.</param>
             <param name="formatProvider">The format provider used for formatting the message.</param>
             <param name="minimumLogEventLevel">The minimum log event level to use.</param>
-            <param name="omitPropertiesSection">Indicates whether properties section should be omitted or not.</param>
+            <param name="omitPropertiesSection">Indicates whether the properties section should be omitted or not.</param>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.WebHookUri">
             <summary>
-            The incoming webhook URI to the Microsoft Teams channel.
+            The incoming web hook URI to the Microsoft Teams channel.
             </summary>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.Title">
@@ -268,7 +268,7 @@
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.OmitPropertiesSection">
             <summary>
-            Indicates whether properties section should be omitted or not 
+            Indicates whether the properties section should be omitted or not.
             </summary>
         </member>
     </members>
