@@ -84,7 +84,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         public LogEventLevel MinimumLogEventLevel { get; }
 
         /// <summary>
-        /// Indicates whether properties section should be omitted or not 
+        /// Indicates whether properties section should be omitted or not.
         /// </summary>
         public bool OmitPropertiesSection { get; }
     }
