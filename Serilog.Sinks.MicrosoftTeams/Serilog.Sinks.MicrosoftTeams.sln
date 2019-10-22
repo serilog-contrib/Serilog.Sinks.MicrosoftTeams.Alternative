@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.MicrosoftTeams", "Serilog.Sinks.MicrosoftTeams\Serilog.Sinks.MicrosoftTeams.csproj", "{8CD41BF4-028E-41D4-8C19-F07F9D37080B}"
 EndProject

@@ -21,6 +21,8 @@ The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 * NetFramework 4.7.2
 * NetFramework 4.8
 * NetStandard 2.0
+* NetCore 2.2
+* NetCore 3.0
 
 ## Basic usage:
 You need to add an "Incoming Webhook" connector to your Teams channel and get it's URL. `title` is optional but can help your distinguish logs coming from different sources.
@@ -53,7 +55,7 @@ Do not hesitate to create [issues](https://github.com/SeppPenner/Serilog.Sinks.M
 Change history
 --------------
 
-
+* **Version 1.0.3.1 (2019-10-22)** : Removed invalid fields from nuspec file, added dependency information to nuget package, added build for netcore.
 * **Version 1.0.3.0 (2019-10-15)** : Added option for omitting properties section in message, added GitVersionTask, updated nuget packages.
 * **Version 1.0.2.1 (2019-06-24)** : Added option to only show from and to dates when the dates are not equal.
 * **Version 1.0.2.0 (2019-06-23)** : Fixed icon in nuget package.

@@ -2,27 +2,91 @@
 <package >
   <metadata>
     <id>HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams</id>
-    <version>1.0.3.0</version>
+    <version>1.0.3.1</version>
     <authors>SeppPenner</authors>
     <owners>SeppPenner</owners>
     <projectUrl>https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/</projectUrl>
-	<licenseUrl>https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/blob/master/License.txt</licenseUrl>
-	<iconUrl>https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/blob/master/Icon.png?raw=true</iconUrl>
+	<icon>images\Icon.png</icon>
+	<license type="file">License.txt</license>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>
 		Serilog.Sinks.MicrosoftTeams is a library to save logging information from https://github.com/serilog/serilog to https://products.office.com/en-us/microsoft-teams/group-chat-software.
 		The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 	</description>
     <releaseNotes>
-        Version 1.0.3.0 (2019-10-15): Added option for omitting properties section in message, added GitVersionTask, updated nuget packages.
+        Version 1.0.3.1 (2019-10-22): Removed invalid fields from nuspec file, added dependency information to nuget package, added build for netcore.
 	</releaseNotes>
     <copyright>Copyright © Hämmer Electronics</copyright>
     <tags>c# csharp serilog teams microsoft microsoft-teams sink logging log</tags>
+	<dependencies>
+      <group targetFramework="net45">
+        <dependency id="Newtonsoft.Json" version="12.0.2" />
+        <dependency id="Serilog" version="2.9.0" />
+        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.2.0" />     
+      </group>
+	  <group targetFramework="net46">
+        <dependency id="Newtonsoft.Json" version="12.0.2" />
+        <dependency id="Serilog" version="2.9.0" />
+        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.2.0" />   
+		<dependency id="System.Net.Http" version="4.6.26907.1" />
+        <dependency id="System.Security.Cryptography.Algorithms" version="4.6.24705.1" />
+        <dependency id="System.Security.Cryptography.Encoding" version="4.6.24705.1" /> 
+		<dependency id="System.Security.Cryptography.Primitives" version="4.6.24705.1" />
+        <dependency id="System.Security.Cryptography.X509Certificates" version="4.6.24705.1" />
+      </group>
+	  <group targetFramework="net47">
+        <dependency id="Newtonsoft.Json" version="12.0.2" />
+        <dependency id="Serilog" version="2.9.0" />
+        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.2.0" /> 
+		<dependency id="System.IO" version="4.6.24705.1" />
+        <dependency id="System.Net.Http" version="4.6.26907.1" />
+		<dependency id="System.Runtime" version="4.6.24705.1" />
+        <dependency id="System.Security.Cryptography.Algorithms" version="4.6.24705.1" />
+        <dependency id="System.Security.Cryptography.Encoding" version="4.6.24705.1" /> 
+		<dependency id="System.Security.Cryptography.Primitives" version="4.6.24705.1" />
+        <dependency id="System.Security.Cryptography.X509Certificates" version="4.6.24705.1" />		
+      </group>
+	  <group targetFramework="net48">
+        <dependency id="Newtonsoft.Json" version="12.0.2" />
+        <dependency id="Serilog" version="2.9.0" />
+        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.2.0" />   
+      </group>
+	  <group targetFramework="net462">
+        <dependency id="Newtonsoft.Json" version="12.0.2" />
+        <dependency id="Serilog" version="2.9.0" />
+        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.2.0" />   
+		<dependency id="System.Net.Http" version="4.6.26907.1" />
+        <dependency id="System.Security.Cryptography.Algorithms" version="4.6.24705.1" />
+        <dependency id="System.Security.Cryptography.Encoding" version="4.6.24705.1" /> 
+		<dependency id="System.Security.Cryptography.Primitives" version="4.6.24705.1" />
+        <dependency id="System.Security.Cryptography.X509Certificates" version="4.6.24705.1" />
+      </group>
+	  <group targetFramework="net472">
+        <dependency id="Newtonsoft.Json" version="12.0.2" />
+        <dependency id="Serilog" version="2.9.0" />
+        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.2.0" />     
+      </group>
+      <group targetFramework="netstandard2.0">
+        <dependency id="NETStandard.Library" version="2.0.0" />
+        <dependency id="Newtonsoft.Json" version="12.0.2" />
+        <dependency id="Serilog" version="2.9.0" />
+        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.2.0" />
+      </group>
+      <group targetFramework="netcoreapp2.2">
+        <dependency id="Newtonsoft.Json" version="12.0.2" />
+        <dependency id="Serilog" version="2.9.0" />
+        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.2.0" />
+      </group>
+	  <group targetFramework="netcoreapp3.0">
+        <dependency id="Newtonsoft.Json" version="12.0.2" />
+        <dependency id="Serilog" version="2.9.0" />
+        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.2.0" />
+      </group>
+    </dependencies>
   </metadata>
   <files>
 		<file src="README.md" target="lib/" />
 		<file src="License.txt" target="" />
-		<file src="Documentation\**" target="lib\Documentation" />
 		<file src="Source\net45\**" target="lib\net45" />
 		<file src="Source\net46\**" target="lib\net46" />
 		<file src="Source\net462\**" target="lib\net462" />
@@ -30,5 +94,6 @@
 		<file src="Source\net472\**" target="lib\net472" />
 		<file src="Source\net48\**" target="lib\net48" />
 		<file src="Source\netstandard2.0\**" target="lib\netstandard2.0" />
+		<file src="..\Icon.png" target="images\" />
     </files>
 </package>
