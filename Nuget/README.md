@@ -8,7 +8,7 @@ The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 [![GitHub issues](https://img.shields.io/github/issues/SeppPenner/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/issues)
 [![GitHub forks](https://img.shields.io/github/forks/SeppPenner/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/network)
 [![GitHub stars](https://img.shields.io/github/stars/SeppPenner/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/stargazers)
-[![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/master/License.txt)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/master/License.txt)
 [![Nuget](https://img.shields.io/badge/Serilog.Sinks.MicrosoftTeams-Nuget-brightgreen.svg)](https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams.svg)](https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams/)
 [![Known Vulnerabilities](https://snyk.io/test/github/SeppPenner/Serilog.Sinks.MicrosoftTeams/badge.svg)](https://snyk.io/test/github/SeppPenner/Serilog.Sinks.MicrosoftTeams)
