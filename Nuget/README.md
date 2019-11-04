@@ -8,7 +8,7 @@ The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 [![GitHub issues](https://img.shields.io/github/issues/SeppPenner/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/issues)
 [![GitHub forks](https://img.shields.io/github/forks/SeppPenner/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/network)
 [![GitHub stars](https://img.shields.io/github/stars/SeppPenner/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/stargazers)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/master/License.txt)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/master/License.txt)
 [![Nuget](https://img.shields.io/badge/Serilog.Sinks.MicrosoftTeams-Nuget-brightgreen.svg)](https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams.svg)](https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams/)
 [![Known Vulnerabilities](https://snyk.io/test/github/SeppPenner/Serilog.Sinks.MicrosoftTeams/badge.svg)](https://snyk.io/test/github/SeppPenner/Serilog.Sinks.MicrosoftTeams)
@@ -55,6 +55,7 @@ Do not hesitate to create [issues](https://github.com/SeppPenner/Serilog.Sinks.M
 Change history
 --------------
 
+* **Version 1.0.3.2 (2019-11-04)** : Adjusted license to the MIT license.
 * **Version 1.0.3.1 (2019-10-22)** : Removed invalid fields from nuspec file, added dependency information to nuget package, added build for netcore.
 * **Version 1.0.3.0 (2019-10-15)** : Added option for omitting properties section in message, added GitVersionTask, updated nuget packages.
 * **Version 1.0.2.1 (2019-06-24)** : Added option to only show from and to dates when the dates are not equal.

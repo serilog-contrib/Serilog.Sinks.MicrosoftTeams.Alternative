@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams</id>
-    <version>1.0.3.1</version>
+    <version>1.0.3.2</version>
     <authors>SeppPenner</authors>
     <owners>SeppPenner</owners>
     <projectUrl>https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/</projectUrl>
@@ -18,7 +18,7 @@
 		The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 	</description>
     <releaseNotes>
-        Version 1.0.3.1 (2019-10-22): Removed invalid fields from nuspec file, added dependency information to nuget package, added build for netcore.
+        Version 1.0.3.2 (2019-11-04) : Adjusted license to the MIT license.
 	</releaseNotes>
     <copyright>Copyright © Hämmer Electronics</copyright>
     <tags>c# csharp serilog teams microsoft microsoft-teams sink logging log</tags>
