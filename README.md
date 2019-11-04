@@ -12,6 +12,7 @@ The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 [![Nuget](https://img.shields.io/badge/Serilog.Sinks.MicrosoftTeams-Nuget-brightgreen.svg)](https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams.svg)](https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams/)
 [![Known Vulnerabilities](https://snyk.io/test/github/SeppPenner/Serilog.Sinks.MicrosoftTeams/badge.svg)](https://snyk.io/test/github/SeppPenner/Serilog.Sinks.MicrosoftTeams)
+[![Gitter](https://badges.gitter.im/Serilog-Sinks-MicrosoftTeams/community.svg)](https://gitter.im/Serilog-Sinks-MicrosoftTeams/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Available for
 * NetFramework 4.5
