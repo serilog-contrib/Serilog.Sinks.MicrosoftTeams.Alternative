@@ -2,23 +2,23 @@
 <package >
   <metadata>
     <id>HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams</id>
-    <version>1.0.3.2</version>
+    <version>1.0.4.0</version>
     <authors>SeppPenner</authors>
     <owners>SeppPenner</owners>
     <projectUrl>https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/</projectUrl>
 	<summary>
-		Serilog.Sinks.MicrosoftTeams is a library to save logging information from Serilog to Microsoft Teams.
+      Serilog.Sinks.MicrosoftTeams is a library to save logging information from Serilog to Microsoft Teams.
 	</summary>
 	<title>Serilog.Sinks.MicrosoftTeams from SeppPenner</title>
 	<icon>images\Icon.png</icon>
 	<license type="file">License.txt</license>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>
-		Serilog.Sinks.MicrosoftTeams is a library to save logging information from https://github.com/serilog/serilog to https://products.office.com/en-us/microsoft-teams/group-chat-software.
-		The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
+      Serilog.Sinks.MicrosoftTeams is a library to save logging information from https://github.com/serilog/serilog to https://products.office.com/en-us/microsoft-teams/group-chat-software.
+      The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 	</description>
     <releaseNotes>
-        Version 1.0.3.2 (2019-11-04) : Adjusted license to the MIT license.
+      Version 1.0.4.0 (2019-11-04) : Updated nuget packages.
 	</releaseNotes>
     <copyright>Copyright © Hämmer Electronics</copyright>
     <tags>c# csharp serilog teams microsoft microsoft-teams sink logging log</tags>
@@ -32,23 +32,23 @@
         <dependency id="Newtonsoft.Json" version="12.0.2" />
         <dependency id="Serilog" version="2.9.0" />
         <dependency id="Serilog.Sinks.PeriodicBatching" version="2.2.0" />   
-		<dependency id="System.Net.Http" version="4.6.26907.1" />
+        <dependency id="System.Net.Http" version="4.6.26907.1" />
         <dependency id="System.Security.Cryptography.Algorithms" version="4.6.24705.1" />
         <dependency id="System.Security.Cryptography.Encoding" version="4.6.24705.1" /> 
-		<dependency id="System.Security.Cryptography.Primitives" version="4.6.24705.1" />
+        <dependency id="System.Security.Cryptography.Primitives" version="4.6.24705.1" />
         <dependency id="System.Security.Cryptography.X509Certificates" version="4.6.24705.1" />
       </group>
 	  <group targetFramework="net47">
         <dependency id="Newtonsoft.Json" version="12.0.2" />
         <dependency id="Serilog" version="2.9.0" />
         <dependency id="Serilog.Sinks.PeriodicBatching" version="2.2.0" /> 
-		<dependency id="System.IO" version="4.6.24705.1" />
+        <dependency id="System.IO" version="4.6.24705.1" />
         <dependency id="System.Net.Http" version="4.6.26907.1" />
-		<dependency id="System.Runtime" version="4.6.24705.1" />
+        <dependency id="System.Runtime" version="4.6.24705.1" />
         <dependency id="System.Security.Cryptography.Algorithms" version="4.6.24705.1" />
         <dependency id="System.Security.Cryptography.Encoding" version="4.6.24705.1" /> 
-		<dependency id="System.Security.Cryptography.Primitives" version="4.6.24705.1" />
-        <dependency id="System.Security.Cryptography.X509Certificates" version="4.6.24705.1" />		
+        <dependency id="System.Security.Cryptography.Primitives" version="4.6.24705.1" />
+        <dependency id="System.Security.Cryptography.X509Certificates" version="4.6.24705.1" />        
       </group>
 	  <group targetFramework="net48">
         <dependency id="Newtonsoft.Json" version="12.0.2" />
@@ -59,10 +59,10 @@
         <dependency id="Newtonsoft.Json" version="12.0.2" />
         <dependency id="Serilog" version="2.9.0" />
         <dependency id="Serilog.Sinks.PeriodicBatching" version="2.2.0" />   
-		<dependency id="System.Net.Http" version="4.6.26907.1" />
+        <dependency id="System.Net.Http" version="4.6.26907.1" />
         <dependency id="System.Security.Cryptography.Algorithms" version="4.6.24705.1" />
         <dependency id="System.Security.Cryptography.Encoding" version="4.6.24705.1" /> 
-		<dependency id="System.Security.Cryptography.Primitives" version="4.6.24705.1" />
+        <dependency id="System.Security.Cryptography.Primitives" version="4.6.24705.1" />
         <dependency id="System.Security.Cryptography.X509Certificates" version="4.6.24705.1" />
       </group>
 	  <group targetFramework="net472">
@@ -89,17 +89,17 @@
     </dependencies>
   </metadata>
   <files>
-		<file src="README.md" target="" />
-		<file src="License.txt" target="" />
-		<file src="Source\net45\**" target="lib\net45" />
-		<file src="Source\net46\**" target="lib\net46" />
-		<file src="Source\net462\**" target="lib\net462" />
-		<file src="Source\net47\**" target="lib\net47" />
-		<file src="Source\net472\**" target="lib\net472" />
-		<file src="Source\net48\**" target="lib\net48" />
-		<file src="Source\netstandard2.0\**" target="lib\netstandard2.0" />
-		<file src="Source\netcoreapp2.2\**" target="lib\netcoreapp2.2" />
-		<file src="Source\netcoreapp3.0\**" target="lib\netcoreapp3.0" />
-		<file src="..\Icon.png" target="images\" />
+      <file src="README.md" target="" />
+      <file src="License.txt" target="" />
+      <file src="Source\net45\**" target="lib\net45" />
+      <file src="Source\net46\**" target="lib\net46" />
+      <file src="Source\net462\**" target="lib\net462" />
+      <file src="Source\net47\**" target="lib\net47" />
+      <file src="Source\net472\**" target="lib\net472" />
+      <file src="Source\net48\**" target="lib\net48" />
+      <file src="Source\netstandard2.0\**" target="lib\netstandard2.0" />
+      <file src="Source\netcoreapp2.2\**" target="lib\netcoreapp2.2" />
+      <file src="Source\netcoreapp3.0\**" target="lib\netcoreapp3.0" />
+      <file src="..\Icon.png" target="images\" />
     </files>
 </package>

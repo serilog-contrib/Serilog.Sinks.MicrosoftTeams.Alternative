@@ -12,6 +12,7 @@ The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 [![Nuget](https://img.shields.io/badge/Serilog.Sinks.MicrosoftTeams-Nuget-brightgreen.svg)](https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams.svg)](https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams/)
 [![Known Vulnerabilities](https://snyk.io/test/github/SeppPenner/Serilog.Sinks.MicrosoftTeams/badge.svg)](https://snyk.io/test/github/SeppPenner/Serilog.Sinks.MicrosoftTeams)
+[![Gitter](https://badges.gitter.im/Serilog-Sinks-MicrosoftTeams/community.svg)](https://gitter.im/Serilog-Sinks-MicrosoftTeams/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Available for
 * NetFramework 4.5
@@ -55,6 +56,7 @@ Do not hesitate to create [issues](https://github.com/SeppPenner/Serilog.Sinks.M
 Change history
 --------------
 
+* **Version 1.0.4.0 (2019-11-08)** : Updated nuget packages.
 * **Version 1.0.3.2 (2019-11-04)** : Adjusted license to the MIT license.
 * **Version 1.0.3.1 (2019-10-22)** : Removed invalid fields from nuspec file, added dependency information to nuget package, added build for netcore.
 * **Version 1.0.3.0 (2019-10-15)** : Added option for omitting properties section in message, added GitVersionTask, updated nuget packages.

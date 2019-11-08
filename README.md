@@ -56,6 +56,7 @@ Do not hesitate to create [issues](https://github.com/SeppPenner/Serilog.Sinks.M
 Change history
 --------------
 
+* **Version 1.0.4.0 (2019-11-08)** : Updated nuget packages.
 * **Version 1.0.3.2 (2019-11-04)** : Adjusted license to the MIT license.
 * **Version 1.0.3.1 (2019-10-22)** : Removed invalid fields from nuspec file, added dependency information to nuget package, added build for netcore.
 * **Version 1.0.3.0 (2019-10-15)** : Added option for omitting properties section in message, added GitVersionTask, updated nuget packages.
