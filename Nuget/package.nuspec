@@ -23,12 +23,17 @@
     <copyright>Copyright © Hämmer Electronics</copyright>
     <tags>c# csharp serilog teams microsoft microsoft-teams sink logging log</tags>
 	<dependencies>
-      <group targetFramework="net45">
+	  <group targetFramework="net46">
         <dependency id="Newtonsoft.Json" version="12.0.3" />
         <dependency id="Serilog" version="2.9.0" />
-        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.3.0" />     
+        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.3.0" />   
+        <dependency id="System.Net.Http" version="4.6.26907.1" />
+        <dependency id="System.Security.Cryptography.Algorithms" version="4.6.24705.1" />
+        <dependency id="System.Security.Cryptography.Encoding" version="4.6.24705.1" /> 
+        <dependency id="System.Security.Cryptography.Primitives" version="4.6.24705.1" />
+        <dependency id="System.Security.Cryptography.X509Certificates" version="4.6.24705.1" />
       </group>
-	  <group targetFramework="net46">
+	  <group targetFramework="net462">
         <dependency id="Newtonsoft.Json" version="12.0.3" />
         <dependency id="Serilog" version="2.9.0" />
         <dependency id="Serilog.Sinks.PeriodicBatching" version="2.3.0" />   
@@ -50,25 +55,15 @@
         <dependency id="System.Security.Cryptography.Primitives" version="4.6.24705.1" />
         <dependency id="System.Security.Cryptography.X509Certificates" version="4.6.24705.1" />        
       </group>
-	  <group targetFramework="net48">
-        <dependency id="Newtonsoft.Json" version="12.0.3" />
-        <dependency id="Serilog" version="2.9.0" />
-        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.3.0" />   
-      </group>
-	  <group targetFramework="net462">
-        <dependency id="Newtonsoft.Json" version="12.0.3" />
-        <dependency id="Serilog" version="2.9.0" />
-        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.3.0" />   
-        <dependency id="System.Net.Http" version="4.6.26907.1" />
-        <dependency id="System.Security.Cryptography.Algorithms" version="4.6.24705.1" />
-        <dependency id="System.Security.Cryptography.Encoding" version="4.6.24705.1" /> 
-        <dependency id="System.Security.Cryptography.Primitives" version="4.6.24705.1" />
-        <dependency id="System.Security.Cryptography.X509Certificates" version="4.6.24705.1" />
-      </group>
 	  <group targetFramework="net472">
         <dependency id="Newtonsoft.Json" version="12.0.3" />
         <dependency id="Serilog" version="2.9.0" />
         <dependency id="Serilog.Sinks.PeriodicBatching" version="2.3.0" />     
+      </group>
+	  <group targetFramework="net48">
+        <dependency id="Newtonsoft.Json" version="12.0.3" />
+        <dependency id="Serilog" version="2.9.0" />
+        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.3.0" />   
       </group>
       <group targetFramework="netstandard2.0">
         <dependency id="NETStandard.Library" version="2.0.0" />
@@ -76,12 +71,18 @@
         <dependency id="Serilog" version="2.9.0" />
         <dependency id="Serilog.Sinks.PeriodicBatching" version="2.3.0" />
       </group>
-      <group targetFramework="netcoreapp2.2">
+	  <group targetFramework="netstandard2.1">
+        <dependency id="NETStandard.Library" version="2.0.0" />
         <dependency id="Newtonsoft.Json" version="12.0.3" />
         <dependency id="Serilog" version="2.9.0" />
         <dependency id="Serilog.Sinks.PeriodicBatching" version="2.3.0" />
       </group>
-	  <group targetFramework="netcoreapp3.0">
+      <group targetFramework="netcoreapp3.0">
+        <dependency id="Newtonsoft.Json" version="12.0.3" />
+        <dependency id="Serilog" version="2.9.0" />
+        <dependency id="Serilog.Sinks.PeriodicBatching" version="2.3.0" />
+      </group>
+	  <group targetFramework="netcoreapp3.1">
         <dependency id="Newtonsoft.Json" version="12.0.3" />
         <dependency id="Serilog" version="2.9.0" />
         <dependency id="Serilog.Sinks.PeriodicBatching" version="2.3.0" />
@@ -91,15 +92,15 @@
   <files>
       <file src="README.md" target="" />
       <file src="License.txt" target="" />
-      <file src="Source\net45\**" target="lib\net45" />
       <file src="Source\net46\**" target="lib\net46" />
       <file src="Source\net462\**" target="lib\net462" />
       <file src="Source\net47\**" target="lib\net47" />
       <file src="Source\net472\**" target="lib\net472" />
       <file src="Source\net48\**" target="lib\net48" />
       <file src="Source\netstandard2.0\**" target="lib\netstandard2.0" />
-      <file src="Source\netcoreapp2.2\**" target="lib\netcoreapp2.2" />
+	  <file src="Source\netstandard2.1\**" target="lib\netstandard2.1" />
       <file src="Source\netcoreapp3.0\**" target="lib\netcoreapp3.0" />
+	  <file src="Source\netcoreapp3.1\**" target="lib\netcoreapp3.1" />
       <file src="..\Icon.png" target="images\" />
     </files>
 </package>
