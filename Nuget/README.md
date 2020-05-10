@@ -61,6 +61,7 @@ Do not hesitate to create [issues](https://github.com/SeppPenner/Serilog.Sinks.M
 Change history
 --------------
 
+* **Version 1.0.7.0 (2020-05-10)** : Updated nuget packages.
 * **Version 1.0.6.0 (2020-03-26)** : Updated nuget packages.
 * **Version 1.0.5.0 (2019-11-08)** : Updated nuget packages.
 * **Version 1.0.3.2 (2019-11-04)** : Adjusted license to the MIT license.
