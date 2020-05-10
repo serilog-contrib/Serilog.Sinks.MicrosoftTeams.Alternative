@@ -1,20 +1,45 @@
-﻿using Microsoft.Net.Http.Server;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Serilog.Events;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TestHelper.cs" company="Hämmer Electronics">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   A helper class for the tests.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Serilog.Sinks.MicrosoftTeams.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Microsoft.Net.Http.Server;
+
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
+    using Serilog.Events;
+
+    /// <summary>
+    /// A helper class for the tests.
+    /// </summary>
     internal static class TestHelper
     {
+        /// <summary>
+        /// The test web hook URL.
+        /// </summary>
         private const string TestWebHook = "http://localhost:1234/webhook";
 
+        /// <summary>
+        /// Adds a timeout to the functionality.
+        /// </summary>
+        /// <typeparam name="T">The type parameter.</typeparam>
+        /// <param name="taskToComplete">The task to run.</param>
+        /// <param name="timeSpan">The time span.</param>
+        /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
         private static async Task<T> WithTimeout<T>(this Task<T> taskToComplete, TimeSpan timeSpan)
         {
             var timeoutCancellationTokenSource = new CancellationTokenSource();
@@ -23,23 +48,33 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
 
             if (completedTask == delayTask)
             {
-                throw new TimeoutException(string.Format("WithTimeout has timed out after {0}.", timeSpan));
+                throw new TimeoutException($"WithTimeout has timed out after {timeSpan}.");
             }
 
             timeoutCancellationTokenSource.Cancel();
             return await taskToComplete.ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Creates the logger.
+        /// </summary>
+        /// <param name="omitPropertiesSection">A value indicating whether the properties should be omitted or not.</param>
+        /// <returns>An <see cref="ILogger"/>.</returns>
         public static ILogger CreateLogger(bool omitPropertiesSection = false)
         {
             var logger = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
-                .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHook, "Integration Tests", omitPropertiesSection: omitPropertiesSection), LogEventLevel.Verbose)
+                .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHook, "Integration Tests", omitPropertiesSection: omitPropertiesSection))
                 .CreateLogger();
 
             return logger;
         }
 
+        /// <summary>
+        /// Captures the requests.
+        /// </summary>
+        /// <param name="count">The counter variable.</param>
+        /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
         public static async Task<IList<JObject>> CaptureRequestsAsync(int count)
         {
             var settings = new WebListenerSettings();
@@ -52,27 +87,38 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
 
                 while (count-- > 0)
                 {
-                    using (var requestContext = await listener.AcceptAsync().WithTimeout(TimeSpan.FromSeconds(6)).ConfigureAwait(false))
-                    {
-                        var body = ReadBodyStream(requestContext.Request.Body);
-                        result.Add(body);
-                        requestContext.Response.StatusCode = 204;
-                    }
+                    using var requestContext = await listener.AcceptAsync().WithTimeout(TimeSpan.FromSeconds(6)).ConfigureAwait(false);
+                    var body = ReadBodyStream(requestContext.Request.Body);
+                    result.Add(body);
+                    requestContext.Response.StatusCode = 204;
                 }
             }
 
             return result;
         }
 
+        /// <summary>
+        /// Reads the body stream.
+        /// </summary>
+        /// <param name="stream">The body stream.</param>
+        /// <returns>A <see cref="JObject"/> from the body stream.</returns>
         private static JObject ReadBodyStream(Stream stream)
         {
-            using (var reader = new StreamReader(stream, Encoding.UTF8))
-            {
-                var json = reader.ReadToEnd();
-                return JsonConvert.DeserializeObject<JObject>(json);
-            }
+            using var reader = new StreamReader(stream, Encoding.UTF8);
+            var json = reader.ReadToEnd();
+            return JsonConvert.DeserializeObject<JObject>(json);
         }
 
+        /// <summary>
+        /// Creates the message.
+        /// </summary>
+        /// <param name="template">The template.</param>
+        /// <param name="renderedMessage">The rendered message.</param>
+        /// <param name="logEventLevel">The log event level.</param>
+        /// <param name="color">The color.</param>
+        /// <param name="counter">The counter.</param>
+        /// <param name="occuredOn">The occured on date.</param>
+        /// <returns>A <see cref="JObject"/> from the message.</returns>
         public static JObject CreateMessage(string template, string renderedMessage, LogEventLevel logEventLevel,
             string color, int counter, string occuredOn)
         {
@@ -111,7 +157,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
                                 ["value"] = occuredOn
                             }
                         }
-                    },
+                    }
                 }
             };
         }

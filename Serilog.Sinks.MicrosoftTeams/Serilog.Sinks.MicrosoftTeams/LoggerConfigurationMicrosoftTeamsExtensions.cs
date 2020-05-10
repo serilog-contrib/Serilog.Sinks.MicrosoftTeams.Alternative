@@ -1,10 +1,20 @@
-﻿using Serilog.Configuration;
-using Serilog.Events;
-using Serilog.Sinks.MicrosoftTeams;
-using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LoggerConfigurationMicrosoftTeamsExtensions.cs" company="Hämmer Electronics">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   Provides extension methods on <see cref="LoggerSinkConfiguration" />.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Serilog
 {
+    using System;
+
+    using Serilog.Configuration;
+    using Serilog.Events;
+    using Serilog.Sinks.MicrosoftTeams;
+
     /// <summary>
     /// Provides extension methods on <see cref="LoggerSinkConfiguration"/>.
     /// </summary>
@@ -20,7 +30,7 @@ namespace Serilog
         /// </example>
         /// </summary>
         /// <param name="loggerSinkConfiguration">Instance of <see cref="LoggerSinkConfiguration"/> object.</param>
-        /// <param name="webHookUri">The incoming webhook URI to the Microsoft Teams channel.</param>
+        /// <param name="webHookUri">The incoming web hook URI to the Microsoft Teams channel.</param>
         /// <param name="title">The title of messages.</param>
         /// <param name="batchSizeLimit">The maximum number of events to post in a single batch; defaults to 1 if
         /// not provided i.e. no batching by default.</param>
@@ -39,9 +49,7 @@ namespace Serilog
             IFormatProvider formatProvider = null,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum)
         {
-            var microsoftTeamsSinkOptions = new MicrosoftTeamsSinkOptions(webHookUri, title, batchSizeLimit, period,
-                formatProvider);
-
+            var microsoftTeamsSinkOptions = new MicrosoftTeamsSinkOptions(webHookUri, title, batchSizeLimit, period, formatProvider);
             return loggerSinkConfiguration.MicrosoftTeams(microsoftTeamsSinkOptions, restrictedToMinimumLevel);
         }
 

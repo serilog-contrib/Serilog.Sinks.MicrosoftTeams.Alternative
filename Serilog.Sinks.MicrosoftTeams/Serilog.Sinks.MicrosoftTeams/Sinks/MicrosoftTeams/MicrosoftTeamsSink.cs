@@ -1,18 +1,31 @@
-﻿using Newtonsoft.Json;
-using Serilog.Debugging;
-using Serilog.Events;
-using Serilog.Sinks.PeriodicBatching;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MicrosoftTeamsSink.cs" company="Hämmer Electronics">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   Implements <see cref="PeriodicBatchingSink" /> and provides means needed for sending Serilog log events to Microsoft Teams.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Serilog.Sinks.MicrosoftTeams
 {
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using Newtonsoft.Json;
+
+    using Serilog.Debugging;
+    using Serilog.Events;
+    using Serilog.Sinks.PeriodicBatching;
+
     /// <summary>
     /// Implements <see cref="PeriodicBatchingSink"/> and provides means needed for sending Serilog log events to Microsoft Teams.
     /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
     public class MicrosoftTeamsSink : PeriodicBatchingSink
     {
         /// <summary>
@@ -31,16 +44,15 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// <summary>
         /// The options.
         /// </summary>
-        private readonly MicrosoftTeamsSinkOptions _options;
+        private readonly MicrosoftTeamsSinkOptions options;
 
         /// <summary>
-        /// Initializes new instance of <see cref="MicrosoftTeamsSink"/>.
+        /// Initializes a new instance of the <see cref="MicrosoftTeamsSink"/> class.
         /// </summary>
         /// <param name="options">Microsoft teams sink options object.</param>
-        public MicrosoftTeamsSink(MicrosoftTeamsSinkOptions options)
-                : base(options.BatchSizeLimit, options.Period)
+        public MicrosoftTeamsSink(MicrosoftTeamsSinkOptions options) : base(options.BatchSizeLimit, options.Period)
         {
-            _options = options;
+            this.options = options;
         }
 
         /// <inheritdoc cref="PeriodicBatchingSink" />
@@ -60,7 +72,7 @@ namespace Serilog.Sinks.MicrosoftTeams
 
             foreach (var logEvent in events)
             {
-                if (logEvent.Level < _options.MinimumLogEventLevel)
+                if (logEvent.Level < this.options.MinimumLogEventLevel)
                 {
                     continue;
                 }
@@ -73,28 +85,29 @@ namespace Serilog.Sinks.MicrosoftTeams
                         new ExtendedLogEvent
                             {
                                 LogEvent = logEvent,
-                                FirstOccurence = logEvent.Timestamp,
-                                LastOccurence = logEvent.Timestamp
+                                FirstOccurrence = logEvent.Timestamp,
+                                LastOccurrence = logEvent.Timestamp
                             });
                 }
                 else
                 {
-                    if (foundSameLogEvent.FirstOccurence > logEvent.Timestamp)
+                    if (foundSameLogEvent.FirstOccurrence > logEvent.Timestamp)
                     {
-                        foundSameLogEvent.FirstOccurence = logEvent.Timestamp;
+                        foundSameLogEvent.FirstOccurrence = logEvent.Timestamp;
                     }
-                    else if (foundSameLogEvent.LastOccurence < logEvent.Timestamp)
+                    else if (foundSameLogEvent.LastOccurrence < logEvent.Timestamp)
                     {
-                        foundSameLogEvent.LastOccurence = logEvent.Timestamp;
+                        foundSameLogEvent.LastOccurrence = logEvent.Timestamp;
                     }
                 }
             }
 
+            // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
             foreach (var logEvent in messagesToSend)
             {
-                var message = CreateMessage(logEvent);
+                var message = this.CreateMessage(logEvent);
                 var json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
-                var result = await Client.PostAsync(_options.WebHookUri, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
+                var result = await Client.PostAsync(this.options.WebHookUri, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
 
                 if (!result.IsSuccessStatusCode)
                 {
@@ -116,25 +129,50 @@ namespace Serilog.Sinks.MicrosoftTeams
         }
 
         /// <summary>
+        /// Gets the color of the attachment.
+        /// </summary>
+        /// <param name="level">The level.</param>
+        /// <returns>The attachment color as <see cref="string"/>.</returns>
+        private static string GetAttachmentColor(LogEventLevel level)
+        {
+            // ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault
+            switch (level)
+            {
+                case LogEventLevel.Information:
+                    return "5bc0de";
+
+                case LogEventLevel.Warning:
+                    return "f0ad4e";
+
+                case LogEventLevel.Error:
+                case LogEventLevel.Fatal:
+                    return "d9534f";
+
+                default:
+                    return "777777";
+            }
+        }
+
+        /// <summary>
         /// Creates the message.
         /// </summary>
         /// <param name="logEvent">The log event.</param>
         /// <returns>A message card.</returns>
         private MicrosoftTeamsMessageCard CreateMessage(ExtendedLogEvent logEvent)
         {
-            var renderedMessage = logEvent.LogEvent.RenderMessage(_options.FormatProvider);
+            var renderedMessage = logEvent.LogEvent.RenderMessage(this.options.FormatProvider);
 
             var request = new MicrosoftTeamsMessageCard
             {
-                Title = _options.Title,
+                Title = this.options.Title,
                 Text = renderedMessage,
                 Color = GetAttachmentColor(logEvent.LogEvent.Level),
-                Sections = _options.OmitPropertiesSection ? null : new[]
+                Sections = this.options.OmitPropertiesSection ? null : new[]
                 {
                     new MicrosoftTeamsMessageSection
                     {
                         Title = "Properties",
-                        Facts = GetFacts(logEvent).ToArray()
+                        Facts = this.GetFacts(logEvent).ToArray()
                     }
                 }
             };
@@ -171,61 +209,31 @@ namespace Serilog.Sinks.MicrosoftTeams
                 yield return new MicrosoftTeamsMessageFact
                 {
                     Name = property.Key,
-                    Value = property.Value.ToString(null, _options.FormatProvider)
+                    Value = property.Value.ToString(null, this.options.FormatProvider)
                 };
             }
 
-            if (logEvent.FirstOccurence != logEvent.LastOccurence)
+            if (logEvent.FirstOccurrence != logEvent.LastOccurrence)
             {
                 yield return new MicrosoftTeamsMessageFact
-                                 {
-                                     Name = "First occurence",
-                                     Value = logEvent.FirstOccurence.ToString(
-                                         "dd.MM.yyyy HH:mm:sszzz",
-                                         _options.FormatProvider)
-                                 };
+                {
+                    Name = "First occurrence",
+                    Value = logEvent.FirstOccurrence.ToString("dd.MM.yyyy HH:mm:sszzz", this.options.FormatProvider)
+                };
 
                 yield return new MicrosoftTeamsMessageFact
-                                 {
-                                     Name = "Last occurence",
-                                     Value = logEvent.LastOccurence.ToString(
-                                         "dd.MM.yyyy HH:mm:sszzz",
-                                         _options.FormatProvider)
-                                 };
+                {
+                    Name = "Last occurrence",
+                    Value = logEvent.LastOccurrence.ToString("dd.MM.yyyy HH:mm:sszzz", this.options.FormatProvider)
+                };
             }
             else
             {
                 yield return new MicrosoftTeamsMessageFact
-                                 {
-                                     Name = "Occured on",
-                                     Value = logEvent.FirstOccurence.ToString(
-                                         "dd.MM.yyyy HH:mm:sszzz",
-                                         _options.FormatProvider)
-                                 };
-            }
-        }
-
-        /// <summary>
-        /// Gets the color of the attachment.
-        /// </summary>
-        /// <param name="level">The level.</param>
-        /// <returns>The attachment color as <see cref="string"/>.</returns>
-        private static string GetAttachmentColor(LogEventLevel level)
-        {
-            switch (level)
-            {
-                case LogEventLevel.Information:
-                    return "5bc0de";
-
-                case LogEventLevel.Warning:
-                    return "f0ad4e";
-
-                case LogEventLevel.Error:
-                case LogEventLevel.Fatal:
-                    return "d9534f";
-
-                default:
-                    return "777777";
+                {
+                    Name = "Occured on",
+                    Value = logEvent.FirstOccurrence.ToString("dd.MM.yyyy HH:mm:sszzz", this.options.FormatProvider)
+                };
             }
         }
     }
