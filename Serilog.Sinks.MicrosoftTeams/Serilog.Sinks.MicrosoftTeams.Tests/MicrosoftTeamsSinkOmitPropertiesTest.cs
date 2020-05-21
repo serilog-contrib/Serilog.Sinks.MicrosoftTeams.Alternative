@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MicrosoftTeamsSinkOmitPropertiesTest.cs" company="Hämmer Electronics">
+// <copyright file="MicrosoftTeamsSinkOmitPropertiesTest.cs" company="Haemmer Electronics">
 // The project is licensed under the MIT license.
 // </copyright>
 // <summary>

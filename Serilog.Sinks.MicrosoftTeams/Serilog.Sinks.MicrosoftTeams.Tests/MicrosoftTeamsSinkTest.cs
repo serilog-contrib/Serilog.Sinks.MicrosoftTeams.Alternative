@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MicrosoftTeamsSinkTest.cs" company="Hämmer Electronics">
+// <copyright file="MicrosoftTeamsSinkTest.cs" company="Haemmer Electronics">
 // The project is licensed under the MIT license.
 // </copyright>
 // <summary>
@@ -79,6 +79,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
 
             for (var i = 0; i < MessageCount; i++)
             {
+                // ReSharper disable PossibleNullReferenceException
                 var occuredOn = actualMessages[i]["sections"][0]["facts"].Last.Last.Last.ToString();
                 var expectedMessage = TestHelper.CreateMessage(templates[i], renderedMessages[i], logEventLevel, color, i, occuredOn);
                 actualMessages[i].ShouldBe(expectedMessage);

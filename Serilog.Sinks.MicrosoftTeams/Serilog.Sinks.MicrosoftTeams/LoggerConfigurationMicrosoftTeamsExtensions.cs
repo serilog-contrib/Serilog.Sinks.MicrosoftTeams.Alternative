@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LoggerConfigurationMicrosoftTeamsExtensions.cs" company="Hämmer Electronics">
+// <copyright file="LoggerConfigurationMicrosoftTeamsExtensions.cs" company="Haemmer Electronics">
 // The project is licensed under the MIT license.
 // </copyright>
 // <summary>

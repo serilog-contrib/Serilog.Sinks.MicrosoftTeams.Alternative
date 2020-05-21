@@ -23,8 +23,11 @@ The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 * NetStandard 2.0
 * NetStandard 2.1
 * NetCore 2.1
-* NetCore 3.0
 * NetCore 3.1
+
+## Net Core and Net Framework latest and LTS versions
+* https://dotnet.microsoft.com/download/dotnet-framework
+* https://dotnet.microsoft.com/download/dotnet-core
 
 ## Basic usage:
 You need to add an "Incoming Webhook" connector to your Teams channel and get it's URL. `title` is optional but can help your distinguish logs coming from different sources.
@@ -53,10 +56,6 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
 ## Further information:
 This project is a fork of https://github.com/DixonDs/serilog-sinks-teams but is maintained.
 Do not hesitate to create [issues](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/issues) or [pull requests](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/pulls).
-
-## Net Core and Net Framework latest and LTS versions
-* https://dotnet.microsoft.com/download/dotnet-framework
-* https://dotnet.microsoft.com/download/dotnet-core
 
 Change history
 --------------

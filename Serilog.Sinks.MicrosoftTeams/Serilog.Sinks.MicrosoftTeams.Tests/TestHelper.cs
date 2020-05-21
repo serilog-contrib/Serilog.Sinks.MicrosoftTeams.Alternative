@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestHelper.cs" company="Hämmer Electronics">
+// <copyright file="TestHelper.cs" company="Haemmer Electronics">
 // The project is licensed under the MIT license.
 // </copyright>
 // <summary>
@@ -81,17 +81,15 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
             settings.UrlPrefixes.Add(TestWebHook);
 
             var result = new List<JObject>();
-            using (var listener = new WebListener(settings))
-            {
-                listener.Start();
+            using var listener = new WebListener(settings);
+            listener.Start();
 
-                while (count-- > 0)
-                {
-                    using var requestContext = await listener.AcceptAsync().WithTimeout(TimeSpan.FromSeconds(6)).ConfigureAwait(false);
-                    var body = ReadBodyStream(requestContext.Request.Body);
-                    result.Add(body);
-                    requestContext.Response.StatusCode = 204;
-                }
+            while (count-- > 0)
+            {
+                using var requestContext = await listener.AcceptAsync().WithTimeout(TimeSpan.FromSeconds(6)).ConfigureAwait(false);
+                var body = ReadBodyStream(requestContext.Request.Body);
+                result.Add(body);
+                requestContext.Response.StatusCode = 204;
             }
 
             return result;
