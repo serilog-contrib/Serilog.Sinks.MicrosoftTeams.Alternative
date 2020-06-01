@@ -12,6 +12,7 @@ namespace Serilog.Sinks.MicrosoftTeams
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using System.Net;
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// <summary>
         /// The client.
         /// </summary>
-        private static readonly HttpClient Client = new HttpClient();
+        private readonly HttpClient Client;
 
         /// <summary>
         /// The json serializer settings.
@@ -53,6 +54,20 @@ namespace Serilog.Sinks.MicrosoftTeams
         public MicrosoftTeamsSink(MicrosoftTeamsSinkOptions options) : base(options.BatchSizeLimit, options.Period)
         {
             this.options = options;
+
+            if (string.IsNullOrWhiteSpace(options.Proxy) == false)
+            {
+                var httpClientHandler = new HttpClientHandler
+                {
+                    Proxy = new WebProxy(options.Proxy, true),
+                    UseProxy = true
+                };
+                this.Client = new HttpClient(httpClientHandler);
+            }
+            else
+            {
+                this.Client = new HttpClient();
+            }
         }
 
         /// <inheritdoc cref="PeriodicBatchingSink" />
@@ -83,11 +98,11 @@ namespace Serilog.Sinks.MicrosoftTeams
                 {
                     messagesToSend.Add(
                         new ExtendedLogEvent
-                            {
-                                LogEvent = logEvent,
-                                FirstOccurrence = logEvent.Timestamp,
-                                LastOccurrence = logEvent.Timestamp
-                            });
+                        {
+                            LogEvent = logEvent,
+                            FirstOccurrence = logEvent.Timestamp,
+                            LastOccurrence = logEvent.Timestamp
+                        });
                 }
                 else
                 {
@@ -107,7 +122,7 @@ namespace Serilog.Sinks.MicrosoftTeams
             {
                 var message = this.CreateMessage(logEvent);
                 var json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
-                var result = await Client.PostAsync(this.options.WebHookUri, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
+                var result = await this.Client.PostAsync(this.options.WebHookUri, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
 
                 if (!result.IsSuccessStatusCode)
                 {
@@ -125,7 +140,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
-            Client.Dispose();
+            this.Client.Dispose();
         }
 
         /// <summary>

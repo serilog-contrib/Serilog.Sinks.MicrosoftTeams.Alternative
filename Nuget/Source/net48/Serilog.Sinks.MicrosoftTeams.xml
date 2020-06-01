@@ -9,7 +9,7 @@
             Provides extension methods on <see cref="T:Serilog.Configuration.LoggerSinkConfiguration"/>.
             </summary>
         </member>
-        <member name="M:Serilog.LoggerConfigurationMicrosoftTeamsExtensions.MicrosoftTeams(Serilog.Configuration.LoggerSinkConfiguration,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.TimeSpan},System.IFormatProvider,Serilog.Events.LogEventLevel)">
+        <member name="M:Serilog.LoggerConfigurationMicrosoftTeamsExtensions.MicrosoftTeams(Serilog.Configuration.LoggerSinkConfiguration,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.TimeSpan},System.IFormatProvider,System.String,Serilog.Events.LogEventLevel)">
             <summary>
             <see cref="T:Serilog.Configuration.LoggerSinkConfiguration"/> extension that provides configuration chaining.
             <example>
@@ -20,13 +20,14 @@
             </example>
             </summary>
             <param name="loggerSinkConfiguration">Instance of <see cref="T:Serilog.Configuration.LoggerSinkConfiguration"/> object.</param>
-            <param name="webHookUri">The incoming webhook URI to the Microsoft Teams channel.</param>
+            <param name="webHookUri">The incoming web hook URI to the Microsoft Teams channel.</param>
             <param name="title">The title of messages.</param>
             <param name="batchSizeLimit">The maximum number of events to post in a single batch; defaults to 1 if
             not provided i.e. no batching by default.</param>
             <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
             provided.</param>
             <param name="formatProvider">The format provider used for formatting the message.</param>
+            <param name="proxy">proxy address to post to Microsoft Teams channel over internet</param>
             <param name="restrictedToMinimumLevel"><see cref="T:Serilog.Events.LogEventLevel"/> value that specifies minimum logging
             level that will be allowed to be logged.</param>
             <returns>Instance of <see cref="T:Serilog.LoggerConfiguration"/> object.</returns>
@@ -43,7 +44,7 @@
         </member>
         <member name="T:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent">
             <summary>
-            Added a new class to store the first and last occurence timestamps.
+            Added a new class to store the first and last occurrence timestamps.
             </summary>
         </member>
         <member name="M:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent.#ctor">
@@ -55,8 +56,8 @@
             <summary>
             Initializes a new instance of the <see cref="T:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent"/> class.
             </summary>
-            <param name="firstOccurence">The first occurence.</param>
-            <param name="lastOccurence">The last occurence.</param>
+            <param name="firstOccurrence">The first occurrence.</param>
+            <param name="lastOccurrence">The last occurrence.</param>
             <param name="logEvent">The log event.</param>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent.LogEvent">
@@ -64,14 +65,14 @@
             Gets or sets the log event.
             </summary>
         </member>
-        <member name="P:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent.FirstOccurence">
+        <member name="P:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent.FirstOccurrence">
             <summary>
-            Gets or sets the first occurence.
+            Gets or sets the first occurrence.
             </summary>
         </member>
-        <member name="P:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent.LastOccurence">
+        <member name="P:Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent.LastOccurrence">
             <summary>
-            Gets or sets the last occurence.
+            Gets or sets the last occurrence.
             </summary>
         </member>
         <member name="T:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsMessageCard">
@@ -81,32 +82,32 @@
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsMessageCard.Type">
             <summary>
-            The type of the card.
+            Gets the type of the card.
             </summary>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsMessageCard.Context">
             <summary>
-            The context of the card.
+            Gets the context of the card.
             </summary>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsMessageCard.Title">
             <summary>
-            The title of the card.
+            Gets or sets the title of the card.
             </summary>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsMessageCard.Text">
             <summary>
-            The text of the card.
+            Gets or sets the text of the card.
             </summary>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsMessageCard.Color">
             <summary>
-            The theme color of the card.
+            Gets or sets the theme color of the card.
             </summary>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsMessageCard.Sections">
             <summary>
-            The sections of the card.
+            Gets or sets the sections of the card.
             </summary>
         </member>
         <member name="T:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsMessageFact">
@@ -116,12 +117,12 @@
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsMessageFact.Name">
             <summary>
-            The name of the card fact.
+            Gets or sets the name of the card fact.
             </summary>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsMessageFact.Value">
             <summary>
-            The value of the card fact.
+            Gets or sets the value of the card fact.
             </summary>
         </member>
         <member name="T:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsMessageSection">
@@ -131,12 +132,12 @@
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsMessageSection.Title">
             <summary>
-            The message section title.
+            Gets or sets message section title.
             </summary>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsMessageSection.Facts">
             <summary>
-            The message section facts.
+            Gets or sets message section facts.
             </summary>
         </member>
         <member name="T:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSink">
@@ -154,14 +155,14 @@
             The json serializer settings.
             </summary>
         </member>
-        <member name="F:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSink._options">
+        <member name="F:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSink.options">
             <summary>
             The options.
             </summary>
         </member>
         <member name="M:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSink.#ctor(Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions)">
             <summary>
-            Initializes new instance of <see cref="T:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSink"/>.
+            Initializes a new instance of the <see cref="T:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSink"/> class.
             </summary>
             <param name="options">Microsoft teams sink options object.</param>
         </member>
@@ -186,6 +187,13 @@
             the object is being disposed from the finalizer.</param>
             <inheritdoc cref="T:Serilog.Sinks.PeriodicBatching.PeriodicBatchingSink"/>
         </member>
+        <member name="M:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSink.GetAttachmentColor(Serilog.Events.LogEventLevel)">
+            <summary>
+            Gets the color of the attachment.
+            </summary>
+            <param name="level">The level.</param>
+            <returns>The attachment color as <see cref="T:System.String"/>.</returns>
+        </member>
         <member name="M:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSink.CreateMessage(Serilog.Sinks.MicrosoftTeams.ExtendedLogEvent)">
             <summary>
             Creates the message.
@@ -200,21 +208,9 @@
             <param name="logEvent">The log event.</param>
             <returns>A list of facts.</returns>
         </member>
-        <member name="M:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSink.GetAttachmentColor(Serilog.Events.LogEventLevel)">
-            <summary>
-            Gets the color of the attachment.
-            </summary>
-            <param name="level">The level.</param>
-            <returns>The attachment color as <see cref="T:System.String"/>.</returns>
-        </member>
         <member name="T:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions">
             <summary>
             Container for all Microsoft Teams sink configurations.
-            </summary>
-        </member>
-        <member name="F:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.DefaultPeriod">
-            <summary>
-            The default period.
             </summary>
         </member>
         <member name="F:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.DefaultBatchSizeLimit">
@@ -222,9 +218,14 @@
             The default batch size limit.
             </summary>
         </member>
-        <member name="M:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.#ctor(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.TimeSpan},System.IFormatProvider,Serilog.Events.LogEventLevel,System.Boolean)">
+        <member name="F:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.DefaultPeriod">
             <summary>
-            Create an instance of the Microsoft Teams options container.
+            The default period.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.#ctor(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.TimeSpan},System.IFormatProvider,System.String,Serilog.Events.LogEventLevel,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions"/> class.
             </summary>
             <param name="webHookUri">The incoming web hook URI to the Microsoft Teams channel.</param>
             <param name="title">The title of messages.</param>
@@ -234,31 +235,32 @@
             provided.</param>
             <param name="formatProvider">The format provider used for formatting the message.</param>
             <param name="minimumLogEventLevel">The minimum log event level to use.</param>
+            <param name="proxy">Proxy address to output messages over internet</param>
             <param name="omitPropertiesSection">Indicates whether the properties section should be omitted or not.</param>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.WebHookUri">
             <summary>
-            The incoming web hook URI to the Microsoft Teams channel.
+            Gets the incoming web hook URI to the Microsoft Teams channel.
             </summary>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.Title">
             <summary>
-            The title of messages.
+            Gets the title of messages.
             </summary>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.BatchSizeLimit">
             <summary>
-            The maximum number of events to post in a single batch.
+            Gets the maximum number of events to post in a single batch.
             </summary>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.Period">
             <summary>
-            The time to wait between checking for event batches.
+            Gets the time to wait between checking for event batches.
             </summary>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.FormatProvider">
             <summary>
-            The format provider used for formatting the message.
+            Gets the format provider used for formatting the message.
             </summary>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.MinimumLogEventLevel">
@@ -268,7 +270,12 @@
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.OmitPropertiesSection">
             <summary>
-            Indicates whether the properties section should be omitted or not.
+            Gets a value indicating whether the properties section should be omitted or not.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.Proxy">
+            <summary>
+            Gets a url of the proxy for output messages
             </summary>
         </member>
     </members>
