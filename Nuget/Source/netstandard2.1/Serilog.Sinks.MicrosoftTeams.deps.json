@@ -7,9 +7,9 @@
   "targets": {
     ".NETStandard,Version=v2.1": {},
     ".NETStandard,Version=v2.1/": {
-      "Serilog.Sinks.MicrosoftTeams/1.0.8-proxy-configuration.1+3": {
+      "Serilog.Sinks.MicrosoftTeams/1.0.8+10": {
         "dependencies": {
-          "GitVersionTask": "5.3.3",
+          "GitVersionTask": "5.3.5",
           "Newtonsoft.Json": "12.0.3",
           "Serilog": "2.9.0",
           "Serilog.Sinks.PeriodicBatching": "2.3.0",
@@ -19,7 +19,7 @@
           "Serilog.Sinks.MicrosoftTeams.dll": {}
         }
       },
-      "GitVersionTask/5.3.3": {},
+      "GitVersionTask/5.3.5": {},
       "Microsoft.NETCore.Platforms/1.1.1": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
       "Newtonsoft.Json/12.0.3": {
@@ -499,17 +499,17 @@
     }
   },
   "libraries": {
-    "Serilog.Sinks.MicrosoftTeams/1.0.8-proxy-configuration.1+3": {
+    "Serilog.Sinks.MicrosoftTeams/1.0.8+10": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "GitVersionTask/5.3.3": {
+    "GitVersionTask/5.3.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-NgGD8kdEPcq2Pt+HiSg8JYp86AtzRHlQq5+Jm8Q1ava4rjgh/7Uj3ButD9peYd+Qi1E95NVO8s+mxDxzvm54hw==",
-      "path": "gitversiontask/5.3.3",
-      "hashPath": "gitversiontask.5.3.3.nupkg.sha512"
+      "sha512": "sha512-yuII5QntMXTbcn0enIQXqbkVN9fjkuZ2tIf+uOWK+aqfZpqZKadlWfR2vSxNUsinTKvONoHFvsX/2XzxBR1Fzg==",
+      "path": "gitversiontask/5.3.5",
+      "hashPath": "gitversiontask.5.3.5.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.1": {
       "type": "package",

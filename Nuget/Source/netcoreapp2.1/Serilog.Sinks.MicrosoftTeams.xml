@@ -9,7 +9,7 @@
             Provides extension methods on <see cref="T:Serilog.Configuration.LoggerSinkConfiguration"/>.
             </summary>
         </member>
-        <member name="M:Serilog.LoggerConfigurationMicrosoftTeamsExtensions.MicrosoftTeams(Serilog.Configuration.LoggerSinkConfiguration,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.TimeSpan},System.IFormatProvider,System.String,Serilog.Events.LogEventLevel)">
+        <member name="M:Serilog.LoggerConfigurationMicrosoftTeamsExtensions.MicrosoftTeams(Serilog.Configuration.LoggerSinkConfiguration,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.TimeSpan},System.IFormatProvider,Serilog.Events.LogEventLevel,System.String)">
             <summary>
             <see cref="T:Serilog.Configuration.LoggerSinkConfiguration"/> extension that provides configuration chaining.
             <example>
@@ -27,9 +27,9 @@
             <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
             provided.</param>
             <param name="formatProvider">The format provider used for formatting the message.</param>
-            <param name="proxy">proxy address to post to Microsoft Teams channel over internet</param>
             <param name="restrictedToMinimumLevel"><see cref="T:Serilog.Events.LogEventLevel"/> value that specifies minimum logging
             level that will be allowed to be logged.</param>
+            <param name = "proxy" > The proxy address to use.</param>
             <returns>Instance of <see cref="T:Serilog.LoggerConfiguration"/> object.</returns>
         </member>
         <member name="M:Serilog.LoggerConfigurationMicrosoftTeamsExtensions.MicrosoftTeams(Serilog.Configuration.LoggerSinkConfiguration,Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions,Serilog.Events.LogEventLevel)">
@@ -145,14 +145,14 @@
             Implements <see cref="T:Serilog.Sinks.PeriodicBatching.PeriodicBatchingSink"/> and provides means needed for sending Serilog log events to Microsoft Teams.
             </summary>
         </member>
-        <member name="F:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSink.Client">
-            <summary>
-            The client.
-            </summary>
-        </member>
         <member name="F:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSink.JsonSerializerSettings">
             <summary>
             The json serializer settings.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSink.client">
+            <summary>
+            The client.
             </summary>
         </member>
         <member name="F:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSink.options">
@@ -223,7 +223,7 @@
             The default period.
             </summary>
         </member>
-        <member name="M:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.#ctor(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.TimeSpan},System.IFormatProvider,System.String,Serilog.Events.LogEventLevel,System.Boolean)">
+        <member name="M:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.#ctor(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.TimeSpan},System.IFormatProvider,Serilog.Events.LogEventLevel,System.Boolean,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions"/> class.
             </summary>
@@ -235,8 +235,8 @@
             provided.</param>
             <param name="formatProvider">The format provider used for formatting the message.</param>
             <param name="minimumLogEventLevel">The minimum log event level to use.</param>
-            <param name="proxy">Proxy address to output messages over internet</param>
             <param name="omitPropertiesSection">Indicates whether the properties section should be omitted or not.</param>
+            <param name="proxy">The proxy address to use.</param>
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.WebHookUri">
             <summary>
@@ -275,7 +275,7 @@
         </member>
         <member name="P:Serilog.Sinks.MicrosoftTeams.MicrosoftTeamsSinkOptions.Proxy">
             <summary>
-            Gets a url of the proxy for output messages
+            Gets the proxy URL.
             </summary>
         </member>
     </members>
