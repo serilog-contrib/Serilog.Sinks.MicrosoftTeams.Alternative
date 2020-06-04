@@ -37,8 +37,8 @@ namespace Serilog
         /// <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
         /// provided.</param>
         /// <param name="formatProvider">The format provider used for formatting the message.</param>
-        /// <param name="proxy">proxy address to post to Microsoft Teams channel over internet</param>
         /// <param name="restrictedToMinimumLevel"><see cref="LogEventLevel"/> value that specifies minimum logging
+        /// <param name="proxy">The proxy address to use.</param>
         /// level that will be allowed to be logged.</param>
         /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
         public static LoggerConfiguration MicrosoftTeams(
@@ -48,8 +48,8 @@ namespace Serilog
             int? batchSizeLimit = null,
             TimeSpan? period = null,
             IFormatProvider formatProvider = null,
-            string proxy = null,
-            LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum)
+            LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
+            string proxy = null)
         {
             var microsoftTeamsSinkOptions = new MicrosoftTeamsSinkOptions(webHookUri, title, batchSizeLimit, period, formatProvider, proxy);
             return loggerSinkConfiguration.MicrosoftTeams(microsoftTeamsSinkOptions, restrictedToMinimumLevel);

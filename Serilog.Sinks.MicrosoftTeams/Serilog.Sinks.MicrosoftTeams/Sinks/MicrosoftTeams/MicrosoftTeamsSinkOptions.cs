@@ -39,9 +39,9 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// provided.</param>
         /// <param name="formatProvider">The format provider used for formatting the message.</param>
         /// <param name="minimumLogEventLevel">The minimum log event level to use.</param>
-        /// <param name="proxy">Proxy address to output messages over internet</param>
         /// <param name="omitPropertiesSection">Indicates whether the properties section should be omitted or not.</param>
-        public MicrosoftTeamsSinkOptions(string webHookUri, string title, int? batchSizeLimit = null, TimeSpan? period = null, IFormatProvider formatProvider = null, string proxy = null, LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose, bool omitPropertiesSection = false)
+        /// <param name="proxy">The proxy address to use.</param>
+        public MicrosoftTeamsSinkOptions(string webHookUri, string title, int? batchSizeLimit = null, TimeSpan? period = null, IFormatProvider formatProvider = null, LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose, bool omitPropertiesSection = false, string proxy = null)
         {
             if (webHookUri == null)
             {
@@ -99,7 +99,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         public bool OmitPropertiesSection { get; }
 
         /// <summary>
-        /// Gets a url of the proxy for output messages
+        /// Gets the proxy URL.
         /// </summary>
         public string Proxy { get; }
     }

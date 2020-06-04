@@ -30,17 +30,17 @@ namespace Serilog.Sinks.MicrosoftTeams
     public class MicrosoftTeamsSink : PeriodicBatchingSink
     {
         /// <summary>
-        /// The client.
-        /// </summary>
-        private readonly HttpClient Client;
-
-        /// <summary>
         /// The json serializer settings.
         /// </summary>
         private static readonly JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings
         {
             NullValueHandling = NullValueHandling.Ignore
         };
+
+        /// <summary>
+        /// The client.
+        /// </summary>
+        private readonly HttpClient client;
 
         /// <summary>
         /// The options.
@@ -62,11 +62,11 @@ namespace Serilog.Sinks.MicrosoftTeams
                     Proxy = new WebProxy(options.Proxy, true),
                     UseProxy = true
                 };
-                this.Client = new HttpClient(httpClientHandler);
+                this.client = new HttpClient(httpClientHandler);
             }
             else
             {
-                this.Client = new HttpClient();
+                this.client = new HttpClient();
             }
         }
 
@@ -122,7 +122,7 @@ namespace Serilog.Sinks.MicrosoftTeams
             {
                 var message = this.CreateMessage(logEvent);
                 var json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
-                var result = await this.Client.PostAsync(this.options.WebHookUri, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
+                var result = await this.client.PostAsync(this.options.WebHookUri, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
 
                 if (!result.IsSuccessStatusCode)
                 {
@@ -140,7 +140,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
-            this.Client.Dispose();
+            this.client.Dispose();
         }
 
         /// <summary>
