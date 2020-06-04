@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams</id>
-    <version>1.0.7.0</version>
+    <version>1.0.7.1</version>
     <authors>SeppPenner</authors>
     <owners>SeppPenner</owners>
     <projectUrl>https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/</projectUrl>
@@ -18,7 +18,7 @@
       The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 	</description>
     <releaseNotes>
-      Version 1.0.7.0 (2020-05-10): Updated nuget packages.
+      Version 1.0.7.1 (2020-06-01): Add proxy setting.
 	</releaseNotes>
     <copyright>Copyright © Hämmer Electronics</copyright>
     <tags>c# csharp serilog teams microsoft microsoft-teams sink logging log</tags>
