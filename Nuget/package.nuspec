@@ -18,7 +18,7 @@
       The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
 	</description>
     <releaseNotes>
-      Version 1.0.7.1 (2020-06-01): Add proxy setting.
+      Version 1.0.7.1 (2020-06-04): Updated nuget packages, added option for proxy (Thanks to [ruisantos78](https://github.com/ruisantos78)).
 	</releaseNotes>
     <copyright>Copyright © Hämmer Electronics</copyright>
     <tags>c# csharp serilog teams microsoft microsoft-teams sink logging log</tags>

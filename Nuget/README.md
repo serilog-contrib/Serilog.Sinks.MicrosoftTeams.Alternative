@@ -2,7 +2,7 @@ Serilog.Sinks.MicrosoftTeams
 ====================================
 
 Serilog.Sinks.MicrosoftTeams is a library to save logging information from [Serilog](https://github.com/serilog/serilog) to [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software).
-The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.
+The assembly was written and tested in NetCore 3.1, .Net Framework 4.8 and .Net Standard 2.0.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/x4l2tdvyj7gv51qo?svg=true)](https://ci.appveyor.com/project/SeppPenner/serilog-sinks-microsoftteams)
 [![GitHub issues](https://img.shields.io/github/issues/SeppPenner/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/issues)
@@ -52,6 +52,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
 |batchSizeLimit|The maximum number of events to include in a single batch.|`batchSizeLimit: 40`|`30`|
 |restrictedToMinimumLevel|The minimum level of the logging.|`restrictedToMinimumLevel: LogEventLevel.Verbose`|`LogEventLevel.Verbose`|
 |omitPropertiesSection|Indicates whether the properties section should be omitted or not.|`omitPropertiesSection: true`|`false`|
+|proxy|The proxy addresss used.|`proxy: "http://test.de/proxy"`|`null`|
 
 ## Further information:
 This project is a fork of https://github.com/DixonDs/serilog-sinks-teams but is maintained.
@@ -60,12 +61,13 @@ Do not hesitate to create [issues](https://github.com/SeppPenner/Serilog.Sinks.M
 Change history
 --------------
 
+* **Version 1.0.7.1 (2020-06-04)** : Updated nuget packages, added option for proxy (Thanks to [ruisantos78](https://github.com/ruisantos78)).
 * **Version 1.0.7.0 (2020-05-10)** : Updated nuget packages.
 * **Version 1.0.6.0 (2020-03-26)** : Updated nuget packages.
 * **Version 1.0.5.0 (2019-11-08)** : Updated nuget packages.
 * **Version 1.0.3.2 (2019-11-04)** : Adjusted license to the MIT license.
 * **Version 1.0.3.1 (2019-10-22)** : Removed invalid fields from nuspec file, added dependency information to nuget package, added build for netcore.
-* **Version 1.0.3.0 (2019-10-15)** : Added option for omitting properties section in message, added GitVersionTask, updated nuget packages.
+* **Version 1.0.3.0 (2019-10-15)** : Added option for omitting properties section in message (Thanks to [maestroMike](https://github.com/maestroMike)), added GitVersionTask, updated nuget packages.
 * **Version 1.0.2.1 (2019-06-24)** : Added option to only show from and to dates when the dates are not equal.
 * **Version 1.0.2.0 (2019-06-23)** : Fixed icon in nuget package.
 * **Version 1.0.0.1 (2019-06-21)** : Added option for minimal log level.
