@@ -92,7 +92,7 @@ namespace Serilog.Sinks.MicrosoftTeams
                     continue;
                 }
 
-                var foundSameLogEvent = messagesToSend.FirstOrDefault(l => l.LogEvent.Exception.Message == logEvent.Exception.Message);
+                var foundSameLogEvent = messagesToSend.FirstOrDefault(l => l.LogEvent?.Exception?.Message == logEvent.Exception?.Message);
 
                 if (foundSameLogEvent == null)
                 {
