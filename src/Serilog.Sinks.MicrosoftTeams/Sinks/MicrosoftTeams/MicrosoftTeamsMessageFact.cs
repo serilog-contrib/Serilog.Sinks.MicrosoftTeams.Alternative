@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MicrosoftTeamsMessageFact.cs" company="Haemmer Electronics">
+// <copyright file="MicrosoftTeamsMessageFact.cs" company="Hämmer Electronics">
 // The project is licensed under the MIT license.
 // </copyright>
 // <summary>

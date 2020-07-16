@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MicrosoftTeamsMessageCard.cs" company="Haemmer Electronics">
+// <copyright file="MicrosoftTeamsMessageCard.cs" company="Hämmer Electronics">
 // The project is licensed under the MIT license.
 // </copyright>
 // <summary>
