@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryType>Github</RepositoryType>
-    <PackageReleaseNotes>Version 1.0.9.0 (2020-07-15): Updated nuget packages, fixed a null reference exception (Thanks to [mahdiman](https://github.com/mahdiman)).</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 1.0.10.0 (2020-07-25): Fixed a logical error with the messagesToSend list (Thanks to [mahdiman](https://github.com/mahdiman)).</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
   </PropertyGroup>
 

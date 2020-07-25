@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.0.10.0 (2020-07-25)** : Fixed a logical error with the messagesToSend list (Thanks to [mahdiman](https://github.com/mahdiman)).
 * **Version 1.0.9.0 (2020-07-15)** : Updated nuget packages, fixed a null reference exception (Thanks to [mahdiman](https://github.com/mahdiman)).
 * **Version 1.0.8.0 (2020-06-05)** : Updated nuget packages, adjusted build to Visual Studio, moved changelog to extra file.
 * **Version 1.0.7.1 (2020-06-04)** : Updated nuget packages, added option for proxy (Thanks to [ruisantos78](https://github.com/ruisantos78)).
