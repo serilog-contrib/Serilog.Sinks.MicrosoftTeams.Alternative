@@ -40,6 +40,7 @@ namespace Serilog
         /// <param name="restrictedToMinimumLevel"><see cref="LogEventLevel"/> value that specifies minimum logging
         /// level that will be allowed to be logged.</param>
         /// <param name = "proxy" > The proxy address to use.</param>
+        /// <param name="omitPropertiesSection">Indicates whether the properties section should be omitted or not.</param>
         /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
         public static LoggerConfiguration MicrosoftTeams(
             this LoggerSinkConfiguration loggerSinkConfiguration,
@@ -49,9 +50,10 @@ namespace Serilog
             TimeSpan? period = null,
             IFormatProvider formatProvider = null,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
-            string proxy = null)
+            string proxy = null,
+            bool omitPropertiesSection = false)
         {
-            var microsoftTeamsSinkOptions = new MicrosoftTeamsSinkOptions(webHookUri, title, batchSizeLimit, period, formatProvider, proxy: proxy);
+            var microsoftTeamsSinkOptions = new MicrosoftTeamsSinkOptions(webHookUri, title, batchSizeLimit, period, formatProvider, restrictedToMinimumLevel, omitPropertiesSection, proxy);
             return loggerSinkConfiguration.MicrosoftTeams(microsoftTeamsSinkOptions, restrictedToMinimumLevel);
         }
 
