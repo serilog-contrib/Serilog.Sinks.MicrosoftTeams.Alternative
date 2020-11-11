@@ -71,6 +71,21 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
         }
 
         /// <summary>
+        /// Creates the logger.
+        /// </summary>
+        /// <param name="buttons">Buttons to output</param>
+        /// <returns>An <see cref="ILogger"/>.</returns>
+        public static ILogger CreateLoggerWithButtons(IEnumerable<MicrosoftTeamsSinkOptionsButton> buttons)
+        {
+            var logger = new LoggerConfiguration()
+                .MinimumLevel.Verbose()
+                .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHook, "Integration Tests", buttons: buttons, omitPropertiesSection: true))
+                .CreateLogger();
+
+            return logger;
+        }
+
+        /// <summary>
         /// Captures the requests.
         /// </summary>
         /// <param name="count">The counter variable.</param>
@@ -169,6 +184,38 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
                 ["title"] = "Integration Tests",
                 ["text"] = renderedMessage,
                 ["themeColor"] = color
+            };
+        }
+
+        public static JObject CreateMessageWithButton(string renderedMessage, string color, IEnumerable<MicrosoftTeamsSinkOptionsButton> buttons)
+        {
+            var potentialAction = new JArray();
+            foreach (var microsoftTeamsSinkOptionsButton in buttons)
+            {
+                var b = new JObject
+                {
+                    ["@type"] = "OpenUri",
+                    ["name"] = microsoftTeamsSinkOptionsButton.Name,
+                    ["targets"] = new JArray
+                    {
+                        new JObject
+                        {
+                            ["uri"] = microsoftTeamsSinkOptionsButton.Uri,
+                            ["os"] = "default"
+                        }
+                    }
+                };
+                potentialAction.Add(b);
+            }
+
+            return new JObject
+            {
+                ["@type"] = "MessageCard",
+                ["@context"] = "http://schema.org/extensions",
+                ["title"] = "Integration Tests",
+                ["text"] = renderedMessage,
+                ["themeColor"] = color,
+                ["potentialAction"] = potentialAction
             };
         }
     }
