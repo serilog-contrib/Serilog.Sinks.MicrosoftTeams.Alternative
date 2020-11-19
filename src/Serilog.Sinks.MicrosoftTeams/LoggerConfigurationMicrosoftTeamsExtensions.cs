@@ -14,6 +14,7 @@ namespace Serilog
     using Serilog.Configuration;
     using Serilog.Events;
     using Serilog.Sinks.MicrosoftTeams;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Provides extension methods on <see cref="LoggerSinkConfiguration"/>.
@@ -41,6 +42,7 @@ namespace Serilog
         /// level that will be allowed to be logged.</param>
         /// <param name = "proxy" > The proxy address to use.</param>
         /// <param name="omitPropertiesSection">Indicates whether the properties section should be omitted or not.</param>
+        /// <param name="buttons">Add button(s) to each nessage.</param>
         /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
         public static LoggerConfiguration MicrosoftTeams(
             this LoggerSinkConfiguration loggerSinkConfiguration,
@@ -51,9 +53,11 @@ namespace Serilog
             IFormatProvider formatProvider = null,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
             string proxy = null,
-            bool omitPropertiesSection = false)
+            bool omitPropertiesSection = false,
+            IEnumerable<MicrosoftTeamsSinkOptionsButton> buttons = null
+            )
         {
-            var microsoftTeamsSinkOptions = new MicrosoftTeamsSinkOptions(webHookUri, title, batchSizeLimit, period, formatProvider, restrictedToMinimumLevel, omitPropertiesSection, proxy);
+            var microsoftTeamsSinkOptions = new MicrosoftTeamsSinkOptions(webHookUri, title, batchSizeLimit, period, formatProvider, restrictedToMinimumLevel, omitPropertiesSection, proxy, buttons);
             return loggerSinkConfiguration.MicrosoftTeams(microsoftTeamsSinkOptions, restrictedToMinimumLevel);
         }
 

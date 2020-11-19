@@ -189,8 +189,16 @@ namespace Serilog.Sinks.MicrosoftTeams
                         Title = "Properties",
                         Facts = this.GetFacts(logEvent).ToArray()
                     }
-                }
+                },
+                PotentialActions =  null
             };
+
+            // Add static URL button(s) from options
+            if (this.options.Buttons.Any())
+            {
+                request.PotentialActions = new List<MicrosoftTeamsMessageAction>();
+                this.options.Buttons.ToList().ForEach(btn => request.PotentialActions.Add(new MicrosoftTeamsMessageAction("OpenUri", btn.Name, new MicrosoftTeamsMessageActionTargetUri(btn.Uri))));
+            }
 
             return request;
         }

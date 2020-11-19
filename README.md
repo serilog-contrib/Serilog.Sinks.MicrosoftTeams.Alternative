@@ -53,6 +53,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
 |restrictedToMinimumLevel|The minimum level of the logging.|`restrictedToMinimumLevel: LogEventLevel.Verbose`|`LogEventLevel.Verbose`|
 |omitPropertiesSection|Indicates whether the properties section should be omitted or not.|`omitPropertiesSection: true`|`false`|
 |proxy|The proxy addresss used.|`proxy: "http://test.de/proxy"`|`null`|
+|buttons|Add static clickable buttons to each message.|`buttons: new[] { new MicrosoftTeamsSinkOptionsButton("Google", "https://google.se") }`|`null`|
 
 ## Further information:
 This project is a fork of https://github.com/DixonDs/serilog-sinks-teams but is maintained.
