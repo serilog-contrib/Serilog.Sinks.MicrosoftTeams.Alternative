@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net46;net462;net47;net472;net48;netstandard2.0;netstandard2.1;netcoreapp2.1;netcoreapp3.1;</TargetFrameworks>
+    <TargetFrameworks>net46;net462;net47;net472;net48;netstandard2.0;netstandard2.1;netcoreapp2.1;netcoreapp3.1;net5.0</TargetFrameworks>
 	<AssemblyName>Serilog.Sinks.MicrosoftTeams</AssemblyName>
     <RootNamespace>Serilog</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -11,22 +11,22 @@
     <Company>Hämmer Electronics</Company>
     <Copyright>Copyright © Hämmer Electronics</Copyright>
     <Description>Serilog.Sinks.MicrosoftTeams is a library to save logging information from https://github.com/serilog/serilog to https://products.office.com/en-us/microsoft-teams/group-chat-software. The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.</Description>
-	<PackageTags>c# csharp serilog teams microsoft-teams microsoft sink logging log</PackageTags>
+	  <PackageTags>c# csharp serilog teams microsoft-teams microsoft sink logging log</PackageTags>
     <PackageProjectUrl>https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryType>Github</RepositoryType>
-    <PackageReleaseNotes>Version 1.0.11.0 (2020-07-29): Fixed a bug where the omitPropertiesSection flag wasn't set when configuration was read.</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 1.1.0.0 (2020-11-19): Updated nuget packages, moved to Net 5.0, added possibility to add static buttons to each message (Thanks to [Appelg](https://github.com/Appelg)), added failure callback.</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="5.3.7">
+    <PackageReference Include="GitVersionTask" Version="5.5.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Serilog" Version="2.9.0" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="Serilog.Sinks.PeriodicBatching" Version="2.3.0" />
   </ItemGroup>

@@ -55,7 +55,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         public IList<MicrosoftTeamsMessageSection> Sections { get; set; }
 
         /// <summary>
-        /// Used to add buttons
+        /// Gets or sets the potential action buttons.
         /// </summary>
         [JsonProperty("potentialAction")]
         public IList<MicrosoftTeamsMessageAction> PotentialActions { get; set; }

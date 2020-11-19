@@ -10,9 +10,9 @@
 namespace Serilog.Sinks.MicrosoftTeams
 {
     using System;
+    using System.Collections.Generic;
 
     using Serilog.Events;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Container for all Microsoft Teams sink configurations.
@@ -42,8 +42,19 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// <param name="minimumLogEventLevel">The minimum log event level to use.</param>
         /// <param name="omitPropertiesSection">Indicates whether the properties section should be omitted or not.</param>
         /// <param name="proxy">The proxy address to use.</param>
-        /// <param name="buttons">Add button(s) to each nessage.</param>
-        public MicrosoftTeamsSinkOptions(string webHookUri, string title, int? batchSizeLimit = null, TimeSpan? period = null, IFormatProvider formatProvider = null, LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose, bool omitPropertiesSection = false, string proxy = null, IEnumerable<MicrosoftTeamsSinkOptionsButton> buttons = null)
+        /// <param name="buttons">The buttons to add to a message.</param>
+        /// <param name="failureCallback">The failure callback.</param>
+        public MicrosoftTeamsSinkOptions(
+            string webHookUri,
+            string title,
+            int? batchSizeLimit = null,
+            TimeSpan? period = null,
+            IFormatProvider formatProvider = null,
+            LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose,
+            bool omitPropertiesSection = false,
+            string proxy = null,
+            IEnumerable<MicrosoftTeamsSinkOptionsButton> buttons = null,
+            Action<Exception> failureCallback = null)
         {
             if (webHookUri == null)
             {
@@ -64,6 +75,7 @@ namespace Serilog.Sinks.MicrosoftTeams
             this.OmitPropertiesSection = omitPropertiesSection;
             this.Proxy = proxy;
             this.Buttons = buttons ?? new List<MicrosoftTeamsSinkOptionsButton>();
+            this.FailureCallback = failureCallback;
         }
 
         /// <summary>
@@ -107,8 +119,13 @@ namespace Serilog.Sinks.MicrosoftTeams
         public string Proxy { get; }
 
         /// <summary>
-        /// Add button(s) to each nessage.
+        /// Gets the buttons to add to a message.
         /// </summary>
         public IEnumerable<MicrosoftTeamsSinkOptionsButton> Buttons { get; }
+
+        /// <summary>
+        /// Gets the failure callback.
+        /// </summary>
+        public Action<Exception> FailureCallback { get; }
     }
 }

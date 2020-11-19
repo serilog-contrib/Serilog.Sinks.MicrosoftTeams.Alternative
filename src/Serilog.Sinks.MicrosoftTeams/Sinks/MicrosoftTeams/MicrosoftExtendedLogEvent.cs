@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ExtendedLogEvent.cs" company="Hämmer Electronics">
+// <copyright file="MicrosoftExtendedLogEvent.cs" company="Hämmer Electronics">
 // The project is licensed under the MIT license.
 // </copyright>
 // <summary>
@@ -16,23 +16,23 @@ namespace Serilog.Sinks.MicrosoftTeams
     /// <summary>
     /// Added a new class to store the first and last occurrence timestamps.
     /// </summary>
-    public class ExtendedLogEvent
+    public class MicrosoftExtendedLogEvent
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExtendedLogEvent"/> class.
+        /// Initializes a new instance of the <see cref="MicrosoftExtendedLogEvent"/> class.
         /// </summary>
-        public ExtendedLogEvent()
+        public MicrosoftExtendedLogEvent()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExtendedLogEvent"/> class.
+        /// Initializes a new instance of the <see cref="MicrosoftExtendedLogEvent"/> class.
         /// </summary>
         /// <param name="firstOccurrence">The first occurrence.</param>
         /// <param name="lastOccurrence">The last occurrence.</param>
         /// <param name="logEvent">The log event.</param>
         // ReSharper disable once UnusedMember.Global
-        public ExtendedLogEvent(DateTime firstOccurrence, DateTime lastOccurrence, LogEvent logEvent)
+        public MicrosoftExtendedLogEvent(DateTime firstOccurrence, DateTime lastOccurrence, LogEvent logEvent)
         {
             this.FirstOccurrence = firstOccurrence;
             this.LastOccurrence = lastOccurrence;

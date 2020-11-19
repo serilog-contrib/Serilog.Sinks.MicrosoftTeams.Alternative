@@ -26,7 +26,8 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
     /// <summary>
     /// A helper class for the tests.
     /// </summary>
-    internal static class TestHelper
+    // ReSharper disable once InconsistentNaming
+    public static class TestHelper
     {
         /// <summary>
         /// The test web hook URL.
@@ -71,9 +72,9 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
         }
 
         /// <summary>
-        /// Creates the logger.
+        /// Creates the logger with buttons..
         /// </summary>
-        /// <param name="buttons">Buttons to output</param>
+        /// <param name="buttons">´The buttons to output</param>
         /// <returns>An <see cref="ILogger"/>.</returns>
         public static ILogger CreateLoggerWithButtons(IEnumerable<MicrosoftTeamsSinkOptionsButton> buttons)
         {
@@ -130,10 +131,10 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
         /// <param name="logEventLevel">The log event level.</param>
         /// <param name="color">The color.</param>
         /// <param name="counter">The counter.</param>
-        /// <param name="occuredOn">The occured on date.</param>
+        /// <param name="occurredOn">The occurred on date.</param>
         /// <returns>A <see cref="JObject"/> from the message.</returns>
         public static JObject CreateMessage(string template, string renderedMessage, LogEventLevel logEventLevel,
-            string color, int counter, string occuredOn)
+            string color, int counter, string occurredOn)
         {
             return new JObject
             {
@@ -166,8 +167,8 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
                             },
                             new JObject
                             {
-                                ["name"] = "Occured on",
-                                ["value"] = occuredOn
+                                ["name"] = "Occurred on",
+                                ["value"] = occurredOn
                             }
                         }
                     }
@@ -175,6 +176,12 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
             };
         }
 
+        /// <summary>
+        /// Creates a message.
+        /// </summary>
+        /// <param name="renderedMessage">The rendered message.</param>
+        /// <param name="color">The color.</param>
+        /// <returns>A new <see cref="JObject"/> representing the message.</returns>
         public static JObject CreateMessage(string renderedMessage, string color)
         {
             return new JObject
@@ -187,6 +194,13 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
             };
         }
 
+        /// <summary>
+        /// Creates a message with buttons.
+        /// </summary>
+        /// <param name="renderedMessage">The rendered message.</param>
+        /// <param name="color">The color.</param>
+        /// <param name="buttons">The buttons.</param>
+        /// <returns>A new <see cref="JObject"/> representing the message.</returns>
         public static JObject CreateMessageWithButton(string renderedMessage, string color, IEnumerable<MicrosoftTeamsSinkOptionsButton> buttons)
         {
             var potentialAction = new JArray();

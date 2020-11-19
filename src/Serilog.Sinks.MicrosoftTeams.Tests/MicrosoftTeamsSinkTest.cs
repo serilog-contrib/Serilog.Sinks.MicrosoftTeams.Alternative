@@ -37,7 +37,6 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
         public MicrosoftTeamsSinkTest()
         {
             SelfLog.Enable(s => Debug.WriteLine(s));
-
             this.logger = TestHelper.CreateLogger();
         }
 
@@ -80,8 +79,8 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
             for (var i = 0; i < MessageCount; i++)
             {
                 // ReSharper disable PossibleNullReferenceException
-                var occuredOn = actualMessages[i]["sections"][0]["facts"].Last.Last.Last.ToString();
-                var expectedMessage = TestHelper.CreateMessage(templates[i], renderedMessages[i], logEventLevel, color, i, occuredOn);
+                var occurredOn = actualMessages[i]["sections"][0]["facts"].Last.Last.Last.ToString();
+                var expectedMessage = TestHelper.CreateMessage(templates[i], renderedMessages[i], logEventLevel, color, i, occurredOn);
                 actualMessages[i].ShouldBe(expectedMessage);
             }
         }

@@ -1,34 +1,26 @@
-﻿namespace Serilog.Sinks.MicrosoftTeams
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MicrosoftTeamsSinkOptionsButton.cs" company="Hämmer Electronics">
+// The project is licensed under the MIT license.
+// </copyright>
+// <summary>
+//   A class to handle the Microsoft Teams options buttons.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Serilog.Sinks.MicrosoftTeams
 {
     /// <summary>
-    /// 
+    /// A class to handle the Microsoft Teams options buttons.
     /// </summary>
     public class MicrosoftTeamsSinkOptionsButton
     {
         /// <summary>
-        /// Default ctor
-        /// </summary>
-        public MicrosoftTeamsSinkOptionsButton() { }
-
-        /// <summary>
-        /// Convenience ctor
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="uri"></param>
-        public MicrosoftTeamsSinkOptionsButton(string name, string uri)
-        {
-            Name = name;
-            Uri = uri;
-        }
-
-        /// <summary>
-        /// Link display name
+        /// Gets or sets the link display name.
         /// </summary>
         public string Name { get; set; }
 
-
         /// <summary>
-        /// Link Uri
+        /// Gets or sets the link URI.
         /// </summary>
         public string Uri { get; set; }
     }
