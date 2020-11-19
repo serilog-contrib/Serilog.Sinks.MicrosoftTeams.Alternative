@@ -2,7 +2,7 @@ Serilog.Sinks.MicrosoftTeams
 ====================================
 
 Serilog.Sinks.MicrosoftTeams is a library to save logging information from [Serilog](https://github.com/serilog/serilog) to [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software).
-The assembly was written and tested in NetCore 3.1, .Net Framework 4.8 and .Net Standard 2.0.
+The assembly was written and tested in Net 5.0
 
 [![Build status](https://ci.appveyor.com/api/projects/status/x4l2tdvyj7gv51qo?svg=true)](https://ci.appveyor.com/project/SeppPenner/serilog-sinks-microsoftteams)
 [![GitHub issues](https://img.shields.io/github/issues/SeppPenner/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/issues)
@@ -24,10 +24,12 @@ The assembly was written and tested in NetCore 3.1, .Net Framework 4.8 and .Net 
 * NetStandard 2.1
 * NetCore 2.1
 * NetCore 3.1
+* Net 5.0
 
 ## Net Core and Net Framework latest and LTS versions
 * https://dotnet.microsoft.com/download/dotnet-framework
 * https://dotnet.microsoft.com/download/dotnet-core
+* https://dotnet.microsoft.com/download/dotnet/5.0
 
 ## Basic usage:
 You need to add an "Incoming Webhook" connector to your Teams channel and get it's URL. `title` is optional but can help your distinguish logs coming from different sources.
