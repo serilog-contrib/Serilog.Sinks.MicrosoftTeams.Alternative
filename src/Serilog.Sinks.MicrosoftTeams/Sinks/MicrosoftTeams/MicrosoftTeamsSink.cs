@@ -12,6 +12,7 @@ namespace Serilog.Sinks.MicrosoftTeams
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
     using System.Linq;
     using System.Net;
     using System.Net.Http;
@@ -22,6 +23,7 @@ namespace Serilog.Sinks.MicrosoftTeams
 
     using Serilog.Debugging;
     using Serilog.Events;
+    using Serilog.Formatting.Display;
     using Serilog.Sinks.PeriodicBatching;
 
     /// <summary>
@@ -205,7 +207,19 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// <returns>A message card.</returns>
         private MicrosoftTeamsMessageCard CreateMessage(MicrosoftExtendedLogEvent logEvent)
         {
-            var renderedMessage = logEvent.LogEvent.RenderMessage(this.options.FormatProvider);
+            string renderedMessage;
+
+            if (string.IsNullOrWhiteSpace(this.options.OutputTemplate))
+            {
+                renderedMessage = logEvent.LogEvent.RenderMessage(this.options.FormatProvider);
+            }
+            else
+            {
+                var formatter = new MessageTemplateTextFormatter(this.options.OutputTemplate, this.options.FormatProvider);
+                var stringWriter = new StringWriter();
+                formatter.Format(logEvent.LogEvent, stringWriter);
+                renderedMessage = stringWriter.ToString();
+            }
 
             var request = new MicrosoftTeamsMessageCard
             {
@@ -224,14 +238,13 @@ namespace Serilog.Sinks.MicrosoftTeams
             };
 
             // Add static URL buttons from the options
-            if (!this.options.Buttons.Any())
+            if (this.options.Buttons.IsNullOrEmpty())
             {
                 return request;
             }
 
             request.PotentialActions = new List<MicrosoftTeamsMessageAction>();
             this.options.Buttons.ToList().ForEach(btn => request.PotentialActions.Add(new MicrosoftTeamsMessageAction("OpenUri", btn.Name, new MicrosoftTeamsMessageActionTargetUri(btn.Uri))));
-
             return request;
         }
 

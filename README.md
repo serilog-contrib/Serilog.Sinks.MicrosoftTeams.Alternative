@@ -2,7 +2,7 @@ Serilog.Sinks.MicrosoftTeams
 ====================================
 
 Serilog.Sinks.MicrosoftTeams is a library to save logging information from [Serilog](https://github.com/serilog/serilog) to [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software).
-The assembly was written and tested in Net 5.0
+The assembly was written and tested in Net 5.0.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/x4l2tdvyj7gv51qo?svg=true)](https://ci.appveyor.com/project/SeppPenner/serilog-sinks-microsoftteams)
 [![GitHub issues](https://img.shields.io/github/issues/SeppPenner/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/issues)
@@ -51,11 +51,12 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
 |title|The title of the card.|`"Some Message"`|None, but is optional.|
 |batchSizeLimit|The maximum number of events to include in a single batch.|`batchSizeLimit: 40`|`1`|
 |period|The time to wait between checking for event batches.|`period: new TimeSpan(0, 0, 20)`|`00:00:01`|
-|formatProvider|The `IFormatProvider` to use. Supplies culture-specific formatting information. Check https://docs.microsoft.com/en-us/dotnet/api/system.iformatprovider?view=netframework-4.8.|`new CultureInfo("de-DE")`|`null`|
+|outputTemplate|The output template for a log event.|`outputTemplate:"{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}"`|`null`|
+|formatProvider|The `IFormatProvider` to use. Supplies culture-specific formatting information. Check https://docs.microsoft.com/en-us/dotnet/api/system.iformatprovider?view=net-5.0.|`new CultureInfo("de-DE")`|`null`|
 |restrictedToMinimumLevel|The minimum level of the logging.|`restrictedToMinimumLevel: LogEventLevel.Verbose`|`LogEventLevel.Verbose`|
 |omitPropertiesSection|Indicates whether the properties section should be omitted or not.|`omitPropertiesSection: true`|`false`|
 |proxy|The proxy addresss used.|`proxy: "http://test.de/proxy"`|`null`|
-|buttons|Option to add static clickable buttons to each message.|`buttons: new[] { new MicrosoftTeamsSinkOptionsButton("Google", "https://google.se") }`|`null`|
+|buttons|Option to add static clickable buttons to each message.|`buttons: new[] { new MicrosoftTeamsSinkOptionsButton("Google", "https://google.de") }`|`null`|
 |failureCallback|Adds an option to add a failure callback action.|`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`|`null`|
 
 ## Further information:

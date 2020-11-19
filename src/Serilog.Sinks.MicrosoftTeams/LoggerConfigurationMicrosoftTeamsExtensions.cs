@@ -38,6 +38,7 @@ namespace Serilog
         /// not provided i.e. no batching by default.</param>
         /// <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
         /// provided.</param>
+        /// <param name="outputTemplate">The output template.</param>
         /// <param name="formatProvider">The format provider used for formatting the message.</param>
         /// <param name="restrictedToMinimumLevel"><see cref="LogEventLevel"/> value that specifies minimum logging
         /// level that will be allowed to be logged.</param>
@@ -53,6 +54,7 @@ namespace Serilog
             string title = null,
             int? batchSizeLimit = null,
             TimeSpan? period = null,
+            string outputTemplate = null,
             IFormatProvider formatProvider = null,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
             string proxy = null,
@@ -65,6 +67,7 @@ namespace Serilog
                 title,
                 batchSizeLimit,
                 period,
+                outputTemplate,
                 formatProvider,
                 restrictedToMinimumLevel,
                 omitPropertiesSection,

@@ -38,6 +38,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// not provided i.e. no batching by default.</param>
         /// <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
         /// provided.</param>
+        /// <param name="outputTemplate">The output template.</param>
         /// <param name="formatProvider">The format provider used for formatting the message.</param>
         /// <param name="minimumLogEventLevel">The minimum log event level to use.</param>
         /// <param name="omitPropertiesSection">Indicates whether the properties section should be omitted or not.</param>
@@ -49,6 +50,7 @@ namespace Serilog.Sinks.MicrosoftTeams
             string title,
             int? batchSizeLimit = null,
             TimeSpan? period = null,
+            string outputTemplate = null,
             IFormatProvider formatProvider = null,
             LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose,
             bool omitPropertiesSection = false,
@@ -70,6 +72,7 @@ namespace Serilog.Sinks.MicrosoftTeams
             this.Title = title;
             this.BatchSizeLimit = batchSizeLimit ?? DefaultBatchSizeLimit;
             this.Period = period ?? DefaultPeriod;
+            this.OutputTemplate = outputTemplate;
             this.FormatProvider = formatProvider;
             this.MinimumLogEventLevel = minimumLogEventLevel;
             this.OmitPropertiesSection = omitPropertiesSection;
@@ -97,6 +100,11 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// Gets the time to wait between checking for event batches.
         /// </summary>
         public TimeSpan Period { get; }
+
+        /// <summary>
+        /// Gets the output template.
+        /// </summary>
+        public string OutputTemplate { get; }
 
         /// <summary>
         /// Gets the format provider used for formatting the message.

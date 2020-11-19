@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.1.1.0 (2020-11-19)** : Added output template.
 * **Version 1.1.0.0 (2020-11-19)** : Updated nuget packages, moved to Net 5.0, added possibility to add static buttons to each message (Thanks to [Appelg](https://github.com/Appelg)), added failure callback.
 * **Version 1.0.11.0 (2020-07-29)**: Fixed a bug where the omitPropertiesSection flag wasn't set when configuration was read.
 * **Version 1.0.10.0 (2020-07-25)** : Fixed a logical error with the messagesToSend list (Thanks to [mahdiman](https://github.com/mahdiman)).
