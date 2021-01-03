@@ -18,6 +18,7 @@
     <RepositoryType>Github</RepositoryType>
     <PackageReleaseNotes>Version 1.1.1.0 (2020-11-19): Added output template.</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
