@@ -62,6 +62,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
 ## Further information:
 This project is a fork of https://github.com/DixonDs/serilog-sinks-teams but is maintained.
 Do not hesitate to create [issues](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/issues) or [pull requests](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/pulls).
+The relevant reference from Microsoft can be found here: https://docs.microsoft.com/en-us/outlook/actionable-messages/message-card-reference.
 
 Change history
 --------------
