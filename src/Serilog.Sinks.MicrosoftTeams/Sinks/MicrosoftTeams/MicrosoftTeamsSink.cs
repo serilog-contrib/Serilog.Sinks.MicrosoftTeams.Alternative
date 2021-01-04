@@ -224,7 +224,7 @@ namespace Serilog.Sinks.MicrosoftTeams
             var request = new MicrosoftTeamsMessageCard
             {
                 Title = this.options.Title,
-                Text = renderedMessage,
+                Text = this.options.UseCodeTagsForMessage ? $"```{Environment.NewLine}{renderedMessage}{Environment.NewLine}```" : renderedMessage,
                 Color = GetAttachmentColor(logEvent.LogEvent.Level),
                 Sections = this.options.OmitPropertiesSection ? null : new[]
                 {
@@ -264,7 +264,7 @@ namespace Serilog.Sinks.MicrosoftTeams
             yield return new MicrosoftTeamsMessageFact
             {
                 Name = "MessageTemplate",
-                Value = logEvent.LogEvent.MessageTemplate.Text
+                Value = this.options.UseCodeTagsForMessage ? $"```{Environment.NewLine}{logEvent.LogEvent.MessageTemplate.Text}{Environment.NewLine}```" : logEvent.LogEvent.MessageTemplate.Text
             };
 
             if (logEvent.LogEvent.Exception != null)

@@ -12,6 +12,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
     using System.Linq;
     using System.Threading;
 
@@ -110,6 +111,19 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
         {
             this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(2));
             this.logger.Debug("Message text {prop}", 3);
+            Thread.Sleep(1000);
+        }
+
+        /// <summary>
+        /// Tests the emitting of messages with complex data.
+        /// </summary>
+        [DeploymentItem("TestException.txt")]
+        [TestMethod]
+        public void EmitMessagesWithComplexData()
+        {
+            this.logger = TestHelper.CreateLoggerWithCodeTags();
+            var data = File.ReadAllText("TestException.txt");
+            this.logger.Debug(data);
             Thread.Sleep(1000);
         }
     }

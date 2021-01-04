@@ -44,6 +44,7 @@ namespace Serilog
         /// level that will be allowed to be logged.</param>
         /// <param name = "proxy" > The proxy address to use.</param>
         /// <param name="omitPropertiesSection">Indicates whether the properties section should be omitted or not.</param>
+        /// <param name="useCodeTagsForMessage">A value indicating whether code tags are used for the message template or not.</param>
         /// <param name="buttons">The buttons to add to a message.</param>
         /// <param name="failureCallback">The failure callback.</param>
         /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
@@ -59,6 +60,7 @@ namespace Serilog
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
             string proxy = null,
             bool omitPropertiesSection = false,
+            bool useCodeTagsForMessage = false,
             IEnumerable<MicrosoftTeamsSinkOptionsButton> buttons = null,
             Action<Exception> failureCallback = null)
         {
@@ -71,6 +73,7 @@ namespace Serilog
                 formatProvider,
                 restrictedToMinimumLevel,
                 omitPropertiesSection,
+                useCodeTagsForMessage,
                 proxy,
                 buttons,
                 failureCallback);

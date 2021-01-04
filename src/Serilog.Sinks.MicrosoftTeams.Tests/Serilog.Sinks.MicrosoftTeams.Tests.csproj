@@ -21,4 +21,10 @@
     <ProjectReference Include="..\Serilog.Sinks.MicrosoftTeams\Serilog.Sinks.MicrosoftTeams.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestException.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

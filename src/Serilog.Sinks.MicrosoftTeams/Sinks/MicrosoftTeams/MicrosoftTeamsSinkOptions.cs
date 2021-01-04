@@ -41,7 +41,8 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// <param name="outputTemplate">The output template.</param>
         /// <param name="formatProvider">The format provider used for formatting the message.</param>
         /// <param name="minimumLogEventLevel">The minimum log event level to use.</param>
-        /// <param name="omitPropertiesSection">Indicates whether the properties section should be omitted or not.</param>
+        /// <param name="omitPropertiesSection">A value indicating whether the properties section should be omitted or not.</param>
+        /// <param name="useCodeTagsForMessage">A value indicating whether code tags are used for the message template or not.</param>
         /// <param name="proxy">The proxy address to use.</param>
         /// <param name="buttons">The buttons to add to a message.</param>
         /// <param name="failureCallback">The failure callback.</param>
@@ -54,6 +55,7 @@ namespace Serilog.Sinks.MicrosoftTeams
             IFormatProvider formatProvider = null,
             LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose,
             bool omitPropertiesSection = false,
+            bool useCodeTagsForMessage = false,
             string proxy = null,
             IEnumerable<MicrosoftTeamsSinkOptionsButton> buttons = null,
             Action<Exception> failureCallback = null)
@@ -76,6 +78,7 @@ namespace Serilog.Sinks.MicrosoftTeams
             this.FormatProvider = formatProvider;
             this.MinimumLogEventLevel = minimumLogEventLevel;
             this.OmitPropertiesSection = omitPropertiesSection;
+            this.UseCodeTagsForMessage = useCodeTagsForMessage;
             this.Proxy = proxy;
             this.Buttons = buttons ?? new List<MicrosoftTeamsSinkOptionsButton>();
             this.FailureCallback = failureCallback;
@@ -120,6 +123,11 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// Gets a value indicating whether the properties section should be omitted or not.
         /// </summary>
         public bool OmitPropertiesSection { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether code tags are used for the message template or not.
+        /// </summary>
+        public bool UseCodeTagsForMessage { get; }
 
         /// <summary>
         /// Gets the proxy URL.

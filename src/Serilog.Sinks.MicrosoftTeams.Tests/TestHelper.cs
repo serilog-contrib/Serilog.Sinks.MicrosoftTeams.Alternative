@@ -47,7 +47,21 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
         {
             var logger = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
-                .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHook, "Integration Tests", buttons: buttons, omitPropertiesSection: true))
+                .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHook, "Integration Tests", buttons: buttons))
+                .CreateLogger();
+
+            return logger;
+        }
+
+        /// <summary>
+        /// Creates the logger.
+        /// </summary>
+        /// <returns>An <see cref="ILogger"/>.</returns>
+        public static ILogger CreateLoggerWithCodeTags()
+        {
+            var logger = new LoggerConfiguration()
+                .MinimumLevel.Verbose()
+                .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHook, "Integration Tests", useCodeTagsForMessage: true))
                 .CreateLogger();
 
             return logger;
