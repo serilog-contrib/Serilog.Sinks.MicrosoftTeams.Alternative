@@ -194,7 +194,7 @@ namespace Serilog.Sinks.MicrosoftTeams
                 }
                 catch (Exception ex)
                 {
-                    SelfLog.WriteLine($"{ex.Message}, {ex.StackTrace}");
+                    SelfLog.WriteLine($"{ex.Message} {ex.StackTrace}");
                     this.options.FailureCallback?.Invoke(ex);
                 }
             }
