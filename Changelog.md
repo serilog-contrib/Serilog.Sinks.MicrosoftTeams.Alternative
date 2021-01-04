@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.2.0.0 (2021-01-04)** : Updated nuget packages, updated project files, updated logging for exceptions in self log, simplified test classes, added hint to reference from Microsoft, added option to use code tags for complex messages to avoid strange formatting.
 * **Version 1.1.1.0 (2020-11-19)** : Added output template.
 * **Version 1.1.0.0 (2020-11-19)** : Updated nuget packages, moved to Net 5.0, added possibility to add static buttons to each message (Thanks to [Appelg](https://github.com/Appelg)), added failure callback.
 * **Version 1.0.11.0 (2020-07-29)**: Fixed a bug where the omitPropertiesSection flag wasn't set when configuration was read.
