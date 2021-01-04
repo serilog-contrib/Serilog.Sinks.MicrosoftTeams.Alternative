@@ -55,6 +55,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
 |formatProvider|The `IFormatProvider` to use. Supplies culture-specific formatting information. Check https://docs.microsoft.com/en-us/dotnet/api/system.iformatprovider?view=net-5.0.|`new CultureInfo("de-DE")`|`null`|
 |restrictedToMinimumLevel|The minimum level of the logging.|`restrictedToMinimumLevel: LogEventLevel.Verbose`|`LogEventLevel.Verbose`|
 |omitPropertiesSection|Indicates whether the properties section should be omitted or not.|`omitPropertiesSection: true`|`false`|
+|useCodeTagsForMessage|A value indicating whether code tags are used for the message template or not. This is useful if you have complex messages that might get formatted as unwanted markdown elements.|`useCodeTagsForMessage:true`|`false`|
 |proxy|The proxy addresss used.|`proxy: "http://test.de/proxy"`|`null`|
 |buttons|Option to add static clickable buttons to each message.|`buttons: new[] { new MicrosoftTeamsSinkOptionsButton("Google", "https://google.de") }`|`null`|
 |failureCallback|Adds an option to add a failure callback action.|`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`|`null`|
