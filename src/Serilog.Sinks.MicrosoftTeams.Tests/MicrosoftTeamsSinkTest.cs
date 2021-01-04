@@ -12,24 +12,33 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Threading.Tasks;
+    using System.Linq;
+    using System.Threading;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Serilog.Debugging;
     using Serilog.Events;
 
-    using Shouldly;
-
-    using Xunit;
-
     /// <summary>
     /// A test class to test the Microsoft Teams sink for basic functionality.
     /// </summary>
+    [TestClass]
     public class MicrosoftTeamsSinkTest
     {
         /// <summary>
+        /// The buttons.
+        /// </summary>
+        private readonly List<MicrosoftTeamsSinkOptionsButton> buttons = new List<MicrosoftTeamsSinkOptionsButton>
+        {
+            new MicrosoftTeamsSinkOptionsButton { Name = "Google", Uri = "https://google.com" },
+            new MicrosoftTeamsSinkOptionsButton { Name = "DuckDuckGo", Uri = "https://duckduckgo.com" }
+        };
+
+        /// <summary>
         /// The logger.
         /// </summary>
-        private readonly ILogger logger;
+        private ILogger logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MicrosoftTeamsSinkTest"/> class.
@@ -37,52 +46,71 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
         public MicrosoftTeamsSinkTest()
         {
             SelfLog.Enable(s => Debug.WriteLine(s));
-            this.logger = TestHelper.CreateLogger();
         }
 
         /// <summary>
-        /// Tests the emitting of events.
+        /// Tests the emitting of messages with all log event levels.
         /// </summary>
-        /// <param name="logEventLevel">The log event level.</param>
-        /// <param name="color">The color.</param>
-        /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-        [Theory]
-        [InlineData(LogEventLevel.Debug, "777777")]
-        [InlineData(LogEventLevel.Error, "d9534f")]
-        [InlineData(LogEventLevel.Fatal, "d9534f")]
-        [InlineData(LogEventLevel.Information, "5bc0de")]
-        [InlineData(LogEventLevel.Verbose, "777777")]
-        [InlineData(LogEventLevel.Warning, "f0ad4e")]
-        public async Task SinkEmitsEvents(LogEventLevel logEventLevel, string color)
+        [TestMethod]
+        public void EmitMessagesWithAllLogEventLevels()
         {
-            const int MessageCount = 100;
+            this.logger = TestHelper.CreateLogger();
 
-            var sentMessagesTask = TestHelper.CaptureRequestsAsync(MessageCount);
+            var counter = 0;
 
-            var renderedMessages = new List<string>();
-            var templates = new List<string>();
-
-            for (var i = 0; i < MessageCount; i++)
+            for (var i = 0; i < 6; i++)
             {
-                var templatePrefix = $"{Guid.NewGuid()} #";
-                var template = templatePrefix + "{counter}";
-                var renderedMessage = templatePrefix + i;
-
-                renderedMessages.Add(renderedMessage);
-                templates.Add(template);
-
-                this.logger.Write(logEventLevel, template, i);
+                var template = $"{Guid.NewGuid()} {{counter}}";
+                this.logger.Write((LogEventLevel)counter, template, i);
+                counter++;
+                Thread.Sleep(500);
             }
 
-            var actualMessages = await sentMessagesTask.ConfigureAwait(false);
+            Thread.Sleep(1000);
+        }
 
-            for (var i = 0; i < MessageCount; i++)
-            {
-                // ReSharper disable PossibleNullReferenceException
-                var occurredOn = actualMessages[i]["sections"][0]["facts"].Last.Last.Last.ToString();
-                var expectedMessage = TestHelper.CreateMessage(templates[i], renderedMessages[i], logEventLevel, color, i, occurredOn);
-                actualMessages[i].ShouldBe(expectedMessage);
-            }
+        /// <summary>
+        /// Tests the emitting of messages with the omit properties feature enabled.
+        /// </summary>
+        [TestMethod]
+        public void EmitMessagesWithOmittedProperties()
+        {
+            this.logger = TestHelper.CreateLogger(true);
+            this.logger.Debug("Message text {prop}", 4);
+            Thread.Sleep(1000);
+        }
+
+        /// <summary>
+        /// Tests the emitting of messages with zero buttons.
+        /// </summary>
+        [TestMethod]
+        public void EmitMessagesWithZeroButtons()
+        {
+            this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(0));
+            this.logger.Debug("Message text {prop}", 1);
+            Thread.Sleep(1000);
+        }
+
+        /// <summary>
+        /// Tests the emitting of messages with one button.
+        /// </summary>
+        [TestMethod]
+        public void EmitMessagesWithOneButton()
+        {
+            this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(1));
+            this.logger.Debug("Message text {prop}", 2);
+            Thread.Sleep(1000);
+        }
+
+        /// <summary>
+        /// Tests the emitting of messages with two buttons.
+        /// </summary>
+        [TestMethod]
+        public void EmitMessagesWithTwoButtons()
+        {
+            this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(2));
+            this.logger.Debug("Message text {prop}", 3);
+            Thread.Sleep(1000);
         }
     }
 }
