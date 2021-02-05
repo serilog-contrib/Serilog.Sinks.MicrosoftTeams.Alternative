@@ -1,4 +1,4 @@
-## Basic usage:
+## Basic usage
 You need to add an "Incoming Webhook" connector to your Teams channel and get it's URL. `title` is optional but can help your distinguish logs coming from different sources.
 Check https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/connectors/connectors-using.
 
@@ -10,7 +10,7 @@ var logger = new LoggerConfiguration()
 
 The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams/).
 
-## Configuration options:
+## Configuration options
 |Parameter|Meaning|Example|Default value|
 |-|-|-|-|
 |webHookUri|The Microsoft teams weebhook uri.|`https://outlook.office.com/webhook/1234567890`|None, is mandatory.|
@@ -26,7 +26,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
 |buttons|Option to add static clickable buttons to each message.|`buttons: new[] { new MicrosoftTeamsSinkOptionsButton("Google", "https://google.de") }`|`null`|
 |failureCallback|Adds an option to add a failure callback action.|`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`|`null`|
 
-## Further information:
+## Further information
 This project is a fork of https://github.com/DixonDs/serilog-sinks-teams but is maintained.
 Do not hesitate to create [issues](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/issues) or [pull requests](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams/pulls).
 The relevant reference from Microsoft can be found here: https://docs.microsoft.com/en-us/outlook/actionable-messages/message-card-reference.
