@@ -68,6 +68,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
             }
 
             Thread.Sleep(1000);
+            Log.CloseAndFlush();
         }
 
         /// <summary>
@@ -79,6 +80,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
             this.logger = TestHelper.CreateLogger(true);
             this.logger.Debug("Message text {prop}", 4);
             Thread.Sleep(1000);
+            Log.CloseAndFlush();
         }
 
         /// <summary>
@@ -90,6 +92,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
             this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(0));
             this.logger.Debug("Message text {prop}", 1);
             Thread.Sleep(1000);
+            Log.CloseAndFlush();
         }
 
         /// <summary>
@@ -101,6 +104,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
             this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(1));
             this.logger.Debug("Message text {prop}", 2);
             Thread.Sleep(1000);
+            Log.CloseAndFlush();
         }
 
         /// <summary>
@@ -112,6 +116,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
             this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(2));
             this.logger.Debug("Message text {prop}", 3);
             Thread.Sleep(1000);
+            Log.CloseAndFlush();
         }
 
         /// <summary>
@@ -125,6 +130,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
             var data = File.ReadAllText("TestException.txt");
             this.logger.Debug(data);
             Thread.Sleep(1000);
+            Log.CloseAndFlush();
         }
     }
 }
