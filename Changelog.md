@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.2.3.0 (2021-06-04)** : Updated nuget packages.
 * **Version 1.2.2.0 (2021-04-29)** : Updated nuget packages.
 * **Version 1.2.1.0 (2021-02-21)** : Updated nuget packages.
 * **Version 1.2.0.0 (2021-01-04)** : Updated nuget packages, updated project files, updated logging for exceptions in self log, simplified test classes, added hint to reference from Microsoft, added option to use code tags for complex messages to avoid strange formatting.
