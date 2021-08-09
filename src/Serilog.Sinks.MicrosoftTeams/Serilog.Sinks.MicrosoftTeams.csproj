@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryType>Github</RepositoryType>
-    <PackageReleaseNotes>Version 1.2.4.0 (2021-07-25): Updated nuget packages, enabled source linking for debugging.</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 1.2.5.0 (2021-08-09): Removed support for soon deprecated NetCore 2.1.</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <LangVersion>latest</LangVersion>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -26,7 +26,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GitVersion.MsBuild" Version="5.6.10">
+    <PackageReference Include="GitVersion.MsBuild" Version="5.6.11">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -34,7 +34,7 @@
     <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="Serilog.Sinks.PeriodicBatching" Version="2.3.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
   
     <ItemGroup>
