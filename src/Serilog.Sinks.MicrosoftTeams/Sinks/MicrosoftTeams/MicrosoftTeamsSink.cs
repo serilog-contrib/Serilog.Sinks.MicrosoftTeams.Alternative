@@ -24,6 +24,8 @@ namespace Serilog.Sinks.MicrosoftTeams
     using Serilog.Debugging;
     using Serilog.Events;
     using Serilog.Formatting.Display;
+    using Serilog.Sinks.MicrosoftTeams.Core;
+    using Serilog.Sinks.MicrosoftTeams.Extensions;
     using Serilog.Sinks.PeriodicBatching;
 
     /// <summary>
