@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.MicrosoftTeams
+namespace Serilog.Sinks.MicrosoftTeams.Enumerations
 {
     /// <summary>
     /// A class to store all the Microsoft Teams colors.
