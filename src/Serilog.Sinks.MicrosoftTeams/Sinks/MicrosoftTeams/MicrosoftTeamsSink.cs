@@ -54,7 +54,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// Initializes a new instance of the <see cref="MicrosoftTeamsSink"/> class.
         /// </summary>
         /// <param name="options">Microsoft teams sink options object.</param>
-        public MicrosoftTeamsSink(MicrosoftTeamsSinkOptions options) : base(options.BatchSizeLimit, options.Period)
+        public MicrosoftTeamsSink(MicrosoftTeamsSinkOptions options) : base(options.BatchSizeLimit, options.Period, options.QueueLimit)
         {
             this.options = options;
 
@@ -145,7 +145,7 @@ namespace Serilog.Sinks.MicrosoftTeams
 
                 var foundSameLogEvent = messagesToSend.Where(m => m.LogEvent?.Exception?.Message != null).FirstOrDefault(l => l.LogEvent.Exception.Message == logEvent.Exception.Message);
 
-                if (foundSameLogEvent == null)
+                if (foundSameLogEvent is null)
                 {
                     messagesToSend.Add(
                         new MicrosoftExtendedLogEvent
@@ -207,19 +207,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// <returns>A message card.</returns>
         private MicrosoftTeamsMessageCard CreateMessage(MicrosoftExtendedLogEvent logEvent)
         {
-            string renderedMessage;
-
-            if (string.IsNullOrWhiteSpace(this.options.OutputTemplate))
-            {
-                renderedMessage = logEvent.LogEvent.RenderMessage(this.options.FormatProvider);
-            }
-            else
-            {
-                var formatter = new MessageTemplateTextFormatter(this.options.OutputTemplate, this.options.FormatProvider);
-                var stringWriter = new StringWriter();
-                formatter.Format(logEvent.LogEvent, stringWriter);
-                renderedMessage = stringWriter.ToString();
-            }
+            var renderedMessage = this.GetRenderedMessage(logEvent);
 
             var request = new MicrosoftTeamsMessageCard
             {
@@ -246,6 +234,25 @@ namespace Serilog.Sinks.MicrosoftTeams
             request.PotentialActions = new List<MicrosoftTeamsMessageAction>();
             this.options.Buttons.ToList().ForEach(btn => request.PotentialActions.Add(new MicrosoftTeamsMessageAction("OpenUri", btn.Name, new MicrosoftTeamsMessageActionTargetUri(btn.Uri))));
             return request;
+        }
+
+
+        /// <summary>
+        /// Gets the rendered message from the <see cref="MicrosoftExtendedLogEvent"/>.
+        /// </summary>
+        /// <param name="logEvent">The log event.</param>
+        /// <returns>The rendered messages as <see cref="string"/>.</returns>
+        private string GetRenderedMessage(MicrosoftExtendedLogEvent logEvent)
+        {
+            if (string.IsNullOrWhiteSpace(this.options.OutputTemplate))
+            {
+                return logEvent.LogEvent.RenderMessage(this.options.FormatProvider);
+            }
+
+            var formatter = new MessageTemplateTextFormatter(this.options.OutputTemplate, this.options.FormatProvider);
+            var stringWriter = new StringWriter();
+            formatter.Format(logEvent.LogEvent, stringWriter);
+            return stringWriter.ToString();
         }
 
         /// <summary>

@@ -25,6 +25,11 @@ namespace Serilog.Sinks.MicrosoftTeams
         private const int DefaultBatchSizeLimit = 1;
 
         /// <summary>
+        /// The default queue limit.
+        /// </summary>
+        private const int DefaultQueueLimit = int.MaxValue;
+
+        /// <summary>
         /// The default period.
         /// </summary>
         private static readonly TimeSpan DefaultPeriod = TimeSpan.FromSeconds(1);
@@ -46,6 +51,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// <param name="proxy">The proxy address to use.</param>
         /// <param name="buttons">The buttons to add to a message.</param>
         /// <param name="failureCallback">The failure callback.</param>
+        /// <param name="queueLimit">The maximum number of events that should be stored in the batching queue.</param>
         public MicrosoftTeamsSinkOptions(
             string webHookUri,
             string title,
@@ -58,7 +64,8 @@ namespace Serilog.Sinks.MicrosoftTeams
             bool useCodeTagsForMessage = false,
             string proxy = null,
             IEnumerable<MicrosoftTeamsSinkOptionsButton> buttons = null,
-            Action<Exception> failureCallback = null)
+            Action<Exception> failureCallback = null,
+            int? queueLimit = null)
         {
             if (webHookUri == null)
             {
@@ -82,6 +89,7 @@ namespace Serilog.Sinks.MicrosoftTeams
             this.Proxy = proxy;
             this.Buttons = buttons ?? new List<MicrosoftTeamsSinkOptionsButton>();
             this.FailureCallback = failureCallback;
+            this.QueueLimit = queueLimit ?? DefaultQueueLimit;
         }
 
         /// <summary>
@@ -143,5 +151,10 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// Gets the failure callback.
         /// </summary>
         public Action<Exception> FailureCallback { get; }
+
+        /// <summary>
+        /// Gets the maximum number of events that should be stored in the batching queue.
+        /// </summary>
+        public int QueueLimit { get; }
     }
 }

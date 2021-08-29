@@ -47,6 +47,7 @@ namespace Serilog
         /// <param name="useCodeTagsForMessage">A value indicating whether code tags are used for the message template or not.</param>
         /// <param name="buttons">The buttons to add to a message.</param>
         /// <param name="failureCallback">The failure callback.</param>
+        /// <param name="queueLimit">The maximum number of events that should be stored in the batching queue.</param>
         /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
         // ReSharper disable once InconsistentNaming
         public static LoggerConfiguration MicrosoftTeams(
@@ -62,7 +63,8 @@ namespace Serilog
             bool omitPropertiesSection = false,
             bool useCodeTagsForMessage = false,
             IEnumerable<MicrosoftTeamsSinkOptionsButton> buttons = null,
-            Action<Exception> failureCallback = null)
+            Action<Exception> failureCallback = null,
+            int? queueLimit = null)
         {
             var microsoftTeamsSinkOptions = new MicrosoftTeamsSinkOptions(
                 webHookUri,
@@ -76,7 +78,8 @@ namespace Serilog
                 useCodeTagsForMessage,
                 proxy,
                 buttons,
-                failureCallback);
+                failureCallback,
+                queueLimit);
             return loggerSinkConfiguration.MicrosoftTeams(microsoftTeamsSinkOptions, restrictedToMinimumLevel);
         }
 

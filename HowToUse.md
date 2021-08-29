@@ -25,6 +25,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/HaemmerElectr
 |proxy|The proxy addresss used.|`proxy: "http://test.de/proxy"`|`null`|
 |buttons|Option to add static clickable buttons to each message.|`buttons: new[] { new MicrosoftTeamsSinkOptionsButton("Google", "https://google.de") }`|`null`|
 |failureCallback|Adds an option to add a failure callback action.|`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`|`null`|
+|queueLimit|The maximum number of events that should be stored in the batching queue.|`queueLimit: 10`|`int.MaxValue` or `2147483647`|
 
 ## Further information
 This project is a fork of https://github.com/DixonDs/serilog-sinks-teams but is maintained.
