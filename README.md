@@ -1,7 +1,7 @@
-Serilog.Sinks.MicrosoftTeams
+Serilog.Sinks.MicrosoftTeams.Alternative
 ====================================
 
-Serilog.Sinks.MicrosoftTeams is a library to save logging information from [Serilog](https://github.com/serilog/serilog) to [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software).
+Serilog.Sinks.MicrosoftTeams.Alternative is a library to save logging information from [Serilog](https://github.com/serilog/serilog) to [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software).
 The assembly was written and tested in Net 5.0.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/x4l2tdvyj7gv51qo?svg=true)](https://ci.appveyor.com/project/SeppPenner/serilog-sinks-microsoftteams)
