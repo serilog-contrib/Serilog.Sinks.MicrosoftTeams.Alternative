@@ -35,7 +35,7 @@ Check out the how to use file [here](https://github.com/SeppPenner/Serilog.Sinks
 
 ## Install
 ```bash
-dotnet add package Serilog.Sinks.MicrosoftTeams
+dotnet add package Serilog.Sinks.MicrosoftTeams.Alternative
 ```
 
 Change history
