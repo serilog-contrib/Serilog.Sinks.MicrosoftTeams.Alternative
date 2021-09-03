@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.2.6.0 (2021-09-03)** : Updated license to fit the new owning repository, updated readme and so on to fit new package name.
 * **Version 1.2.5.0 (2021-08-09)** : Removed support for soon deprecated NetCore 2.1.
 * **Version 1.2.4.0 (2021-07-25)** : Updated nuget packages, enabled source linking for debugging.
 * **Version 1.2.3.0 (2021-06-04)** : Updated nuget packages.
