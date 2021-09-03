@@ -132,5 +132,17 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
             Thread.Sleep(1000);
             Log.CloseAndFlush();
         }
+
+        /// <summary>
+        /// Tests the emitting of messages with all log event levels.
+        /// </summary>
+        [TestMethod]
+        public void EmitMessagesWithTitleTemplate()
+        {
+            this.logger = TestHelper.CreateLogger("{Tenant} {Level} {Message}");
+            this.logger.Debug("Message text {prop}", 2);
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
     }
 }

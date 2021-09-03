@@ -156,5 +156,10 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// Gets the maximum number of events that should be stored in the batching queue.
         /// </summary>
         public int QueueLimit { get; }
+
+        /// <summary>
+        /// Gets the title template.
+        /// </summary>
+        public string TitleTemplate { get; }
     }
 }

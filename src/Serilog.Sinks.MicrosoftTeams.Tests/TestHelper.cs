@@ -39,6 +39,22 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
         }
 
         /// <summary>
+        /// Creates the logger.
+        /// </summary>
+        /// <param name="titleTemplate">The title template.</param>
+        /// <param name="omitPropertiesSection">A value indicating whether the properties should be omitted or not.</param>
+        /// <returns>An <see cref="ILogger"/>.</returns>
+        public static ILogger CreateLogger(string titleTemplate, bool omitPropertiesSection = false)
+        {
+            var logger = new LoggerConfiguration()
+                .MinimumLevel.Verbose()
+                .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHook, titleTemplate, omitPropertiesSection: omitPropertiesSection))
+                .CreateLogger();
+
+            return logger;
+        }
+
+        /// <summary>
         /// Creates the logger with buttons.
         /// </summary>
         /// <param name="buttons">´The buttons to output</param>

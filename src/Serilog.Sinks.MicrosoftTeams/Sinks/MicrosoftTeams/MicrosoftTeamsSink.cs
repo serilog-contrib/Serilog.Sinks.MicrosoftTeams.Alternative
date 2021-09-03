@@ -239,6 +239,27 @@ namespace Serilog.Sinks.MicrosoftTeams
             return request;
         }
 
+        /// <summary>
+        /// Gets the title from the <see cref="MicrosoftExtendedLogEvent"/>.
+        /// </summary>
+        /// <param name="logEvent">The log event.</param>
+        /// <returns>The title as <see cref="string"/>.</returns>
+        private string GetTitle(MicrosoftExtendedLogEvent logEvent)
+        {
+            if (string.IsNullOrWhiteSpace(this.options.Title) && string.IsNullOrWhiteSpace(this.options.TitleTemplate))
+            {
+                return this.options.Title;
+            }
+            else if(st)
+            {
+                var formatter = new SimpleTitleFormatter(this.options.TitleTemplate, this.options.FormatProvider);
+                var stringWriter = new StringWriter();
+                formatter.Format(logEvent.LogEvent, stringWriter);
+                return stringWriter.ToString();
+            }
+
+            return this.options.Title;
+        }
 
         /// <summary>
         /// Gets the rendered message from the <see cref="MicrosoftExtendedLogEvent"/>.
