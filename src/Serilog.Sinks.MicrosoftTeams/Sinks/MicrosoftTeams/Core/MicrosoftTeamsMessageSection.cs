@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MicrosoftTeamsMessageSection.cs" company="Hämmer Electronics">
+// <copyright file="MicrosoftTeamsMessageSection.cs" company="SeppPenner and the Serilog contributors">
 // The project is licensed under the MIT license.
 // </copyright>
 // <summary>
