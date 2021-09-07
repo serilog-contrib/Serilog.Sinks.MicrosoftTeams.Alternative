@@ -29,5 +29,5 @@ The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks
 
 ## Further information
 This project is a fork of https://github.com/DixonDs/serilog-sinks-teams but is maintained.
-Do not hesitate to create [issues](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams.Alternative/issues) or [pull requests](https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams.Alternative/pulls).
+Do not hesitate to create [issues](https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues) or [pull requests](https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/pulls).
 The relevant reference from Microsoft can be found here: https://docs.microsoft.com/en-us/outlook/actionable-messages/message-card-reference.
