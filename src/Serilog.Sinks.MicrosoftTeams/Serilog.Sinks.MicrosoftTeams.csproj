@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryType>Github</RepositoryType>
-    <PackageReleaseNotes>Version 1.2.6.0 (2021-09-03): Updated license to fit the new owning repository, updated readme and so on to fit new package name.</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 1.2.7.0 (2021-09-12): Added functionality to format title with a template (Breaking change!), smaller changes due to move to serilog-contrib organization.</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <LangVersion>latest</LangVersion>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
