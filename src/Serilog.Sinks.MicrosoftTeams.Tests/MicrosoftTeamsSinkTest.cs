@@ -132,5 +132,18 @@ namespace Serilog.Sinks.MicrosoftTeams.Tests
             Thread.Sleep(1000);
             Log.CloseAndFlush();
         }
+
+        /// <summary>
+        /// Tests the emitting of messages with a title template (As requested in https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/12).
+        /// </summary>
+        [TestMethod]
+        // ReSharper disable once StyleCop.SA1650
+        public void EmitMessagesWithTitleTemplate()
+        {
+            this.logger = TestHelper.CreateLogger("My title: {Tenant}");
+            this.logger.Debug("Message text {prop} for tenant {Tenant}", 1, "Tenant1");
+            Thread.Sleep(1000);
+            Log.CloseAndFlush();
+        }
     }
 }
