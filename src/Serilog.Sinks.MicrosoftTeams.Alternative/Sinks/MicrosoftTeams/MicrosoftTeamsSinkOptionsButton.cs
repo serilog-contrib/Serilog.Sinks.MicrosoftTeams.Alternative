@@ -1,31 +1,27 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MicrosoftTeamsMessageFact.cs" company="SeppPenner and the Serilog contributors">
+// <copyright file="MicrosoftTeamsSinkOptionsButton.cs" company="SeppPenner and the Serilog contributors">
 // The project is licensed under the MIT license.
 // </copyright>
 // <summary>
-//   The message card fact.
+//   A class to handle the Microsoft Teams options buttons.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.MicrosoftTeams.Core
+namespace Serilog.Sinks.MicrosoftTeams.Alternative
 {
-    using Newtonsoft.Json;
-
     /// <summary>
-    /// The message card fact.
+    /// A class to handle the Microsoft Teams options buttons.
     /// </summary>
-    internal class MicrosoftTeamsMessageFact
+    public class MicrosoftTeamsSinkOptionsButton
     {
         /// <summary>
-        /// Gets or sets the name of the card fact.
+        /// Gets or sets the link display name.
         /// </summary>
-        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the value of the card fact.
+        /// Gets or sets the link URI.
         /// </summary>
-        [JsonProperty("value")]
-        public string Value { get; set; }
+        public string Uri { get; set; }
     }
 }

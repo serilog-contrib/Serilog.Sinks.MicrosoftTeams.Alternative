@@ -8,7 +8,7 @@ var logger = new LoggerConfiguration()
     .CreateLogger();
 ```
 
-The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks.MicrosoftTeams/).
+The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks.MicrosoftTeams.Alternative/).
 
 ## Configuration options
 |Parameter|Meaning|Example|Default value|

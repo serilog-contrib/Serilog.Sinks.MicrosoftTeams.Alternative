@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.MicrosoftTeams
+namespace Serilog.Sinks.MicrosoftTeams.Alternative
 {
     using System;
     using System.Collections.Generic;
@@ -24,9 +24,9 @@ namespace Serilog.Sinks.MicrosoftTeams
     using Serilog.Debugging;
     using Serilog.Events;
     using Serilog.Formatting.Display;
-    using Serilog.Sinks.MicrosoftTeams.Core;
-    using Serilog.Sinks.MicrosoftTeams.Enumerations;
-    using Serilog.Sinks.MicrosoftTeams.Extensions;
+    using Serilog.Sinks.MicrosoftTeams.Alternative.Core;
+    using Serilog.Sinks.MicrosoftTeams.Alternative.Enumerations;
+    using Serilog.Sinks.MicrosoftTeams.Alternative.Extensions;
     using Serilog.Sinks.PeriodicBatching;
 
     /// <summary>

@@ -4,13 +4,13 @@ Serilog.Sinks.MicrosoftTeams.Alternative
 Serilog.Sinks.MicrosoftTeams.Alternative is a library to save logging information from [Serilog](https://github.com/serilog/serilog) to [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software).
 The assembly was written and tested in Net 5.0.
 
-[![GitHub issues](https://img.shields.io/github/issues/serilog-contrib/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues)
-[![GitHub forks](https://img.shields.io/github/forks/serilog-contrib/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/network)
-[![GitHub stars](https://img.shields.io/github/stars/serilog-contrib/Serilog.Sinks.MicrosoftTeams.svg)](https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/stargazers)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams/master/License.txt)
-[![Nuget](https://img.shields.io/badge/Serilog.Sinks.MicrosoftTeams-Nuget-brightgreen.svg)](https://www.nuget.org/packages/Serilog.Sinks.MicrosoftTeams/)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/Serilog.Sinks.MicrosoftTeams.svg)](https://www.nuget.org/packages/Serilog.Sinks.MicrosoftTeams/)
-[![Known Vulnerabilities](https://snyk.io/test/github/serilog-contrib/Serilog.Sinks.MicrosoftTeams/badge.svg)](https://snyk.io/test/github/serilog-contrib/Serilog.Sinks.MicrosoftTeams)
+[![GitHub issues](https://img.shields.io/github/issues/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative.svg)](https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues)
+[![GitHub forks](https://img.shields.io/github/forks/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative.svg)](https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/network)
+[![GitHub stars](https://img.shields.io/github/stars/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative.svg)](https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/stargazers)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/master/License.txt)
+[![Nuget](https://img.shields.io/badge/Serilog.Sinks.MicrosoftTeams.Alternative-Nuget-brightgreen.svg)](https://www.nuget.org/packages/Serilog.Sinks.MicrosoftTeams.Alternative/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Serilog.Sinks.MicrosoftTeams.Alternative.svg)](https://www.nuget.org/packages/Serilog.Sinks.MicrosoftTeams.Alternative/)
+[![Known Vulnerabilities](https://snyk.io/test/github/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/badge.svg)](https://snyk.io/test/github/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative)
 [![Gitter](https://badges.gitter.im/Serilog-Sinks-MicrosoftTeams/community.svg)](https://gitter.im/Serilog-Sinks-MicrosoftTeams/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Available for

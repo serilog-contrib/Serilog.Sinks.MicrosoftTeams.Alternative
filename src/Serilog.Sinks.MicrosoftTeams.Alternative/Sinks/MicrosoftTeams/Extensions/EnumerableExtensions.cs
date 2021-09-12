@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.MicrosoftTeams.Extensions
+namespace Serilog.Sinks.MicrosoftTeams.Alternative.Extensions
 {
     using System.Collections.Generic;
     using System.Linq;

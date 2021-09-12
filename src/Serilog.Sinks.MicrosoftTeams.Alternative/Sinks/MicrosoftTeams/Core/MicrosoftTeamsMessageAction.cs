@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.MicrosoftTeams.Core
+namespace Serilog.Sinks.MicrosoftTeams.Alternative.Core
 {
     using System.Collections.Generic;
     using Newtonsoft.Json;

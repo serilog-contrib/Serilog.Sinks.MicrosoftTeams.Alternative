@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Serilog.Sinks.MicrosoftTeams\Serilog.Sinks.MicrosoftTeams.csproj" />
+    <ProjectReference Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Serilog.Sinks.MicrosoftTeams.Alternative.csproj" />
   </ItemGroup>
 
   <ItemGroup>

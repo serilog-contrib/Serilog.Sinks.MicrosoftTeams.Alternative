@@ -14,7 +14,7 @@ namespace Serilog
 
     using Serilog.Configuration;
     using Serilog.Events;
-    using Serilog.Sinks.MicrosoftTeams;
+    using Serilog.Sinks.MicrosoftTeams.Alternative;
 
     /// <summary>
     /// Provides extension methods on <see cref="LoggerSinkConfiguration"/>.

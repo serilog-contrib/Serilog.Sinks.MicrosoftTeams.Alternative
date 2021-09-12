@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.MicrosoftTeams
+namespace Serilog.Sinks.MicrosoftTeams.Alternative
 {
     using System;
 

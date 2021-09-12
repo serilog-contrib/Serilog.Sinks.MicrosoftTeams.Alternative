@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.MicrosoftTeams.Tests
+namespace Serilog.Sinks.MicrosoftTeams.Alternative.Tests
 {
     using System;
     using System.Collections.Generic;
