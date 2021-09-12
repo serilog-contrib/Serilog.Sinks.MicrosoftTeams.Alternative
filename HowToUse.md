@@ -1,10 +1,10 @@
 ## Basic usage
-You need to add an "Incoming Webhook" connector to your Teams channel and get it's URL. `title` is optional but can help your distinguish logs coming from different sources.
+You need to add an "Incoming Webhook" connector to your Teams channel and get it's URL. `titleTemplate` is optional but can help your distinguish logs coming from different sources.
 Check https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/connectors/connectors-using.
 
 ```csharp
 var logger = new LoggerConfiguration()
-	.WriteTo.MicrosoftTeams(webHookUri, title: title)
+	.WriteTo.MicrosoftTeams(webHookUri, titleTemplate: titleTemplate)
     .CreateLogger();
 ```
 
@@ -14,7 +14,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks
 |Parameter|Meaning|Example|Default value|
 |-|-|-|-|
 |webHookUri|The Microsoft teams weebhook uri.|`https://outlook.office.com/webhook/1234567890`|None, is mandatory.|
-|title|The title of the card.|`"Some Message"`|None, but is optional.|
+|titleTemplate|The title template of the card. The Serilog templating can be used to customize the title (Same as the `outputTemplate` property).|`"Some Message"`|None, but is optional.|
 |batchSizeLimit|The maximum number of events to include in a single batch.|`batchSizeLimit: 40`|`1`|
 |period|The time to wait between checking for event batches.|`period: new TimeSpan(0, 0, 20)`|`00:00:01`|
 |outputTemplate|The output template for a log event.|`outputTemplate:"{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}"`|`null`|
