@@ -214,7 +214,7 @@ namespace Serilog.Sinks.MicrosoftTeams
 
             var request = new MicrosoftTeamsMessageCard
             {
-                Title = this.options.Title,
+                Title = this.GetRenderedTitle(logEvent),
                 Text = this.options.UseCodeTagsForMessage ? $"```{Environment.NewLine}{renderedMessage}{Environment.NewLine}```" : renderedMessage,
                 Color = GetAttachmentColor(logEvent.LogEvent.Level),
                 Sections = this.options.OmitPropertiesSection ? null : new[]
@@ -253,6 +253,24 @@ namespace Serilog.Sinks.MicrosoftTeams
             }
 
             var formatter = new MessageTemplateTextFormatter(this.options.OutputTemplate, this.options.FormatProvider);
+            var stringWriter = new StringWriter();
+            formatter.Format(logEvent.LogEvent, stringWriter);
+            return stringWriter.ToString();
+        }
+
+        /// <summary>
+        /// Gets the rendered title from the <see cref="MicrosoftExtendedLogEvent"/>.
+        /// </summary>
+        /// <param name="logEvent">The log event.</param>
+        /// <returns>The rendered messages as <see cref="string"/>.</returns>
+        private string GetRenderedTitle(MicrosoftExtendedLogEvent logEvent)
+        {
+            if (string.IsNullOrWhiteSpace(this.options.TitleTemplate))
+            {
+                return logEvent.LogEvent.RenderMessage(this.options.FormatProvider);
+            }
+
+            var formatter = new MessageTemplateTextFormatter(this.options.TitleTemplate, this.options.FormatProvider);
             var stringWriter = new StringWriter();
             formatter.Format(logEvent.LogEvent, stringWriter);
             return stringWriter.ToString();

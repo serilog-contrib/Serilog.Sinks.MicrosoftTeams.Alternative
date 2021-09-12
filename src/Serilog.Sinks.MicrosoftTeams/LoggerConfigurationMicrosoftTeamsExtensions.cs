@@ -33,7 +33,7 @@ namespace Serilog
         /// </summary>
         /// <param name="loggerSinkConfiguration">Instance of <see cref="LoggerSinkConfiguration"/> object.</param>
         /// <param name="webHookUri">The incoming web hook URI to the Microsoft Teams channel.</param>
-        /// <param name="title">The title of messages.</param>
+        /// <param name="titleTemplate">The title template of the messages.</param>
         /// <param name="batchSizeLimit">The maximum number of events to post in a single batch; defaults to 1 if
         /// not provided i.e. no batching by default.</param>
         /// <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
@@ -53,7 +53,7 @@ namespace Serilog
         public static LoggerConfiguration MicrosoftTeams(
             this LoggerSinkConfiguration loggerSinkConfiguration,
             string webHookUri,
-            string title = null,
+            string titleTemplate = null,
             int? batchSizeLimit = null,
             TimeSpan? period = null,
             string outputTemplate = null,
@@ -68,7 +68,7 @@ namespace Serilog
         {
             var microsoftTeamsSinkOptions = new MicrosoftTeamsSinkOptions(
                 webHookUri,
-                title,
+                titleTemplate,
                 batchSizeLimit,
                 period,
                 outputTemplate,

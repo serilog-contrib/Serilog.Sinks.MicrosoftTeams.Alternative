@@ -38,7 +38,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// Initializes a new instance of the <see cref="MicrosoftTeamsSinkOptions"/> class.
         /// </summary>
         /// <param name="webHookUri">The incoming web hook URI to the Microsoft Teams channel.</param>
-        /// <param name="title">The title of messages.</param>
+        /// <param name="titleTemplate">The title template of the messages.</param>
         /// <param name="batchSizeLimit">The maximum number of events to post in a single batch; defaults to 1 if
         /// not provided i.e. no batching by default.</param>
         /// <param name="period">The time to wait between checking for event batches; defaults to 1 sec if not
@@ -54,7 +54,7 @@ namespace Serilog.Sinks.MicrosoftTeams
         /// <param name="queueLimit">The maximum number of events that should be stored in the batching queue.</param>
         public MicrosoftTeamsSinkOptions(
             string webHookUri,
-            string title,
+            string titleTemplate,
             int? batchSizeLimit = null,
             TimeSpan? period = null,
             string outputTemplate = null,
@@ -78,7 +78,7 @@ namespace Serilog.Sinks.MicrosoftTeams
             }
 
             this.WebHookUri = webHookUri;
-            this.Title = title;
+            this.TitleTemplate = titleTemplate;
             this.BatchSizeLimit = batchSizeLimit ?? DefaultBatchSizeLimit;
             this.Period = period ?? DefaultPeriod;
             this.OutputTemplate = outputTemplate;
@@ -98,9 +98,9 @@ namespace Serilog.Sinks.MicrosoftTeams
         public string WebHookUri { get; }
 
         /// <summary>
-        /// Gets the title of messages.
+        /// Gets the title template of messages.
         /// </summary>
-        public string Title { get; }
+        public string TitleTemplate { get; }
 
         /// <summary>
         /// Gets the maximum number of events to post in a single batch.
