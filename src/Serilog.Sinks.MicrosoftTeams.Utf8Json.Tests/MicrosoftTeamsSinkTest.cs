@@ -20,7 +20,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Tests
 
     using Serilog.Debugging;
     using Serilog.Events;
-    using Serilog.Sinks.MicrosoftTeams.Utf8Json;
+    using Serilog.Sinks.MicrosoftTeams.Alternative;
 
     /// <summary>
     /// A test class to test the Microsoft Teams sink for basic functionality.

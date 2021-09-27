@@ -12,7 +12,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Tests
     using System;
     using System.Collections.Generic;
 
-    using Serilog.Sinks.MicrosoftTeams.Utf8Json;
+    using Serilog.Sinks.MicrosoftTeams.Alternative;
 
     /// <summary>
     /// A helper class for the tests.
