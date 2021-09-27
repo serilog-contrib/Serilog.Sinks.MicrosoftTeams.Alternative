@@ -38,11 +38,11 @@
   </ItemGroup>
   
   <ItemGroup>
-	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Enumerations\MicrosoftTeamsColors.cs" />
-	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Extensions\EnumerableExtensions.cs" />
-	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\MicrosoftExtendedLogEvent.cs" />
-	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\MicrosoftTeamsSinkOptions.cs" />
-	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\MicrosoftTeamsSinkOptionsButton.cs" />
+	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Alternative\Enumerations\MicrosoftTeamsColors.cs" />
+	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Alternative\Extensions\EnumerableExtensions.cs" />
+	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Alternative\MicrosoftExtendedLogEvent.cs" />
+	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Alternative\MicrosoftTeamsSinkOptions.cs" />
+	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Alternative\MicrosoftTeamsSinkOptionsButton.cs" />
 	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\LoggerConfigurationMicrosoftTeamsExtensions.cs" />	  
   </ItemGroup>
   
