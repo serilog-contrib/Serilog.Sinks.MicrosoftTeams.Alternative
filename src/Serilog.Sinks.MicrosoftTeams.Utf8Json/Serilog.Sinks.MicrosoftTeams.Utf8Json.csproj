@@ -43,7 +43,6 @@
 	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Alternative\MicrosoftExtendedLogEvent.cs" />
 	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Alternative\MicrosoftTeamsSinkOptions.cs" />
 	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Alternative\MicrosoftTeamsSinkOptionsButton.cs" />
-	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\LoggerConfigurationMicrosoftTeamsExtensions.cs" />	  
   </ItemGroup>
   
     <ItemGroup>

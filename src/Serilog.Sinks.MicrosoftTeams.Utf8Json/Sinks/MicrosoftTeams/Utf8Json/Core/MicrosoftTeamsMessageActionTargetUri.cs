@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.MicrosoftTeams.Core
+namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Core
 {
     using System.Runtime.Serialization;
 

@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.MicrosoftTeams
+namespace Serilog.Sinks.MicrosoftTeams.Utf8Json
 {
     using System;
     using System.Collections.Generic;
@@ -25,11 +25,11 @@ namespace Serilog.Sinks.MicrosoftTeams
     using Serilog.Sinks.MicrosoftTeams.Alternative;
     using Serilog.Sinks.MicrosoftTeams.Alternative.Enumerations;
     using Serilog.Sinks.MicrosoftTeams.Alternative.Extensions;
-    using Serilog.Sinks.MicrosoftTeams.Core;
+    using Serilog.Sinks.MicrosoftTeams.Utf8Json.Core;
     using Serilog.Sinks.PeriodicBatching;
 
-    using Utf8Json;
-    using Utf8Json.Resolvers;
+    using global::Utf8Json;
+    using global::Utf8Json.Resolvers;
 
     /// <summary>
     /// Implements <see cref="PeriodicBatchingSink"/> and provides means needed for sending Serilog log events to Microsoft Teams.
