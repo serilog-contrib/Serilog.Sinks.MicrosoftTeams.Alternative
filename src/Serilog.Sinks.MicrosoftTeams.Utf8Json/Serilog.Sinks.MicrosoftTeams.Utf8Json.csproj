@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Utf8Json</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryType>Github</RepositoryType>
-    <PackageReleaseNotes>Version 1.2.7.0 (2021-09-12): Added functionality to format title with a template (Breaking change!), smaller changes due to move to serilog-contrib organization.</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 1.2.8.0 (2021-09-30): Smaller changes, added new sink that uses Utf8Json and is only available for NetFramework 4.8.</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <LangVersion>latest</LangVersion>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
