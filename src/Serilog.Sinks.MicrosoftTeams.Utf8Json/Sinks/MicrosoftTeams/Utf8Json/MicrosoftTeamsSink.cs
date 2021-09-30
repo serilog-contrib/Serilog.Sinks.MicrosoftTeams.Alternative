@@ -40,7 +40,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Utf8Json
         /// <summary>
         /// The JSON formatter settings.
         /// </summary>
-        private static readonly IJsonFormatterResolver JsonFormatterSettings = StandardResolver.ExcludeNull;
+        private static readonly IJsonFormatterResolver JsonFormatterSettings = StandardResolver.AllowPrivateCamelCase;
 
         /// <summary>
         /// The client.
