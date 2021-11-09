@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.2.10.0 (2021-11-09)** : NuGet packages updated, added support for Net6.0.
 * **Version 1.2.9.0 (2021-11-04)** : Updated NuGet packages, removed support for netstandard2.0.
 * **Version 1.2.8.0 (2021-09-30)** : Smaller changes, added new sink that uses Utf8Json and is only available for NetFramework 4.8.
 * **Version 1.2.7.0 (2021-09-12)** : Added functionality to format title with a template (Breaking change!), smaller changes due to move to serilog-contrib organization.
