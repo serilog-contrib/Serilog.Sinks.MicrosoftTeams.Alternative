@@ -1,6 +1,6 @@
 Serilog.Sinks.MicrosoftTeams.Alternative
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 ====================================
 
@@ -56,6 +56,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/ruisantos"><img src="https://avatars.githubusercontent.com/u/218613?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ruisantos</b></sub></a><br /><a href="https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/commits?author=ruisantos" title="Code">💻</a> <a href="https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/commits?author=ruisantos" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/Appelg"><img src="https://avatars.githubusercontent.com/u/50763504?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Appelg</b></sub></a><br /><a href="https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/commits?author=Appelg" title="Code">💻</a> <a href="https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/commits?author=Appelg" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/maestroMike"><img src="https://avatars.githubusercontent.com/u/2403754?v=4?s=100" width="100px;" alt=""/><br /><sub><b>maestroMike</b></sub></a><br /><a href="https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/commits?author=maestroMike" title="Code">💻</a> <a href="https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/commits?author=maestroMike" title="Documentation">📖</a></td>
   </tr>
 </table>
 
