@@ -1,7 +1,4 @@
 Serilog.Sinks.MicrosoftTeams.Alternative
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 ====================================
 
 Serilog.Sinks.MicrosoftTeams.Alternative is a library to save logging information from [Serilog](https://github.com/serilog/serilog) to [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software).
@@ -14,6 +11,9 @@ Serilog.Sinks.MicrosoftTeams.Alternative is a library to save logging informatio
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Serilog.Sinks.MicrosoftTeams.Alternative.svg)](https://www.nuget.org/packages/Serilog.Sinks.MicrosoftTeams.Alternative/)
 [![Known Vulnerabilities](https://snyk.io/test/github/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/badge.svg)](https://snyk.io/test/github/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative)
 [![Gitter](https://badges.gitter.im/Serilog-Sinks-MicrosoftTeams/community.svg)](https://gitter.im/Serilog-Sinks-MicrosoftTeams/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Available for
 * NetFramework 4.6
