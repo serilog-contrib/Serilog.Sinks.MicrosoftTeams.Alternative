@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "ruisantos",
+      "name": "ruisantos",
+      "avatar_url": "https://avatars.githubusercontent.com/u/218613?v=4",
+      "profile": "https://github.com/ruisantos",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Serilog.Sinks.MicrosoftTeams.Alternative",
+  "projectOwner": "serilog-contrib",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
