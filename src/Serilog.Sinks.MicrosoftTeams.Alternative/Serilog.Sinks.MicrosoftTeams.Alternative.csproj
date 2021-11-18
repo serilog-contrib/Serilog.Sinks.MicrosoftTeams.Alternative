@@ -10,7 +10,7 @@
     <Authors>SeppPenner and the Serilog contributors</Authors>
     <Company>SeppPenner and the Serilog contributors</Company>
     <Copyright>Copyright © SeppPenner and the Serilog contributors</Copyright>
-    <Description>Serilog.Sinks.MicrosoftTeams.Alternative is a library to save logging information from https://github.com/serilog/serilog to https://products.office.com/en-us/microsoft-teams/group-chat-software. The assembly was written and tested in .Net Framework 4.8 and .Net Standard 2.0.</Description>
+    <Description>Serilog.Sinks.MicrosoftTeams.Alternative is a library to save logging information from https://github.com/serilog/serilog to https://products.office.com/en-us/microsoft-teams/group-chat-software.</Description>
 	<PackageTags>c# csharp serilog teams microsoft-teams microsoft sink logging log</PackageTags>
     <PackageProjectUrl>https://www.nuget.org/packages/Serilog.Sinks.MicrosoftTeams.Alternative/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative</RepositoryUrl>
