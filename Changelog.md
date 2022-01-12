@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.2.11.0 (2022-01-12)** : NuGet packages updated.
 * **Version 1.2.10.0 (2021-11-09)** : NuGet packages updated, added support for Net6.0.
 * **Version 1.2.9.0 (2021-11-04)** : Updated NuGet packages, removed support for netstandard2.0.
 * **Version 1.2.8.0 (2021-09-30)** : Smaller changes, added new sink that uses Utf8Json and is only available for NetFramework 4.8.
