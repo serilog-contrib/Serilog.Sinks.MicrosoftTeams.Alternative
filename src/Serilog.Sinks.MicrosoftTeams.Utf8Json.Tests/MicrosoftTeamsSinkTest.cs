@@ -31,7 +31,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Tests
         /// <summary>
         /// The buttons.
         /// </summary>
-        private readonly List<MicrosoftTeamsSinkOptionsButton> buttons = new List<MicrosoftTeamsSinkOptionsButton>
+        private readonly List<MicrosoftTeamsSinkOptionsButton> buttons = new()
         {
             new MicrosoftTeamsSinkOptionsButton { Name = "Google", Uri = "https://google.com" },
             new MicrosoftTeamsSinkOptionsButton { Name = "DuckDuckGo", Uri = "https://duckduckgo.com" }
@@ -40,7 +40,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Tests
         /// <summary>
         /// The logger.
         /// </summary>
-        private ILogger logger;
+        private ILogger? logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MicrosoftTeamsSinkTest"/> class.
@@ -138,7 +138,6 @@ namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Tests
         /// Tests the emitting of messages with a title template (As requested in https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/12).
         /// </summary>
         [TestMethod]
-        // ReSharper disable once StyleCop.SA1650
         public void EmitMessagesWithTitleTemplate()
         {
             this.logger = TestHelper.CreateLogger("My title: {Tenant}");

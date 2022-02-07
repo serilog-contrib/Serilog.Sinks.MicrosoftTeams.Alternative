@@ -21,17 +21,9 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative
         /// <summary>
         /// Initializes a new instance of the <see cref="MicrosoftExtendedLogEvent"/> class.
         /// </summary>
-        public MicrosoftExtendedLogEvent()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MicrosoftExtendedLogEvent"/> class.
-        /// </summary>
         /// <param name="firstOccurrence">The first occurrence.</param>
         /// <param name="lastOccurrence">The last occurrence.</param>
         /// <param name="logEvent">The log event.</param>
-        // ReSharper disable once UnusedMember.Global
         public MicrosoftExtendedLogEvent(DateTime firstOccurrence, DateTime lastOccurrence, LogEvent logEvent)
         {
             this.FirstOccurrence = firstOccurrence;

@@ -17,11 +17,11 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative
         /// <summary>
         /// Gets or sets the link display name.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the link URI.
         /// </summary>
-        public string Uri { get; set; }
+        public string Uri { get; set; } = string.Empty;
     }
 }

@@ -20,12 +20,12 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative.Core
         /// Gets or sets the name of the card fact.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the value of the card fact.
         /// </summary>
         [JsonProperty("value")]
-        public string Value { get; set; }
+        public string Value { get; set; } = string.Empty;
     }
 }

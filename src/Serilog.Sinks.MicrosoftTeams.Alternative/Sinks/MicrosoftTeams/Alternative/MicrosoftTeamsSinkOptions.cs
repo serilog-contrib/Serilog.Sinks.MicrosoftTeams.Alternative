@@ -54,27 +54,22 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative
         /// <param name="queueLimit">The maximum number of events that should be stored in the batching queue.</param>
         public MicrosoftTeamsSinkOptions(
             string webHookUri,
-            string titleTemplate,
+            string? titleTemplate = null,
             int? batchSizeLimit = null,
             TimeSpan? period = null,
-            string outputTemplate = null,
-            IFormatProvider formatProvider = null,
+            string? outputTemplate = null,
+            IFormatProvider? formatProvider = null,
             LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose,
             bool omitPropertiesSection = false,
             bool useCodeTagsForMessage = false,
-            string proxy = null,
-            IEnumerable<MicrosoftTeamsSinkOptionsButton> buttons = null,
-            Action<Exception> failureCallback = null,
+            string? proxy = null,
+            IEnumerable<MicrosoftTeamsSinkOptionsButton>? buttons = null,
+            Action<Exception>? failureCallback = null,
             int? queueLimit = null)
         {
-            if (webHookUri == null)
+            if (string.IsNullOrWhiteSpace(webHookUri))
             {
-                throw new ArgumentNullException(nameof(webHookUri));
-            }
-
-            if (string.IsNullOrEmpty(webHookUri))
-            {
-                throw new ArgumentException(nameof(webHookUri));
+                throw new ArgumentException("The webhook URI is empty.", nameof(webHookUri));
             }
 
             this.WebHookUri = webHookUri;
@@ -95,12 +90,12 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative
         /// <summary>
         /// Gets the incoming web hook URI to the Microsoft Teams channel.
         /// </summary>
-        public string WebHookUri { get; }
+        public string WebHookUri { get; } = string.Empty;
 
         /// <summary>
         /// Gets the title template of messages.
         /// </summary>
-        public string TitleTemplate { get; }
+        public string? TitleTemplate { get; }
 
         /// <summary>
         /// Gets the maximum number of events to post in a single batch.
@@ -115,12 +110,12 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative
         /// <summary>
         /// Gets the output template.
         /// </summary>
-        public string OutputTemplate { get; }
+        public string? OutputTemplate { get; }
 
         /// <summary>
         /// Gets the format provider used for formatting the message.
         /// </summary>
-        public IFormatProvider FormatProvider { get; }
+        public IFormatProvider? FormatProvider { get; }
 
         /// <summary>
         /// Gets the minimum log event level.
@@ -140,17 +135,17 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative
         /// <summary>
         /// Gets the proxy URL.
         /// </summary>
-        public string Proxy { get; }
+        public string? Proxy { get; }
 
         /// <summary>
         /// Gets the buttons to add to a message.
         /// </summary>
-        public IEnumerable<MicrosoftTeamsSinkOptionsButton> Buttons { get; }
+        public IEnumerable<MicrosoftTeamsSinkOptionsButton>? Buttons { get; }
 
         /// <summary>
         /// Gets the failure callback.
         /// </summary>
-        public Action<Exception> FailureCallback { get; }
+        public Action<Exception>? FailureCallback { get; }
 
         /// <summary>
         /// Gets the maximum number of events that should be stored in the batching queue.

@@ -21,12 +21,12 @@ namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Core
         /// Gets or sets message section title.
         /// </summary>
         [DataMember(Name = "title")]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets message section facts.
         /// </summary>
         [DataMember(Name = "facts")]
-        public IList<MicrosoftTeamsMessageFact> Facts { get; set; }
+        public IList<MicrosoftTeamsMessageFact> Facts { get; set; } = new List<MicrosoftTeamsMessageFact>();
     }
 }

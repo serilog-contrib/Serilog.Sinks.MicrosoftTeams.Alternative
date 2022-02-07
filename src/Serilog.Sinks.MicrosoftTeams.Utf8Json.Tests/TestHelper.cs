@@ -17,7 +17,6 @@ namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Tests
     /// <summary>
     /// A helper class for the tests.
     /// </summary>
-    // ReSharper disable once InconsistentNaming
     public static class TestHelper
     {
         /// <summary>

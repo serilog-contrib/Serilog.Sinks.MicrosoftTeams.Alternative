@@ -4,6 +4,7 @@
     <OutputType>Library</OutputType>
     <TargetFramework>net4.6</TargetFramework>
     <LangVersion>latest</LangVersion>
+	<Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

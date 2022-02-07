@@ -15,13 +15,12 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative.Tests
     /// <summary>
     /// A helper class for the tests.
     /// </summary>
-    // ReSharper disable once InconsistentNaming
     public static class TestHelper
     {
         /// <summary>
         /// The test web hook URL.
         /// </summary>
-        private static readonly string TestWebHook = Environment.GetEnvironmentVariable("MicrosoftTeamsWebhookUrl");
+        private static readonly string TestWebHook = Environment.GetEnvironmentVariable("MicrosoftTeamsWebhookUrl") ?? string.Empty;
 
         /// <summary>
         /// Creates the logger.

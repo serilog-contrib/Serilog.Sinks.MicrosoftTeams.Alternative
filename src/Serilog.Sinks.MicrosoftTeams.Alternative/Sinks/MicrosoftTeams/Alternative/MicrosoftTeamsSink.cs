@@ -11,7 +11,6 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
     using System.Net;
@@ -32,13 +31,12 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative
     /// <summary>
     /// Implements <see cref="PeriodicBatchingSink"/> and provides means needed for sending Serilog log events to Microsoft Teams.
     /// </summary>
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
     public class MicrosoftTeamsSink : PeriodicBatchingSink
     {
         /// <summary>
         /// The json serializer settings.
         /// </summary>
-        private static readonly JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings
+        private static readonly JsonSerializerSettings JsonSerializerSettings = new()
         {
             NullValueHandling = NullValueHandling.Ignore
         };
@@ -112,22 +110,13 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative
         /// <returns>The attachment color as <see cref="string"/>.</returns>
         private static string GetAttachmentColor(LogEventLevel level)
         {
-            // ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault
-            switch (level)
+            return level switch
             {
-                case LogEventLevel.Information:
-                    return MicrosoftTeamsColors.Information;
-
-                case LogEventLevel.Warning:
-                    return MicrosoftTeamsColors.Warning;
-
-                case LogEventLevel.Error:
-                case LogEventLevel.Fatal:
-                    return MicrosoftTeamsColors.Error;
-
-                default:
-                    return MicrosoftTeamsColors.Default;
-            }
+                LogEventLevel.Information => MicrosoftTeamsColors.Information,
+                LogEventLevel.Warning => MicrosoftTeamsColors.Warning,
+                LogEventLevel.Error or LogEventLevel.Fatal => MicrosoftTeamsColors.Error,
+                _ => MicrosoftTeamsColors.Default,
+            };
         }
 
         /// <summary>
@@ -150,13 +139,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative
 
                 if (foundSameLogEvent is null)
                 {
-                    messagesToSend.Add(
-                        new MicrosoftExtendedLogEvent
-                        {
-                            LogEvent = logEvent,
-                            FirstOccurrence = logEvent.Timestamp,
-                            LastOccurrence = logEvent.Timestamp
-                        });
+                    messagesToSend.Add(new MicrosoftExtendedLogEvent(logEvent.Timestamp.DateTime, logEvent.Timestamp.DateTime, logEvent));
                 }
                 else
                 {
@@ -181,7 +164,6 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative
         /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
         private async Task PostMessages(IEnumerable<MicrosoftExtendedLogEvent> messages)
         {
-            // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
             foreach (var logEvent in messages)
             {
                 try
@@ -217,7 +199,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative
                 Title = this.GetRenderedTitle(logEvent),
                 Text = this.options.UseCodeTagsForMessage ? $"```{Environment.NewLine}{renderedMessage}{Environment.NewLine}```" : renderedMessage,
                 Color = GetAttachmentColor(logEvent.LogEvent.Level),
-                Sections = this.options.OmitPropertiesSection ? null : new[]
+                Sections = this.options.OmitPropertiesSection ? new List<MicrosoftTeamsMessageSection>() : new[]
                 {
                     new MicrosoftTeamsMessageSection
                     {
@@ -225,7 +207,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative
                         Facts = this.GetFacts(logEvent).ToArray()
                     }
                 },
-                PotentialActions = null
+                PotentialActions = new List<MicrosoftTeamsMessageAction>()
             };
 
             // Add static URL buttons from the options
@@ -235,7 +217,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative
             }
 
             request.PotentialActions = new List<MicrosoftTeamsMessageAction>();
-            this.options.Buttons.ToList().ForEach(btn => request.PotentialActions.Add(new MicrosoftTeamsMessageAction("OpenUri", btn.Name, new MicrosoftTeamsMessageActionTargetUri(btn.Uri))));
+            this.options.Buttons!.ToList().ForEach(btn => request.PotentialActions.Add(new MicrosoftTeamsMessageAction("OpenUri", btn.Name, new MicrosoftTeamsMessageActionTargetUri(btn.Uri))));
             return request;
         }
 

@@ -20,6 +20,6 @@ namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Core
         /// Gets or sets the operating system.
         /// </summary>
         [DataMember(Name = "os")]
-        public string OperatingSystem { get; set; }
+        public string OperatingSystem { get; set; } = string.Empty;
     }
 }

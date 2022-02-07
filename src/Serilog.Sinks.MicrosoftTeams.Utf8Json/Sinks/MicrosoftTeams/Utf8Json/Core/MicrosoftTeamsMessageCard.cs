@@ -33,30 +33,30 @@ namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Core
         /// Gets or sets the title of the card.
         /// </summary>
         [DataMember(Name = "title")]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the text of the card.
         /// </summary>
         [DataMember(Name = "text")]
-        public string Text { get; set; }
+        public string Text { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the theme color of the card.
         /// </summary>
         [DataMember(Name = "themeColor")]
-        public string Color { get; set; }
+        public string Color { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the sections of the card.
         /// </summary>
         [DataMember(Name = "sections")]
-        public IList<MicrosoftTeamsMessageSection> Sections { get; set; }
+        public IList<MicrosoftTeamsMessageSection> Sections { get; set; } = new List<MicrosoftTeamsMessageSection>();
 
         /// <summary>
         /// Gets or sets the potential action buttons.
         /// </summary>
         [DataMember(Name = "potentialAction")]
-        public IList<MicrosoftTeamsMessageAction> PotentialActions { get; set; }
+        public IList<MicrosoftTeamsMessageAction> PotentialActions { get; set; } = new List<MicrosoftTeamsMessageAction>();
     }
 }

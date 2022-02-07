@@ -20,7 +20,6 @@ namespace Serilog
     /// <summary>
     /// Provides extension methods on <see cref="LoggerSinkConfiguration"/>.
     /// </summary>
-    // ReSharper disable once InconsistentNaming
     public static class LoggerConfigurationMicrosoftTeamsUtf8Extensions
     {
         /// <summary>
@@ -50,21 +49,20 @@ namespace Serilog
         /// <param name="failureCallback">The failure callback.</param>
         /// <param name="queueLimit">The maximum number of events that should be stored in the batching queue.</param>
         /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
-        // ReSharper disable once InconsistentNaming
         public static LoggerConfiguration MicrosoftTeams(
             this LoggerSinkConfiguration loggerSinkConfiguration,
             string webHookUri,
-            string titleTemplate = null,
+            string? titleTemplate = null,
             int? batchSizeLimit = null,
             TimeSpan? period = null,
-            string outputTemplate = null,
-            IFormatProvider formatProvider = null,
+            string? outputTemplate = null,
+            IFormatProvider? formatProvider = null,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
-            string proxy = null,
+            string? proxy = null,
             bool omitPropertiesSection = false,
             bool useCodeTagsForMessage = false,
-            IEnumerable<MicrosoftTeamsSinkOptionsButton> buttons = null,
-            Action<Exception> failureCallback = null,
+            IEnumerable<MicrosoftTeamsSinkOptionsButton>? buttons = null,
+            Action<Exception>? failureCallback = null,
             int? queueLimit = null)
         {
             var microsoftTeamsSinkOptions = new MicrosoftTeamsSinkOptions(
@@ -92,18 +90,17 @@ namespace Serilog
         /// <param name="restrictedToMinimumLevel"><see cref="LogEventLevel"/> value that specifies minimum logging
         /// level that will be allowed to be logged.</param>
         /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
-        // ReSharper disable once InconsistentNaming
         public static LoggerConfiguration MicrosoftTeams(
             this LoggerSinkConfiguration loggerSinkConfiguration,
             MicrosoftTeamsSinkOptions microsoftTeamsSinkOptions,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum)
         {
-            if (loggerSinkConfiguration == null)
+            if (loggerSinkConfiguration is null)
             {
                 throw new ArgumentNullException(nameof(loggerSinkConfiguration));
             }
 
-            if (microsoftTeamsSinkOptions == null)
+            if (microsoftTeamsSinkOptions is null)
             {
                 throw new ArgumentNullException(nameof(microsoftTeamsSinkOptions));
             }
