@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MicrosoftTeamsMessageCard.cs" company="SeppPenner and the Serilog contributors">
 // The project is licensed under the MIT license.
 // </copyright>
@@ -7,57 +7,52 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.MicrosoftTeams.Alternative.Core
-{
-    using System.Collections.Generic;
+namespace Serilog.Sinks.MicrosoftTeams.Alternative.Core;
 
-    using Newtonsoft.Json;
+/// <summary>
+/// The teams message card.
+/// </summary>
+internal class MicrosoftTeamsMessageCard
+{
+    /// <summary>
+    /// Gets the type of the card.
+    /// </summary>
+    [JsonProperty("@type")]
+    public string Type { get; } = "MessageCard";
 
     /// <summary>
-    /// The teams message card.
+    /// Gets the context of the card.
     /// </summary>
-    internal class MicrosoftTeamsMessageCard
-    {
-        /// <summary>
-        /// Gets the type of the card.
-        /// </summary>
-        [JsonProperty("@type")]
-        public string Type { get; } = "MessageCard";
+    [JsonProperty("@context")]
+    public string Context { get; } = "http://schema.org/extensions";
 
-        /// <summary>
-        /// Gets the context of the card.
-        /// </summary>
-        [JsonProperty("@context")]
-        public string Context { get; } = "http://schema.org/extensions";
+    /// <summary>
+    /// Gets or sets the title of the card.
+    /// </summary>
+    [JsonProperty("title")]
+    public string Title { get; set; } = string.Empty;
 
-        /// <summary>
-        /// Gets or sets the title of the card.
-        /// </summary>
-        [JsonProperty("title")]
-        public string Title { get; set; } = string.Empty;
+    /// <summary>
+    /// Gets or sets the text of the card.
+    /// </summary>
+    [JsonProperty("text")]
+    public string Text { get; set; } = string.Empty;
 
-        /// <summary>
-        /// Gets or sets the text of the card.
-        /// </summary>
-        [JsonProperty("text")]
-        public string Text { get; set; } = string.Empty;
+    /// <summary>
+    /// Gets or sets the theme color of the card.
+    /// </summary>
+    [JsonProperty("themeColor")]
+    public string Color { get; set; } = string.Empty;
 
-        /// <summary>
-        /// Gets or sets the theme color of the card.
-        /// </summary>
-        [JsonProperty("themeColor")]
-        public string Color { get; set; } = string.Empty;
+    /// <summary>
+    /// Gets or sets the sections of the card.
+    /// </summary>
+    [JsonProperty("sections")]
+    public IList<MicrosoftTeamsMessageSection> Sections { get; set; } = new List<MicrosoftTeamsMessageSection>();
 
-        /// <summary>
-        /// Gets or sets the sections of the card.
-        /// </summary>
-        [JsonProperty("sections")]
-        public IList<MicrosoftTeamsMessageSection> Sections { get; set; } = new List<MicrosoftTeamsMessageSection>();
-
-        /// <summary>
-        /// Gets or sets the potential action buttons.
-        /// </summary>
-        [JsonProperty("potentialAction")]
-        public IList<MicrosoftTeamsMessageAction> PotentialActions { get; set; } = new List<MicrosoftTeamsMessageAction>();
-    }
+    /// <summary>
+    /// Gets or sets the potential action buttons.
+    /// </summary>
+    [JsonProperty("potentialAction")]
+    public IList<MicrosoftTeamsMessageAction> PotentialActions { get; set; } = new List<MicrosoftTeamsMessageAction>();
 }

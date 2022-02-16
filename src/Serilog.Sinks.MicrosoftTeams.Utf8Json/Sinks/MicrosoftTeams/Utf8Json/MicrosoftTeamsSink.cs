@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MicrosoftTeamsSink.cs" company="SeppPenner and the Serilog contributors">
 // The project is licensed under the MIT license.
 // </copyright>
@@ -219,7 +219,6 @@ namespace Serilog.Sinks.MicrosoftTeams.Utf8Json
             this.options.Buttons.ToList().ForEach(btn => request.PotentialActions.Add(new MicrosoftTeamsMessageAction("OpenUri", btn.Name, new MicrosoftTeamsMessageActionTargetUri(btn.Uri))));
             return request;
         }
-
 
         /// <summary>
         /// Gets the rendered message from the <see cref="MicrosoftExtendedLogEvent"/>.

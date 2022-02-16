@@ -7,143 +7,129 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Tests
+namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Tests;
+
+/// <summary>
+/// A test class to test the Microsoft Teams sink for basic functionality.
+/// </summary>
+[TestClass]
+public class MicrosoftTeamsSinkTest
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-    using System.Threading;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Serilog.Debugging;
-    using Serilog.Events;
-    using Serilog.Sinks.MicrosoftTeams.Alternative;
+    /// <summary>
+    /// The buttons.
+    /// </summary>
+    private readonly List<MicrosoftTeamsSinkOptionsButton> buttons = new()
+    {
+        new MicrosoftTeamsSinkOptionsButton { Name = "Google", Uri = "https://google.com" },
+        new MicrosoftTeamsSinkOptionsButton { Name = "DuckDuckGo", Uri = "https://duckduckgo.com" }
+    };
 
     /// <summary>
-    /// A test class to test the Microsoft Teams sink for basic functionality.
+    /// The logger.
     /// </summary>
-    [TestClass]
-    public class MicrosoftTeamsSinkTest
+    private ILogger? logger;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MicrosoftTeamsSinkTest"/> class.
+    /// </summary>
+    public MicrosoftTeamsSinkTest()
     {
-        /// <summary>
-        /// The buttons.
-        /// </summary>
-        private readonly List<MicrosoftTeamsSinkOptionsButton> buttons = new()
-        {
-            new MicrosoftTeamsSinkOptionsButton { Name = "Google", Uri = "https://google.com" },
-            new MicrosoftTeamsSinkOptionsButton { Name = "DuckDuckGo", Uri = "https://duckduckgo.com" }
-        };
+        SelfLog.Enable(s => Debug.WriteLine(s));
+    }
 
-        /// <summary>
-        /// The logger.
-        /// </summary>
-        private ILogger? logger;
+    /// <summary>
+    /// Tests the emitting of messages with all log event levels.
+    /// </summary>
+    [TestMethod]
+    public void EmitMessagesWithAllLogEventLevels()
+    {
+        this.logger = TestHelper.CreateLogger();
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MicrosoftTeamsSinkTest"/> class.
-        /// </summary>
-        public MicrosoftTeamsSinkTest()
+        var counter = 0;
+
+        for (var i = 0; i < 6; i++)
         {
-            SelfLog.Enable(s => Debug.WriteLine(s));
+            var template = $"{Guid.NewGuid()} {{counter}}";
+            this.logger.Write((LogEventLevel)counter, template, i);
+            counter++;
+            Thread.Sleep(500);
         }
 
-        /// <summary>
-        /// Tests the emitting of messages with all log event levels.
-        /// </summary>
-        [TestMethod]
-        public void EmitMessagesWithAllLogEventLevels()
-        {
-            this.logger = TestHelper.CreateLogger();
+        Thread.Sleep(1000);
+        Log.CloseAndFlush();
+    }
 
-            var counter = 0;
+    /// <summary>
+    /// Tests the emitting of messages with the omit properties feature enabled.
+    /// </summary>
+    [TestMethod]
+    public void EmitMessagesWithOmittedProperties()
+    {
+        this.logger = TestHelper.CreateLogger(true);
+        this.logger.Debug("Message text {prop}", 4);
+        Thread.Sleep(1000);
+        Log.CloseAndFlush();
+    }
 
-            for (var i = 0; i < 6; i++)
-            {
-                var template = $"{Guid.NewGuid()} {{counter}}";
-                this.logger.Write((LogEventLevel)counter, template, i);
-                counter++;
-                Thread.Sleep(500);
-            }
+    /// <summary>
+    /// Tests the emitting of messages with zero buttons.
+    /// </summary>
+    [TestMethod]
+    public void EmitMessagesWithZeroButtons()
+    {
+        this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(0));
+        this.logger.Debug("Message text {prop}", 1);
+        Thread.Sleep(1000);
+        Log.CloseAndFlush();
+    }
 
-            Thread.Sleep(1000);
-            Log.CloseAndFlush();
-        }
+    /// <summary>
+    /// Tests the emitting of messages with one button.
+    /// </summary>
+    [TestMethod]
+    public void EmitMessagesWithOneButton()
+    {
+        this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(1));
+        this.logger.Debug("Message text {prop}", 2);
+        Thread.Sleep(1000);
+        Log.CloseAndFlush();
+    }
 
-        /// <summary>
-        /// Tests the emitting of messages with the omit properties feature enabled.
-        /// </summary>
-        [TestMethod]
-        public void EmitMessagesWithOmittedProperties()
-        {
-            this.logger = TestHelper.CreateLogger(true);
-            this.logger.Debug("Message text {prop}", 4);
-            Thread.Sleep(1000);
-            Log.CloseAndFlush();
-        }
+    /// <summary>
+    /// Tests the emitting of messages with two buttons.
+    /// </summary>
+    [TestMethod]
+    public void EmitMessagesWithTwoButtons()
+    {
+        this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(2));
+        this.logger.Debug("Message text {prop}", 3);
+        Thread.Sleep(1000);
+        Log.CloseAndFlush();
+    }
 
-        /// <summary>
-        /// Tests the emitting of messages with zero buttons.
-        /// </summary>
-        [TestMethod]
-        public void EmitMessagesWithZeroButtons()
-        {
-            this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(0));
-            this.logger.Debug("Message text {prop}", 1);
-            Thread.Sleep(1000);
-            Log.CloseAndFlush();
-        }
+    /// <summary>
+    /// Tests the emitting of messages with complex data.
+    /// </summary>
+    [DeploymentItem("TestException.txt")]
+    [TestMethod]
+    public void EmitMessagesWithComplexData()
+    {
+        this.logger = TestHelper.CreateLoggerWithCodeTags();
+        var data = File.ReadAllText("TestException.txt");
+        this.logger.Debug(data);
+        Thread.Sleep(1000);
+        Log.CloseAndFlush();
+    }
 
-        /// <summary>
-        /// Tests the emitting of messages with one button.
-        /// </summary>
-        [TestMethod]
-        public void EmitMessagesWithOneButton()
-        {
-            this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(1));
-            this.logger.Debug("Message text {prop}", 2);
-            Thread.Sleep(1000);
-            Log.CloseAndFlush();
-        }
-
-        /// <summary>
-        /// Tests the emitting of messages with two buttons.
-        /// </summary>
-        [TestMethod]
-        public void EmitMessagesWithTwoButtons()
-        {
-            this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(2));
-            this.logger.Debug("Message text {prop}", 3);
-            Thread.Sleep(1000);
-            Log.CloseAndFlush();
-        }
-
-        /// <summary>
-        /// Tests the emitting of messages with complex data.
-        /// </summary>
-        [DeploymentItem("TestException.txt")]
-        [TestMethod]
-        public void EmitMessagesWithComplexData()
-        {
-            this.logger = TestHelper.CreateLoggerWithCodeTags();
-            var data = File.ReadAllText("TestException.txt");
-            this.logger.Debug(data);
-            Thread.Sleep(1000);
-            Log.CloseAndFlush();
-        }
-
-        /// <summary>
-        /// Tests the emitting of messages with a title template (As requested in https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/12).
-        /// </summary>
-        [TestMethod]
-        public void EmitMessagesWithTitleTemplate()
-        {
-            this.logger = TestHelper.CreateLogger("My title: {Tenant}");
-            this.logger.Debug("Message text {prop} for tenant {Tenant}", 1, "Tenant1");
-            Thread.Sleep(1000);
-            Log.CloseAndFlush();
-        }
+    /// <summary>
+    /// Tests the emitting of messages with a title template (As requested in https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/12).
+    /// </summary>
+    [TestMethod]
+    public void EmitMessagesWithTitleTemplate()
+    {
+        this.logger = TestHelper.CreateLogger("My title: {Tenant}");
+        this.logger.Debug("Message text {prop} for tenant {Tenant}", 1, "Tenant1");
+        Thread.Sleep(1000);
+        Log.CloseAndFlush();
     }
 }
