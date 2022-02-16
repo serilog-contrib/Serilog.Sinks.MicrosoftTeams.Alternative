@@ -1,7 +1,7 @@
 Change history
 --------------
 
-* **Version 1.2.12.0 (2022-02-16)** : NuGet packages updated, added nullable checks, added editorconfig, added file scoped namespaces, added global usings, removed native support for Net Framework (Breaking change).
+* **Version 1.2.12.0 (2022-02-16)** : NuGet packages updated, added nullable checks, added editorconfig, added file scoped namespaces, added global usings, removed native support for Net Framework (Breaking change), fixed Serilog PeriodicBatchingSink issues.
 * **Version 1.2.11.0 (2022-01-12)** : NuGet packages updated.
 * **Version 1.2.10.0 (2021-11-09)** : NuGet packages updated, added support for Net6.0.
 * **Version 1.2.9.0 (2021-11-04)** : Updated NuGet packages, removed support for netstandard2.0.
