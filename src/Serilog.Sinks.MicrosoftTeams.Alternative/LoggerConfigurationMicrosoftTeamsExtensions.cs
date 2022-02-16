@@ -102,6 +102,14 @@ public static class LoggerConfigurationMicrosoftTeamsExtensions
             throw new ArgumentNullException("The webhook URI is empty.", nameof(microsoftTeamsSinkOptions.WebHookUri));
         }
 
-        return loggerSinkConfiguration.Sink(new MicrosoftTeamsSink(microsoftTeamsSinkOptions), restrictedToMinimumLevel);
+        var batchingOptions = new PeriodicBatchingSinkOptions()
+        {
+            BatchSizeLimit = microsoftTeamsSinkOptions.BatchSizeLimit,
+            Period = microsoftTeamsSinkOptions.Period,
+            QueueLimit = microsoftTeamsSinkOptions.QueueLimit
+        };
+
+        var batchingSink = new PeriodicBatchingSink(new MicrosoftTeamsSink(microsoftTeamsSinkOptions), batchingOptions);
+        return loggerSinkConfiguration.Sink(batchingSink, restrictedToMinimumLevel);
     }
 }
