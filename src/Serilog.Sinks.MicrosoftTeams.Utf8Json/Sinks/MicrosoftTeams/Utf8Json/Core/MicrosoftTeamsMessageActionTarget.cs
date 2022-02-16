@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MicrosoftTeamsMessageActionTarget.cs" company="SeppPenner and the Serilog contributors">
 // The project is licensed under the MIT license.
 // </copyright>
@@ -7,19 +7,16 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Core
-{
-    using System.Runtime.Serialization;
+namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Core;
 
+/// <summary>
+/// The Microsoft Teams message action target class.
+/// </summary>
+public class MicrosoftTeamsMessageActionTarget
+{
     /// <summary>
-    /// The Microsoft Teams message action target class.
+    /// Gets or sets the operating system.
     /// </summary>
-    public class MicrosoftTeamsMessageActionTarget
-    {
-        /// <summary>
-        /// Gets or sets the operating system.
-        /// </summary>
-        [DataMember(Name = "os")]
-        public string OperatingSystem { get; set; } = string.Empty;
-    }
+    [DataMember(Name = "os")]
+    public string OperatingSystem { get; set; } = string.Empty;
 }

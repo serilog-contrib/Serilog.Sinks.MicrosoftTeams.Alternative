@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MicrosoftTeamsMessageSection.cs" company="SeppPenner and the Serilog contributors">
 // The project is licensed under the MIT license.
 // </copyright>
@@ -7,26 +7,22 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Core
+namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Core;
+
+/// <summary>
+/// The message section.
+/// </summary>
+internal class MicrosoftTeamsMessageSection
 {
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
+    /// <summary>
+    /// Gets or sets message section title.
+    /// </summary>
+    [DataMember(Name = "title")]
+    public string Title { get; set; } = string.Empty;
 
     /// <summary>
-    /// The message section.
+    /// Gets or sets message section facts.
     /// </summary>
-    internal class MicrosoftTeamsMessageSection
-    {
-        /// <summary>
-        /// Gets or sets message section title.
-        /// </summary>
-        [DataMember(Name = "title")]
-        public string Title { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Gets or sets message section facts.
-        /// </summary>
-        [DataMember(Name = "facts")]
-        public IList<MicrosoftTeamsMessageFact> Facts { get; set; } = new List<MicrosoftTeamsMessageFact>();
-    }
+    [DataMember(Name = "facts")]
+    public IList<MicrosoftTeamsMessageFact> Facts { get; set; } = new List<MicrosoftTeamsMessageFact>();
 }

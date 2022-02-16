@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="LoggerConfigurationMicrosoftTeamsUtf8Extensions.cs" company="SeppPenner and the Serilog contributors">
 // The project is licensed under the MIT license.
 // </copyright>
@@ -102,6 +102,14 @@ public static class LoggerConfigurationMicrosoftTeamsUtf8Extensions
             throw new ArgumentNullException(nameof(microsoftTeamsSinkOptions.WebHookUri));
         }
 
-        return loggerSinkConfiguration.Sink(new MicrosoftTeamsSink(microsoftTeamsSinkOptions), restrictedToMinimumLevel);
+        var batchingOptions = new PeriodicBatchingSinkOptions()
+        {
+            BatchSizeLimit = microsoftTeamsSinkOptions.BatchSizeLimit,
+            Period = microsoftTeamsSinkOptions.Period,
+            QueueLimit = microsoftTeamsSinkOptions.QueueLimit
+        };
+
+        var batchingSink = new PeriodicBatchingSink(new MicrosoftTeamsSink(microsoftTeamsSinkOptions), batchingOptions);
+        return loggerSinkConfiguration.Sink(batchingSink, restrictedToMinimumLevel);
     }
 }

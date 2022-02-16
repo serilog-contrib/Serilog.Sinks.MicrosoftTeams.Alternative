@@ -3,16 +3,16 @@
 // The project is licensed under the MIT license.
 // </copyright>
 // <summary>
-//   Implements <see cref="PeriodicBatchingSink" /> and provides means needed for sending Serilog log events to Microsoft Teams.
+//   Implements <see cref="IBatchedLogEventSink" /> and provides means needed for sending Serilog log events to Microsoft Teams.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Serilog.Sinks.MicrosoftTeams.Alternative;
 
 /// <summary>
-/// Implements <see cref="PeriodicBatchingSink"/> and provides means needed for sending Serilog log events to Microsoft Teams.
+/// Implements <see cref="IBatchedLogEventSink"/> and provides means needed for sending Serilog log events to Microsoft Teams.
 /// </summary>
-public class MicrosoftTeamsSink : PeriodicBatchingSink
+public class MicrosoftTeamsSink : IBatchedLogEventSink
 {
     /// <summary>
     /// The json serializer settings.
@@ -36,7 +36,7 @@ public class MicrosoftTeamsSink : PeriodicBatchingSink
     /// Initializes a new instance of the <see cref="MicrosoftTeamsSink"/> class.
     /// </summary>
     /// <param name="options">Microsoft teams sink options object.</param>
-    public MicrosoftTeamsSink(MicrosoftTeamsSinkOptions options) : base(options.BatchSizeLimit, options.Period, options.QueueLimit)
+    public MicrosoftTeamsSink(MicrosoftTeamsSinkOptions options)
     {
         this.options = options;
 
@@ -55,7 +55,7 @@ public class MicrosoftTeamsSink : PeriodicBatchingSink
         }
     }
 
-    /// <inheritdoc cref="PeriodicBatchingSink" />
+    /// <inheritdoc cref="IBatchedLogEventSink" />
     /// <summary>
     /// Emit a batch of log events, running asynchronously.
     /// </summary>
@@ -63,25 +63,23 @@ public class MicrosoftTeamsSink : PeriodicBatchingSink
     /// <returns></returns>
     /// <exception cref="LoggingFailedException">Received failed result {result.StatusCode} when posting events to Microsoft Teams</exception>
     /// <remarks>
-    /// Override either <see cref="M:Serilog.Sinks.PeriodicBatching.PeriodicBatchingSink.EmitBatch(System.Collections.Generic.IEnumerable{Serilog.Events.LogEvent})" /> or <see cref="M:Serilog.Sinks.PeriodicBatching.PeriodicBatchingSink.EmitBatchAsync(System.Collections.Generic.IEnumerable{Serilog.Events.LogEvent})" />,
+    /// Override either <see cref="M:Serilog.Sinks.PeriodicBatching.IBatchedLogEventSink.EmitBatch(System.Collections.Generic.IEnumerable{Serilog.Events.LogEvent})" /> or <see cref="M:Serilog.Sinks.PeriodicBatching.IBatchedLogEventSink.EmitBatchAsync(System.Collections.Generic.IEnumerable{Serilog.Events.LogEvent})" />,
     /// not both. Overriding EmitBatch() is preferred.
     /// </remarks>
-    protected override async Task EmitBatchAsync(IEnumerable<LogEvent> events)
+    public async Task EmitBatchAsync(IEnumerable<LogEvent> events)
     {
         var messages = this.GetMessagesToSend(events);
         await this.PostMessages(messages);
     }
 
+    /// <inheritdoc cref="IBatchedLogEventSink" />
     /// <summary>
-    /// Free resources held by the sink.
+    /// Allows sinks to perform periodic work without requiring additional threads or
+    /// timers (thus avoiding additional flush/shut-down complexity).   
     /// </summary>
-    /// <param name="disposing">If true, called because the object is being disposed; if false,
-    /// the object is being disposed from the finalizer.</param>
-    /// <inheritdoc cref="PeriodicBatchingSink"/>
-    protected override void Dispose(bool disposing)
+    public Task OnEmptyBatchAsync()
     {
-        base.Dispose(disposing);
-        this.client.Dispose();
+        return Task.CompletedTask;
     }
 
     /// <summary>

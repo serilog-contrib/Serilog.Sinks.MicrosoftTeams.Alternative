@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MicrosoftTeamsMessageFact.cs" company="SeppPenner and the Serilog contributors">
 // The project is licensed under the MIT license.
 // </copyright>
@@ -7,25 +7,22 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Core
+namespace Serilog.Sinks.MicrosoftTeams.Utf8Json.Core;
+
+/// <summary>
+/// The message card fact.
+/// </summary>
+internal class MicrosoftTeamsMessageFact
 {
-    using System.Runtime.Serialization;
+    /// <summary>
+    /// Gets or sets the name of the card fact.
+    /// </summary>
+    [DataMember(Name = "name")]
+    public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// The message card fact.
+    /// Gets or sets the value of the card fact.
     /// </summary>
-    internal class MicrosoftTeamsMessageFact
-    {
-        /// <summary>
-        /// Gets or sets the name of the card fact.
-        /// </summary>
-        [DataMember(Name = "name")]
-        public string Name { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Gets or sets the value of the card fact.
-        /// </summary>
-        [DataMember(Name = "value")]
-        public string Value { get; set; } = string.Empty;
-    }
+    [DataMember(Name = "value")]
+    public string Value { get; set; } = string.Empty;
 }
