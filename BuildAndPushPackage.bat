@@ -16,7 +16,6 @@ FOR /d /r . %%d in (bin,obj) DO (
 
 @ECHO on
 @ECHO.Building solution...
-@cd Serilog.Sinks.MicrosoftTeams.Alternative
 @dotnet build -c Release -o bin/publish
 @ECHO.Deleting *.pdb files...
 @cd bin/publish
