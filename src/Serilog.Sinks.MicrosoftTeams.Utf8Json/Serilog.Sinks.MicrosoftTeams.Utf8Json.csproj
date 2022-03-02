@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Utf8Json</RepositoryUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryType>Github</RepositoryType>
-    <PackageReleaseNotes>Version 1.2.12.0 (2022-02-16): NuGet packages updated, added nullable checks, added editorconfig, added file scoped namespaces, added global usings, removed native support for Net Framework (Breaking change), fixed Serilog PeriodicBatchingSink issues.</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 1.2.14.0 (2022-02-03): Just a new version because of a NuGet upload issue.</PackageReleaseNotes>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <LangVersion>latest</LangVersion>
 	<Nullable>enable</Nullable>
