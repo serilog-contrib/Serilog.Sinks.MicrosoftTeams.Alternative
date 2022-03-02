@@ -1,7 +1,7 @@
 Change history
 --------------
 
-* **Version 1.2.14.0 (2022-02-03)** : Just a new version because of a NuGet upload issue.
+* **Version 1.2.14.0 (2022-03-02)** : Just a new version because of a NuGet upload issue.
 * **Version 1.2.13.0 (2022-02-02)** : Invalid version, something went wrong with NuGet. Don't use this version.
 * **Version 1.2.12.0 (2022-02-16)** : NuGet packages updated, added nullable checks, added editorconfig, added file scoped namespaces, added global usings, removed native support for Net Framework (Breaking change), fixed Serilog PeriodicBatchingSink issues.
 * **Version 1.2.11.0 (2022-01-12)** : NuGet packages updated.
