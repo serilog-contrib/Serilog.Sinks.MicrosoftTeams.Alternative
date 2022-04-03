@@ -164,9 +164,10 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
         {
             try
             {
+                var webHookUri = this.GetChannelUri(logEvent);
                 var message = this.CreateMessage(logEvent);
                 var json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
-                var result = await this.client.PostAsync(this.options.WebHookUri, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
+                var result = await this.client.PostAsync(webHookUri, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
 
                 if (!result.IsSuccessStatusCode)
                 {
@@ -179,6 +180,28 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
                 this.options.FailureCallback?.Invoke(ex);
             }
         }
+    }
+
+    private string GetChannelUri(MicrosoftExtendedLogEvent logEvent)
+    {
+        //Use default channel when not configured to use filters
+        if (string.IsNullOrWhiteSpace(this.options.ChannelHandler?.FilterOnProperty))
+        {
+            return this.options.WebHookUri;
+        }
+
+        var expectedKey = logEvent.LogEvent
+            .Properties[this.options.ChannelHandler?.FilterOnProperty]
+            .ToString()
+            .Trim('"');
+
+        //Return specific channel uri if available
+        if (this.options.ChannelHandler?.ChannelList?.ContainsKey(expectedKey) ?? false)
+        {
+            return this.options.ChannelHandler.ChannelList[expectedKey];
+        }
+
+        return this.options.WebHookUri;
     }
 
     /// <summary>

@@ -9,6 +9,8 @@
 
 namespace Serilog.Sinks.MicrosoftTeams.Alternative.Tests;
 
+using Extensions;
+
 /// <summary>
 /// A test class to test the Microsoft Teams sink for basic functionality.
 /// </summary>
@@ -43,7 +45,7 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesWithAllLogEventLevels()
     {
-        using var mockServer = TestHelper.CreateMockServer();
+        using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLogger();
 
         var counter = 0;
@@ -78,7 +80,7 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesWithOmittedProperties()
     {
-        using var mockServer = TestHelper.CreateMockServer();
+        using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLogger(true);
         this.logger.Debug("Message text {prop}", 4);
         Thread.Sleep(1000);
@@ -103,7 +105,7 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesWithZeroButtons()
     {
-        using var mockServer = TestHelper.CreateMockServer();
+        using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(0));
         this.logger.Debug("Message text {prop}", 1);
         Thread.Sleep(1000);
@@ -128,7 +130,7 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesWithOneButton()
     {
-        using var mockServer = TestHelper.CreateMockServer();
+        using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(1));
         this.logger.Debug("Message text {prop}", 2);
         Thread.Sleep(1000);
@@ -153,7 +155,7 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesWithTwoButtons()
     {
-        using var mockServer = TestHelper.CreateMockServer();
+        using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(2));
         this.logger.Debug("Message text {prop}", 3);
         Thread.Sleep(1000);
@@ -179,7 +181,7 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesWithComplexData()
     {
-        using var mockServer = TestHelper.CreateMockServer();
+        using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLoggerWithCodeTags();
         var data = File.ReadAllText("TestException.txt");
         this.logger.Debug(data);
@@ -193,7 +195,7 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesWithTitleTemplate()
     {
-        using var mockServer = TestHelper.CreateMockServer();
+        using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLogger("My title: {Tenant}");
         this.logger.Debug("Message text {prop} for tenant {Tenant}", 1, "Tenant1");
         Thread.Sleep(1000);
@@ -222,7 +224,7 @@ public class MicrosoftTeamsSinkTest
         const string filterOnProperty = "MsTeams";
         
         var logLevels = Enum.GetValues<LogEventLevel>();
-        using var mockServer = TestHelper.CreateMockServer();
+        using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         int counter = 0;
 
         this.logger = TestHelper.CreateLoggerWithChannels(new MicrosoftTeamsSinkChannelHandlerOptions(filterOnProperty));
@@ -261,6 +263,165 @@ public class MicrosoftTeamsSinkTest
 
         Assert.AreEqual(
             logLevels.Length,
+            mockServer.LogEntries.Count(),
+            "Wrong number of events send to teams");
+    }
+
+    /// <summary>
+    /// Tests the emitting of messages for a specific channel
+    /// </summary>
+    [TestMethod]
+    public void EmitMessagesForSpecificChannel()
+    {
+        //Arrange
+        const string filterOnProperty = "MsTeams";
+        const string channelName = "ITTeam";
+
+        using var mockServer = TestHelper.CreateMockServer();
+        mockServer.AddChannel(channelName);
+
+        this.logger = TestHelper.CreateLoggerWithChannels(
+            new MicrosoftTeamsSinkChannelHandlerOptions(
+                filterOnProperty,
+                new Dictionary<string, string>
+                {
+                    [channelName] = $"{mockServer.Url}/{channelName}/"
+                }
+            )
+        );
+
+        //Act
+
+        var loggerWithContext = this.logger.ForContext(filterOnProperty, channelName);
+        loggerWithContext.Information("Demo for a specific channel");
+
+        Thread.Sleep(1000);
+        Log.CloseAndFlush();
+
+        //Assert
+        
+        Assert.IsTrue(
+            mockServer
+                .LogEntries
+                .All(t => t.PartialMatchResult.IsPerfectMatch),
+            "Invalid requests made to the mock server"
+        );
+
+        Assert.AreEqual(
+            1,
+            mockServer.LogEntries.Count(),
+            "Wrong number of events send to teams");
+    }
+
+    /// <summary>
+    /// Tests the emitting of messages for multiple channels
+    /// </summary>
+    [TestMethod]
+    public void EmitMessagesForMultipleChannels()
+    {
+        //Arrange
+        const string filterOnProperty = "MsTeams";
+        const string channelName = "ITTeam";
+        const string alternativeChannelName = "SupportTeam";
+        const string missingChannelName = "HelpdeskTeam";
+
+        using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
+        mockServer.AddChannel(channelName);
+        mockServer.AddChannel(alternativeChannelName);
+
+        var channelDictionary = new Dictionary<string, string>
+        {
+            [channelName] = $"{mockServer.Url}/{channelName}/",
+            [alternativeChannelName] = $"{mockServer.Url}/{alternativeChannelName}/"
+        };
+
+        this.logger = TestHelper.CreateLoggerWithChannels(
+            new MicrosoftTeamsSinkChannelHandlerOptions(
+                filterOnProperty,
+                channelDictionary
+            )
+        );
+
+        //Act
+
+        var loggerForDefaultChannel = this.logger.ForContext(filterOnProperty, missingChannelName);
+        loggerForDefaultChannel.Information("Demo for the default channel");
+
+        foreach (var channelPair in channelDictionary)
+        {
+            var loggerForChannel = this.logger.ForContext(filterOnProperty, channelPair.Key);
+            loggerForChannel.Information("Demo for the channel {channel}", channelPair.Key);
+        }
+
+        Thread.Sleep(1000);
+        Log.CloseAndFlush();
+
+        //Assert
+
+        Assert.IsTrue(
+            mockServer
+                .LogEntries
+                .All(t => t.PartialMatchResult.IsPerfectMatch),
+            "Invalid requests made to the mock server"
+        );
+        
+        foreach (var channelPair in channelDictionary)
+        {
+            Assert.AreEqual(
+                1,
+                mockServer.LogEntries.Count(t => t.RequestMessage.Url == channelPair.Value),
+                "Wrong event count for the default channel"
+            );
+        }
+
+        Assert.AreEqual(
+            channelDictionary.Count + 1,
+            mockServer.LogEntries.Count(),
+            "Wrong number of events send to teams");
+    }
+
+    /// <summary>
+    /// Tests the emitting of messages to the default channel when the specific channel is not found
+    /// </summary>
+    [TestMethod]
+    public void EmitMessagesForDefaultChannel()
+    {
+        //Arrange
+        const string filterOnProperty = "MsTeams";
+        const string channelName = "ITTeam";
+        const string missingChannelName = "SupportTeam";
+
+        using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
+        
+        this.logger = TestHelper.CreateLoggerWithChannels(
+            new MicrosoftTeamsSinkChannelHandlerOptions(
+                filterOnProperty,
+                new Dictionary<string, string>
+                {
+                    [channelName] = $"{mockServer.Url}/{channelName}/"
+                }
+            )
+        );
+
+        //Act
+
+        var loggerWithContext = this.logger.ForContext(filterOnProperty, missingChannelName);
+        loggerWithContext.Information("Demo for a missing channel emiting to default");
+
+        Thread.Sleep(1000);
+        Log.CloseAndFlush();
+
+        //Assert
+
+        Assert.IsTrue(
+            mockServer
+                .LogEntries
+                .All(t => t.PartialMatchResult.IsPerfectMatch),
+            "Invalid requests made to the mock server"
+        );
+
+        Assert.AreEqual(
+            1,
             mockServer.LogEntries.Count(),
             "Wrong number of events send to teams");
     }

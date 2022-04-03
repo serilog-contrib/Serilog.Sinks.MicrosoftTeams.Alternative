@@ -9,6 +9,7 @@
 
 namespace Serilog.Sinks.MicrosoftTeams.Alternative.Tests;
 
+using Extensions;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
@@ -103,26 +104,25 @@ public static class TestHelper
     }
 
     /// <summary>
-    /// Creates a mock http server
+    /// Creates a mock http server with the default channel
+    /// </summary>
+    /// <returns>A mocked server</returns>
+    public static WireMockServer CreateMockServerWithDefaultChannel()
+    {
+        var server = WireMockServer.Start(MockServerPort);
+        server.AddDefaultChannel();
+
+        return server;
+    }
+
+    /// <summary>
+    /// Creates a clean mock http server
     /// </summary>
     /// <returns>A mocked server</returns>
     public static WireMockServer CreateMockServer()
     {
         var server = WireMockServer.Start(MockServerPort);
 
-        server.Given(
-                Request
-                    .Create()
-                    .WithPath("/")
-                    .WithHeader("content-type", "application/json; charset=utf-8")
-                    .UsingPost()
-            )
-            .RespondWith(
-                Response
-                    .Create()
-                    .WithStatusCode(200)
-            );
-        
         return server;
     }
 }
