@@ -370,7 +370,7 @@ public class MicrosoftTeamsSinkTest
             Assert.AreEqual(
                 1,
                 mockServer.LogEntries.Count(t => t.RequestMessage.Url == channelPair.Value),
-                "Wrong event count for the default channel"
+                $"Wrong event count for the channel {channelPair.Key}"
             );
         }
 
