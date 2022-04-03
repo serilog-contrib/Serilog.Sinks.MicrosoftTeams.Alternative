@@ -43,6 +43,7 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesWithAllLogEventLevels()
     {
+        using var mockServer = TestHelper.CreateMockServer();
         this.logger = TestHelper.CreateLogger();
 
         var counter = 0;
@@ -57,6 +58,18 @@ public class MicrosoftTeamsSinkTest
 
         Thread.Sleep(1000);
         Log.CloseAndFlush();
+
+        Assert.IsTrue(
+            mockServer
+                .LogEntries
+                .All(t => t.PartialMatchResult.IsPerfectMatch),
+            "Invalid requests made to the mock server"
+        );
+
+        Assert.AreEqual(
+            6,
+            mockServer.LogEntries.Count(),
+            "Wrong number of events send to teams");
     }
 
     /// <summary>
@@ -65,10 +78,23 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesWithOmittedProperties()
     {
+        using var mockServer = TestHelper.CreateMockServer();
         this.logger = TestHelper.CreateLogger(true);
         this.logger.Debug("Message text {prop}", 4);
         Thread.Sleep(1000);
         Log.CloseAndFlush();
+
+        Assert.IsTrue(
+            mockServer
+                .LogEntries
+                .All(t => t.PartialMatchResult.IsPerfectMatch),
+            "Invalid requests made to the mock server"
+        );
+
+        Assert.AreEqual(
+            1,
+            mockServer.LogEntries.Count(),
+            "Wrong number of events send to teams");
     }
 
     /// <summary>
@@ -77,10 +103,23 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesWithZeroButtons()
     {
+        using var mockServer = TestHelper.CreateMockServer();
         this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(0));
         this.logger.Debug("Message text {prop}", 1);
         Thread.Sleep(1000);
         Log.CloseAndFlush();
+
+        Assert.IsTrue(
+            mockServer
+                .LogEntries
+                .All(t => t.PartialMatchResult.IsPerfectMatch),
+            "Invalid requests made to the mock server"
+        );
+
+        Assert.AreEqual(
+            1,
+            mockServer.LogEntries.Count(),
+            "Wrong number of events send to teams");
     }
 
     /// <summary>
@@ -89,10 +128,23 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesWithOneButton()
     {
+        using var mockServer = TestHelper.CreateMockServer();
         this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(1));
         this.logger.Debug("Message text {prop}", 2);
         Thread.Sleep(1000);
         Log.CloseAndFlush();
+
+        Assert.IsTrue(
+            mockServer
+                .LogEntries
+                .All(t => t.PartialMatchResult.IsPerfectMatch),
+            "Invalid requests made to the mock server"
+        );
+
+        Assert.AreEqual(
+            1,
+            mockServer.LogEntries.Count(),
+            "Wrong number of events send to teams");
     }
 
     /// <summary>
@@ -101,10 +153,23 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesWithTwoButtons()
     {
+        using var mockServer = TestHelper.CreateMockServer();
         this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(2));
         this.logger.Debug("Message text {prop}", 3);
         Thread.Sleep(1000);
         Log.CloseAndFlush();
+
+        Assert.IsTrue(
+            mockServer
+                .LogEntries
+                .All(t => t.PartialMatchResult.IsPerfectMatch),
+            "Invalid requests made to the mock server"
+        );
+
+        Assert.AreEqual(
+            1,
+            mockServer.LogEntries.Count(),
+            "Wrong number of events send to teams");
     }
 
     /// <summary>
@@ -114,6 +179,7 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesWithComplexData()
     {
+        using var mockServer = TestHelper.CreateMockServer();
         this.logger = TestHelper.CreateLoggerWithCodeTags();
         var data = File.ReadAllText("TestException.txt");
         this.logger.Debug(data);
@@ -127,10 +193,23 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesWithTitleTemplate()
     {
+        using var mockServer = TestHelper.CreateMockServer();
         this.logger = TestHelper.CreateLogger("My title: {Tenant}");
         this.logger.Debug("Message text {prop} for tenant {Tenant}", 1, "Tenant1");
         Thread.Sleep(1000);
         Log.CloseAndFlush();
+
+        Assert.IsTrue(
+            mockServer
+                .LogEntries
+                .All(t => t.PartialMatchResult.IsPerfectMatch),
+            "Invalid requests made to the mock server"
+        );
+
+        Assert.AreEqual(
+            1,
+            mockServer.LogEntries.Count(),
+            "Wrong number of events send to teams");
     }
 
     /// <summary>
