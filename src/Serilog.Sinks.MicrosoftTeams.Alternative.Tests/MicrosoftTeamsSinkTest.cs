@@ -71,7 +71,7 @@ public class MicrosoftTeamsSinkTest
         Assert.AreEqual(
             6,
             mockServer.LogEntries.Count(),
-            "Wrong number of events send to teams");
+            "Wrong number of events sent to teams");
     }
 
     /// <summary>
@@ -96,7 +96,7 @@ public class MicrosoftTeamsSinkTest
         Assert.AreEqual(
             1,
             mockServer.LogEntries.Count(),
-            "Wrong number of events send to teams");
+            "Wrong number of events sent to teams");
     }
 
     /// <summary>
@@ -121,7 +121,7 @@ public class MicrosoftTeamsSinkTest
         Assert.AreEqual(
             1,
             mockServer.LogEntries.Count(),
-            "Wrong number of events send to teams");
+            "Wrong number of events sent to teams");
     }
 
     /// <summary>
@@ -146,7 +146,7 @@ public class MicrosoftTeamsSinkTest
         Assert.AreEqual(
             1,
             mockServer.LogEntries.Count(),
-            "Wrong number of events send to teams");
+            "Wrong number of events sent to teams");
     }
 
     /// <summary>
@@ -171,7 +171,7 @@ public class MicrosoftTeamsSinkTest
         Assert.AreEqual(
             1,
             mockServer.LogEntries.Count(),
-            "Wrong number of events send to teams");
+            "Wrong number of events sent to teams");
     }
 
     /// <summary>
@@ -211,7 +211,7 @@ public class MicrosoftTeamsSinkTest
         Assert.AreEqual(
             1,
             mockServer.LogEntries.Count(),
-            "Wrong number of events send to teams");
+            "Wrong number of events sent to teams");
     }
 
     /// <summary>
@@ -264,7 +264,7 @@ public class MicrosoftTeamsSinkTest
         Assert.AreEqual(
             logLevels.Length,
             mockServer.LogEntries.Count(),
-            "Wrong number of events send to teams");
+            "Wrong number of events sent to teams");
     }
 
     /// <summary>
@@ -310,7 +310,7 @@ public class MicrosoftTeamsSinkTest
         Assert.AreEqual(
             1,
             mockServer.LogEntries.Count(),
-            "Wrong number of events send to teams");
+            "Wrong number of events sent to teams");
     }
 
     /// <summary>
@@ -377,7 +377,7 @@ public class MicrosoftTeamsSinkTest
         Assert.AreEqual(
             channelDictionary.Count + 1,
             mockServer.LogEntries.Count(),
-            "Wrong number of events send to teams");
+            "Wrong number of events sent to teams");
     }
 
     /// <summary>
@@ -423,6 +423,6 @@ public class MicrosoftTeamsSinkTest
         Assert.AreEqual(
             1,
             mockServer.LogEntries.Count(),
-            "Wrong number of events send to teams");
+            "Wrong number of events sent to teams");
     }
 }
