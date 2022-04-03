@@ -105,9 +105,10 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     /// <returns>A <see cref="List{T}"/> of <see cref="MicrosoftExtendedLogEvent"/>.</returns>
     private IEnumerable<MicrosoftExtendedLogEvent> GetMessagesToSend(IEnumerable<LogEvent> events)
     {
+        var filteredEvents = this.FilterEventsByProperty(events);
         var messagesToSend = new List<MicrosoftExtendedLogEvent>();
 
-        foreach (var logEvent in events)
+        foreach (var logEvent in filteredEvents)
         {
             if (logEvent.Level < this.options.MinimumLogEventLevel)
             {
@@ -134,6 +135,22 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
         }
 
         return messagesToSend;
+    }
+
+    /// <summary>
+    /// Filter for the events with the configured property, if no filter is set returns all events
+    /// </summary>
+    /// <param name="events">Events to filter</param>
+    /// <returns>Filtered events</returns>
+    private IEnumerable<LogEvent> FilterEventsByProperty(IEnumerable<LogEvent> events)
+    {
+        if (!string.IsNullOrWhiteSpace(this.options.ChannelHandler?.FilterOnProperty))
+        {
+            return events.Where(t =>
+                t.Properties.ContainsKey(this.options.ChannelHandler?.FilterOnProperty));
+        }
+
+        return events;
     }
 
     /// <summary>

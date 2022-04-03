@@ -132,4 +132,57 @@ public class MicrosoftTeamsSinkTest
         Thread.Sleep(1000);
         Log.CloseAndFlush();
     }
+
+    /// <summary>
+    /// Tests the emitting of messages only with the required filter property.
+    /// </summary>
+    [TestMethod]
+    public void EmitMessagesFilteredByProperty()
+    {
+        //Arrange
+        const string filterOnProperty = "MsTeams";
+        
+        var logLevels = Enum.GetValues<LogEventLevel>();
+        using var mockServer = TestHelper.CreateMockServer();
+        int counter = 0;
+
+        this.logger = TestHelper.CreateLoggerWithChannels(new MicrosoftTeamsSinkChannelHandlerOptions(filterOnProperty));
+
+        //Act
+
+        //A message for every loglevel with the required property
+        foreach (var logEventLevel in logLevels)
+        {
+            var loggerWithContext = this.logger.ForContext(filterOnProperty, $"Channel{logEventLevel}");
+
+            var template = $"{Guid.NewGuid()} {{counter}}";
+            loggerWithContext.Write(logEventLevel, template, counter);
+            counter++;
+        }
+
+        //A message for every loglevel without the required property
+        foreach (var logEventLevel in logLevels)
+        {
+            var template = $"{Guid.NewGuid()} {{counter}}";
+            this.logger.Write(logEventLevel, template, counter);
+            counter++;
+        }
+
+        Thread.Sleep(1000);
+        Log.CloseAndFlush();
+
+        //Assert
+
+        Assert.IsTrue(
+            mockServer
+                .LogEntries
+                .All(t => t.PartialMatchResult.IsPerfectMatch),
+            "Invalid requests made to the mock server"
+        );
+
+        Assert.AreEqual(
+            logLevels.Length,
+            mockServer.LogEntries.Count(),
+            "Wrong number of events send to teams");
+    }
 }

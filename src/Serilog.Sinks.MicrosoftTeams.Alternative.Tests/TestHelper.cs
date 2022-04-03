@@ -9,15 +9,24 @@
 
 namespace Serilog.Sinks.MicrosoftTeams.Alternative.Tests;
 
+using WireMock.RequestBuilders;
+using WireMock.ResponseBuilders;
+using WireMock.Server;
+
 /// <summary>
 /// A helper class for the tests.
 /// </summary>
 public static class TestHelper
 {
     /// <summary>
+    /// The default port for the mock http server
+    /// </summary>
+    private static readonly int MockServerPort = 63210;
+
+    /// <summary>
     /// The test web hook URL.
     /// </summary>
-    private static readonly string TestWebHook = Environment.GetEnvironmentVariable("MicrosoftTeamsWebhookUrl") ?? string.Empty;
+    private static readonly string TestWebHook = Environment.GetEnvironmentVariable("MicrosoftTeamsWebhookUrl") ?? $"http://localhost:{MockServerPort}";
 
     /// <summary>
     /// Creates the logger.
@@ -76,5 +85,44 @@ public static class TestHelper
             .CreateLogger();
 
         return logger;
+    }
+
+    /// <summary>
+    /// Creates the logger with a channel handler.
+    /// </summary>
+    /// <param name="channelHandler">Channel handler</param>
+    /// <returns>An <see cref="ILogger"/>.</returns>
+    public static ILogger CreateLoggerWithChannels(MicrosoftTeamsSinkChannelHandlerOptions channelHandler)
+    {
+        var logger = new LoggerConfiguration()
+            .MinimumLevel.Verbose()
+            .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHook, channelHandler: channelHandler))
+            .CreateLogger();
+
+        return logger;
+    }
+
+    /// <summary>
+    /// Creates a mock http server
+    /// </summary>
+    /// <returns>A mocked server</returns>
+    public static WireMockServer CreateMockServer()
+    {
+        var server = WireMockServer.Start(MockServerPort);
+
+        server.Given(
+                Request
+                    .Create()
+                    .WithPath("/")
+                    .WithHeader("content-type", "application/json; charset=utf-8")
+                    .UsingPost()
+            )
+            .RespondWith(
+                Response
+                    .Create()
+                    .WithStatusCode(200)
+            );
+        
+        return server;
     }
 }
