@@ -34,7 +34,7 @@ It's possible to send messages for multiple channels based on the value
 of a property for the event.
 
 |Parameter|Meaning|Default value|
-|-|-|-|-|
+|-|-|-|
 |filterOnProperty|Send **only** the events that have a property with this name.|`null`|
 |channelList|Mapping for the target channels Uri and the filter property value. If the filter property for the event is not on this list, the webHookUri will be used|`null`|
 
