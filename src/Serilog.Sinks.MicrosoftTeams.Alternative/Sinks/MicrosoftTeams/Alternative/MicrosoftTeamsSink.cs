@@ -105,12 +105,18 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     /// <returns>A <see cref="List{T}"/> of <see cref="MicrosoftExtendedLogEvent"/>.</returns>
     private IEnumerable<MicrosoftExtendedLogEvent> GetMessagesToSend(IEnumerable<LogEvent> events)
     {
-        var filteredEvents = this.FilterEventsByProperty(events);
+        var isFilterEnabled = this.options.ChannelHandler.GetIsFilterOnPropertyEnabled;
         var messagesToSend = new List<MicrosoftExtendedLogEvent>();
 
-        foreach (var logEvent in filteredEvents)
+        foreach (var logEvent in events)
         {
             if (logEvent.Level < this.options.MinimumLogEventLevel)
+            {
+                continue;
+            }
+
+            // Ignore messages that do not comply with the filter
+            if (isFilterEnabled && !logEvent.Properties.ContainsKey(this.options.ChannelHandler.FilterOnProperty))
             {
                 continue;
             }
@@ -138,33 +144,22 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     }
 
     /// <summary>
-    /// Filter for the events with the configured property, if no filter is set returns all events
-    /// </summary>
-    /// <param name="events">Events to filter</param>
-    /// <returns>Filtered events</returns>
-    private IEnumerable<LogEvent> FilterEventsByProperty(IEnumerable<LogEvent> events)
-    {
-        if (!string.IsNullOrWhiteSpace(this.options.ChannelHandler?.FilterOnProperty))
-        {
-            return events.Where(t =>
-                t.Properties.ContainsKey(this.options.ChannelHandler?.FilterOnProperty));
-        }
-
-        return events;
-    }
-
-    /// <summary>
     /// Posts the messages.
     /// </summary>
     /// <param name="messages">The messages.</param>
     /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
     private async Task PostMessages(IEnumerable<MicrosoftExtendedLogEvent> messages)
     {
+        var isFilterEnabled = this.options.ChannelHandler.GetIsFilterOnPropertyEnabled;
+
         foreach (var logEvent in messages)
         {
             try
             {
-                var webHookUri = this.GetChannelUri(logEvent);
+                var webHookUri = isFilterEnabled
+                    ? this.GetChannelUri(logEvent)
+                    : this.options.WebHookUri;
+
                 var message = this.CreateMessage(logEvent);
                 var json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
                 var result = await this.client.PostAsync(webHookUri, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
@@ -182,21 +177,22 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
         }
     }
 
+    /// <summary>
+    ///     If support for multiple channels is enabled this will get
+    ///     the corresponding Uri for the channel or the default Uri if
+    ///     there is no specific configuration for the event
+    /// </summary>
+    /// <param name="logEvent">Event to check for the target channel</param>
+    /// <returns>Uri for the target channel</returns>
     private string GetChannelUri(MicrosoftExtendedLogEvent logEvent)
     {
-        //Use default channel when not configured to use filters
-        if (string.IsNullOrWhiteSpace(this.options.ChannelHandler?.FilterOnProperty))
-        {
-            return this.options.WebHookUri;
-        }
-
         var expectedKey = logEvent.LogEvent
-            .Properties[this.options.ChannelHandler?.FilterOnProperty]
+            .Properties[this.options.ChannelHandler.FilterOnProperty]
             .ToString()
             .Trim('"');
 
         //Return specific channel uri if available
-        if (this.options.ChannelHandler?.ChannelList?.ContainsKey(expectedKey) ?? false)
+        if (this.options.ChannelHandler.ChannelList.ContainsKey(expectedKey))
         {
             return this.options.ChannelHandler.ChannelList[expectedKey];
         }

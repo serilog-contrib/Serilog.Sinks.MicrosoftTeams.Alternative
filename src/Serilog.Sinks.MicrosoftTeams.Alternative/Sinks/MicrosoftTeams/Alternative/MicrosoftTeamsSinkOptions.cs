@@ -82,7 +82,7 @@ public class MicrosoftTeamsSinkOptions
         this.Buttons = buttons ?? new List<MicrosoftTeamsSinkOptionsButton>();
         this.FailureCallback = failureCallback;
         this.QueueLimit = queueLimit ?? DefaultQueueLimit;
-        this.ChannelHandler = channelHandler;
+        this.ChannelHandler = channelHandler ?? new MicrosoftTeamsSinkChannelHandlerOptions();
     }
 
     /// <summary>
@@ -153,5 +153,5 @@ public class MicrosoftTeamsSinkOptions
     /// <summary>
     /// Gets the configuration for sending events to multiple channels
     /// </summary>
-    public MicrosoftTeamsSinkChannelHandlerOptions? ChannelHandler { get; }
+    public MicrosoftTeamsSinkChannelHandlerOptions ChannelHandler { get; }
 }
