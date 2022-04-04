@@ -381,6 +381,68 @@ public class MicrosoftTeamsSinkTest
     }
 
     /// <summary>
+    /// Tests the emitting of messages for multiple channels using the appsettings.TwoChannelsExample.json configuration
+    /// </summary>
+    [TestMethod]
+    public void EmitMessagesForMultipleChannelsUsingAppSettingsTwoChannelsExample()
+    {
+        //Arrange
+        const string filterOnProperty = "MsTeams";
+        const string channelName = "ITTeam";
+        const string alternativeChannelName = "SupportTeam";
+        const string missingChannelName = "HelpdeskTeam";
+
+        using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
+        mockServer.AddChannel(channelName);
+        mockServer.AddChannel(alternativeChannelName);
+
+        var channelDictionary = new Dictionary<string, string>
+        {
+            [channelName] = $"{mockServer.Url}/{channelName}/",
+            [alternativeChannelName] = $"{mockServer.Url}/{alternativeChannelName}/"
+        };
+
+        this.logger = TestHelper.CreateLoggerFromConfiguration("appsettings.TwoChannelsExample.json");
+
+        //Act
+
+        var loggerForDefaultChannel = this.logger.ForContext(filterOnProperty, missingChannelName);
+        loggerForDefaultChannel.Information("Demo for the default channel");
+
+        foreach (var channelPair in channelDictionary)
+        {
+            var loggerForChannel = this.logger.ForContext(filterOnProperty, channelPair.Key);
+            loggerForChannel.Information("Demo for the channel {channel}", channelPair.Key);
+        }
+
+        Thread.Sleep(1000);
+        Log.CloseAndFlush();
+
+        //Assert
+        
+        Assert.IsTrue(
+            mockServer
+                .LogEntries
+                .All(t => t.PartialMatchResult.IsPerfectMatch),
+            "Invalid requests made to the mock server"
+        );
+
+        foreach (var channelPair in channelDictionary)
+        {
+            Assert.AreEqual(
+                1,
+                mockServer.LogEntries.Count(t => t.RequestMessage.Url == channelPair.Value),
+                $"Wrong event count for the channel {channelPair.Key}"
+            );
+        }
+
+        Assert.AreEqual(
+            channelDictionary.Count + 1,
+            mockServer.LogEntries.Count(),
+            "Wrong number of events sent to teams");
+    }
+
+    /// <summary>
     /// Tests the emitting of messages to the default channel when the specific channel is not found
     /// </summary>
     [TestMethod]

@@ -40,6 +40,7 @@ public static class LoggerConfigurationMicrosoftTeamsExtensions
     /// <param name="buttons">The buttons to add to a message.</param>
     /// <param name="failureCallback">The failure callback.</param>
     /// <param name="queueLimit">The maximum number of events that should be stored in the batching queue.</param>
+    /// <param name="channelHandler">The configuration for sending events to multiple channels</param>
     /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
     public static LoggerConfiguration MicrosoftTeams(
         this LoggerSinkConfiguration loggerSinkConfiguration,
@@ -55,7 +56,8 @@ public static class LoggerConfigurationMicrosoftTeamsExtensions
         bool useCodeTagsForMessage = false,
         IEnumerable<MicrosoftTeamsSinkOptionsButton>? buttons = null,
         Action<Exception>? failureCallback = null,
-        int? queueLimit = null)
+        int? queueLimit = null,
+        MicrosoftTeamsSinkChannelHandlerOptions? channelHandler = null)
     {
         var microsoftTeamsSinkOptions = new MicrosoftTeamsSinkOptions(
             webHookUri,
@@ -70,7 +72,8 @@ public static class LoggerConfigurationMicrosoftTeamsExtensions
             proxy,
             buttons,
             failureCallback,
-            queueLimit);
+            queueLimit,
+            channelHandler);
         return loggerSinkConfiguration.MicrosoftTeams(microsoftTeamsSinkOptions, restrictedToMinimumLevel);
     }
 

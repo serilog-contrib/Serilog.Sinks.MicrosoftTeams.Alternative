@@ -10,8 +10,7 @@
 namespace Serilog.Sinks.MicrosoftTeams.Alternative.Tests;
 
 using Extensions;
-using WireMock.RequestBuilders;
-using WireMock.ResponseBuilders;
+using Microsoft.Extensions.Configuration;
 using WireMock.Server;
 
 /// <summary>
@@ -98,6 +97,25 @@ public static class TestHelper
         var logger = new LoggerConfiguration()
             .MinimumLevel.Verbose()
             .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHook, channelHandler: channelHandler))
+            .CreateLogger();
+
+        return logger;
+    }
+
+    /// <summary>
+    /// Creates the logger from a appsettings file
+    /// </summary>
+    /// <param name="appsettingsPath">Path for the appsettings file to use</param>
+    /// <returns>An <see cref="ILogger"/>.</returns>
+    public static ILogger CreateLoggerFromConfiguration(string appsettingsPath)
+    {
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile(appsettingsPath)
+            .Build();
+
+        var logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(configuration)
             .CreateLogger();
 
         return logger;

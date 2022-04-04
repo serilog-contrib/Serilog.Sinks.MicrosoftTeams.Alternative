@@ -17,7 +17,7 @@ public class MicrosoftTeamsSinkChannelHandlerOptions
     /// <summary>
     ///     Only emit events that have this property (Ignoring it's value)
     /// </summary>
-    public string? FilterOnProperty { get; }
+    public string? FilterOnProperty { get; set; }
 
     /// <summary>
     ///     Mapping between a requested channel (set in <see cref="FilterOnProperty"/>) and it's api endpoint
@@ -27,7 +27,7 @@ public class MicrosoftTeamsSinkChannelHandlerOptions
     ///     searched on this dictionary to find the matching channel endpoint, if no matching key is
     ///     found here, it will send the event to the default endpoint for this sink.
     /// </example>
-    public Dictionary<string, string> ChannelList { get; }
+    public Dictionary<string, string> ChannelList { get; set; } = new ();
 
     /// <summary>
     /// Checks if the sink is configured to only emit events that have the property set in <see cref="FilterOnProperty"/>
@@ -44,5 +44,12 @@ public class MicrosoftTeamsSinkChannelHandlerOptions
     {
         this.FilterOnProperty = filterOnProperty;
         this.ChannelList = channelList ?? new Dictionary<string, string>();
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MicrosoftTeamsSinkChannelHandlerOptions"/> class.
+    /// </summary>
+    public MicrosoftTeamsSinkChannelHandlerOptions()
+    {
     }
 }
