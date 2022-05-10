@@ -26,6 +26,69 @@ The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks
 |buttons|Option to add static clickable buttons to each message.|`buttons: new[] { new MicrosoftTeamsSinkOptionsButton("Google", "https://google.de") }`|`null`|
 |failureCallback|Adds an option to add a failure callback action.|`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`|`null`|
 |queueLimit|The maximum number of events that should be stored in the batching queue.|`queueLimit: 10`|`int.MaxValue` or `2147483647`|
+|channelHandler|Configuration for dispatching events to multiple channels.|See [Support for multiple channels](#support-for-multiple-channels)|`null`|
+
+### Support for multiple channels
+
+It's possible to send messages for multiple channels based on the value
+of a property for the event.
+
+|Parameter|Meaning|Default value|
+|-|-|-|
+|filterOnProperty|Send **only** the events that have a property with this name.|`null`|
+|channelList|Mapping for the target channels Uri and the filter property value. If the filter property for the event is not on this list, the webHookUri will be used|`null`|
+
+Example configuration:
+
+```json
+{
+    "Serilog": {
+        "Using": [ "Serilog.Sinks.MicrosoftTeams.Alternative" ],
+        "MinimumLevel": "Debug",
+        "WriteTo": [
+            {
+                "Name": "MicrosoftTeams",
+                "Args": {
+                    "webHookUri": "http://example.com/",
+                    "channelHandler":
+                    {
+                        "filterOnProperty": "MsTeams",
+                        "channelList": {
+                            "ITTeam": "http://example.com/ITTeam/",
+                            "SupportTeam": "http://example.com/SupportTeam/"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}
+```
+
+> **Note**: filterOnProperty can be used with an empty channelList to send
+> only some log events to Teams.
+
+#### Adding the required property for filterOnProperty to events
+
+Once filterOnProperty is set, some events will need to be marked to be sent
+to Teams.
+
+Using Serilog:
+
+```csharp
+var loggerForChannel = logger.ForContext("filterOnPropertyValue", "ChannelName");
+loggerForChannel.Information("Hello");
+```
+
+Using Microsoft iLogger:
+
+```csharp
+using (logger.BeginScope(
+    new Dictionary<string, object> { ["filterOnPropertyValue"] = "ChannelName" }))
+{
+    logger.LogInformation("Hello");
+}
+```
 
 ## Further information
 This project is a fork of https://github.com/DixonDs/serilog-sinks-teams but is maintained.

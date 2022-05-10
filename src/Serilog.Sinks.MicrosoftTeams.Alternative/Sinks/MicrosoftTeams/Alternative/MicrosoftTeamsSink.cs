@@ -105,11 +105,18 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     /// <returns>A <see cref="List{T}"/> of <see cref="MicrosoftExtendedLogEvent"/>.</returns>
     private IEnumerable<MicrosoftExtendedLogEvent> GetMessagesToSend(IEnumerable<LogEvent> events)
     {
+        var isFilterEnabled = this.options.ChannelHandler.GetIsFilterOnPropertyEnabled;
         var messagesToSend = new List<MicrosoftExtendedLogEvent>();
 
         foreach (var logEvent in events)
         {
             if (logEvent.Level < this.options.MinimumLogEventLevel)
+            {
+                continue;
+            }
+
+            // Ignore messages that do not comply with the filter
+            if (isFilterEnabled && !logEvent.Properties.ContainsKey(this.options.ChannelHandler.FilterOnProperty))
             {
                 continue;
             }
@@ -143,13 +150,19 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
     private async Task PostMessages(IEnumerable<MicrosoftExtendedLogEvent> messages)
     {
+        var isFilterEnabled = this.options.ChannelHandler.GetIsFilterOnPropertyEnabled;
+
         foreach (var logEvent in messages)
         {
             try
             {
+                var webHookUri = isFilterEnabled
+                    ? this.GetChannelUri(logEvent)
+                    : this.options.WebHookUri;
+
                 var message = this.CreateMessage(logEvent);
                 var json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
-                var result = await this.client.PostAsync(this.options.WebHookUri, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
+                var result = await this.client.PostAsync(webHookUri, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
 
                 if (!result.IsSuccessStatusCode)
                 {
@@ -162,6 +175,29 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
                 this.options.FailureCallback?.Invoke(ex);
             }
         }
+    }
+
+    /// <summary>
+    ///     If support for multiple channels is enabled this will get
+    ///     the corresponding Uri for the channel or the default Uri if
+    ///     there is no specific configuration for the event
+    /// </summary>
+    /// <param name="logEvent">Event to check for the target channel</param>
+    /// <returns>Uri for the target channel</returns>
+    private string GetChannelUri(MicrosoftExtendedLogEvent logEvent)
+    {
+        var expectedKey = logEvent.LogEvent
+            .Properties[this.options.ChannelHandler.FilterOnProperty]
+            .ToString()
+            .Trim('"');
+
+        //Return specific channel uri if available
+        if (this.options.ChannelHandler.ChannelList.ContainsKey(expectedKey))
+        {
+            return this.options.ChannelHandler.ChannelList[expectedKey];
+        }
+
+        return this.options.WebHookUri;
     }
 
     /// <summary>

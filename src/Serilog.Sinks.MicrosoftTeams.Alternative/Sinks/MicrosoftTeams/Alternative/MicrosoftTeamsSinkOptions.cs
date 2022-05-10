@@ -47,6 +47,7 @@ public class MicrosoftTeamsSinkOptions
     /// <param name="buttons">The buttons to add to a message.</param>
     /// <param name="failureCallback">The failure callback.</param>
     /// <param name="queueLimit">The maximum number of events that should be stored in the batching queue.</param>
+    /// <param name="channelHandler">The configuration for sending events to multiple channels</param>
     public MicrosoftTeamsSinkOptions(
         string webHookUri,
         string? titleTemplate = null,
@@ -60,13 +61,14 @@ public class MicrosoftTeamsSinkOptions
         string? proxy = null,
         IEnumerable<MicrosoftTeamsSinkOptionsButton>? buttons = null,
         Action<Exception>? failureCallback = null,
-        int? queueLimit = null)
+        int? queueLimit = null,
+        MicrosoftTeamsSinkChannelHandlerOptions? channelHandler = null)
     {
         if (string.IsNullOrWhiteSpace(webHookUri))
         {
             throw new ArgumentException("The webhook URI is empty.", nameof(webHookUri));
         }
-
+        
         this.WebHookUri = webHookUri;
         this.TitleTemplate = titleTemplate;
         this.BatchSizeLimit = batchSizeLimit ?? DefaultBatchSizeLimit;
@@ -80,6 +82,7 @@ public class MicrosoftTeamsSinkOptions
         this.Buttons = buttons ?? new List<MicrosoftTeamsSinkOptionsButton>();
         this.FailureCallback = failureCallback;
         this.QueueLimit = queueLimit ?? DefaultQueueLimit;
+        this.ChannelHandler = channelHandler ?? new MicrosoftTeamsSinkChannelHandlerOptions();
     }
 
     /// <summary>
@@ -146,4 +149,9 @@ public class MicrosoftTeamsSinkOptions
     /// Gets the maximum number of events that should be stored in the batching queue.
     /// </summary>
     public int QueueLimit { get; }
+
+    /// <summary>
+    /// Gets the configuration for sending events to multiple channels
+    /// </summary>
+    public MicrosoftTeamsSinkChannelHandlerOptions ChannelHandler { get; }
 }
