@@ -29,14 +29,13 @@ The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks
 |channelHandler|Configuration for dispatching events to multiple channels.|See [Support for multiple channels](#support-for-multiple-channels)|`null`|
 
 ### Support for multiple channels
-
 It's possible to send messages for multiple channels based on the value
 of a property for the event.
 
 |Parameter|Meaning|Default value|
 |-|-|-|
 |filterOnProperty|Send **only** the events that have a property with this name.|`null`|
-|channelList|Mapping for the target channels Uri and the filter property value. If the filter property for the event is not on this list, the webHookUri will be used|`null`|
+|channelList|Mapping for the target channels Uri and the filter property value. If the filter property for the event is not in this list, the webHookUri will be used.|`null`|
 
 Example configuration:
 
@@ -80,7 +79,7 @@ var loggerForChannel = logger.ForContext("filterOnPropertyValue", "ChannelName")
 loggerForChannel.Information("Hello");
 ```
 
-Using Microsoft iLogger:
+Using Microsoft ILogger:
 
 ```csharp
 using (logger.BeginScope(

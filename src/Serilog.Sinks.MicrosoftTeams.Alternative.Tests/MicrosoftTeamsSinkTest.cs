@@ -51,7 +51,9 @@ public class MicrosoftTeamsSinkTest
         for (var i = 0; i < 6; i++)
         {
             var template = $"{Guid.NewGuid()} {{counter}}";
+#pragma warning disable Serilog004 // Constant MessageTemplate verifier
             this.logger.Write((LogEventLevel)counter, template, i);
+#pragma warning restore Serilog004 // Constant MessageTemplate verifier
             counter++;
             Thread.Sleep(500);
         }
@@ -80,7 +82,7 @@ public class MicrosoftTeamsSinkTest
     {
         using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLogger(true);
-        this.logger.Debug("Message text {prop}", 4);
+        this.logger.Debug("Message text {Property}", 4);
         Thread.Sleep(1000);
         Log.CloseAndFlush();
 
@@ -105,7 +107,7 @@ public class MicrosoftTeamsSinkTest
     {
         using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(0));
-        this.logger.Debug("Message text {prop}", 1);
+        this.logger.Debug("Message text {Property}", 1);
         Thread.Sleep(1000);
         Log.CloseAndFlush();
 
@@ -130,7 +132,7 @@ public class MicrosoftTeamsSinkTest
     {
         using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(1));
-        this.logger.Debug("Message text {prop}", 2);
+        this.logger.Debug("Message text {Property}", 2);
         Thread.Sleep(1000);
         Log.CloseAndFlush();
 
@@ -155,7 +157,7 @@ public class MicrosoftTeamsSinkTest
     {
         using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(2));
-        this.logger.Debug("Message text {prop}", 3);
+        this.logger.Debug("Message text {Property}", 3);
         Thread.Sleep(1000);
         Log.CloseAndFlush();
 
@@ -182,7 +184,9 @@ public class MicrosoftTeamsSinkTest
         using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLoggerWithCodeTags();
         var data = File.ReadAllText("TestException.txt");
+#pragma warning disable Serilog004 // Constant MessageTemplate verifier
         this.logger.Debug(data);
+#pragma warning restore Serilog004 // Constant MessageTemplate verifier
         Thread.Sleep(1000);
         Log.CloseAndFlush();
     }
@@ -195,7 +199,7 @@ public class MicrosoftTeamsSinkTest
     {
         using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLogger("My title: {Tenant}");
-        this.logger.Debug("Message text {prop} for tenant {Tenant}", 1, "Tenant1");
+        this.logger.Debug("Message text {Property} for tenant {Tenant}", 1, "Tenant1");
         Thread.Sleep(1000);
         Log.CloseAndFlush();
 
@@ -218,7 +222,7 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesFilteredByProperty()
     {
-        //Arrange
+        // Arrange.
         const string filterOnProperty = "MsTeams";
         
         var logLevels = Enum.GetValues<LogEventLevel>();
@@ -227,31 +231,33 @@ public class MicrosoftTeamsSinkTest
 
         this.logger = TestHelper.CreateLoggerWithChannels(new MicrosoftTeamsSinkChannelHandlerOptions(filterOnProperty));
 
-        //Act
-
-        //A message for every loglevel with the required property
+        // Act.
+        // A message for every loglevel with the required property.
         foreach (var logEventLevel in logLevels)
         {
             var loggerWithContext = this.logger.ForContext(filterOnProperty, $"Channel{logEventLevel}");
 
             var template = $"{Guid.NewGuid()} {{counter}}";
+#pragma warning disable Serilog004 // Constant MessageTemplate verifier
             loggerWithContext.Write(logEventLevel, template, counter);
+#pragma warning restore Serilog004 // Constant MessageTemplate verifier
             counter++;
         }
 
-        //A message for every loglevel without the required property
+        // A message for every loglevel without the required property.
         foreach (var logEventLevel in logLevels)
         {
             var template = $"{Guid.NewGuid()} {{counter}}";
+#pragma warning disable Serilog004 // Constant MessageTemplate verifier
             this.logger.Write(logEventLevel, template, counter);
+#pragma warning restore Serilog004 // Constant MessageTemplate verifier
             counter++;
         }
 
         Thread.Sleep(1000);
         Log.CloseAndFlush();
 
-        //Assert
-
+        // Assert.
         Assert.IsTrue(
             mockServer
                 .LogEntries
@@ -271,7 +277,7 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesForSpecificChannel()
     {
-        //Arrange
+        // Arrange.
         const string filterOnProperty = "MsTeams";
         const string channelName = "ITTeam";
 
@@ -288,16 +294,14 @@ public class MicrosoftTeamsSinkTest
             )
         );
 
-        //Act
-
+        // Act.
         var loggerWithContext = this.logger.ForContext(filterOnProperty, channelName);
         loggerWithContext.Information("Demo for a specific channel");
 
         Thread.Sleep(1000);
         Log.CloseAndFlush();
 
-        //Assert
-        
+        // Assert.
         Assert.IsTrue(
             mockServer
                 .LogEntries
@@ -317,7 +321,7 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesForMultipleChannels()
     {
-        //Arrange
+        // Arrange.
         const string filterOnProperty = "MsTeams";
         const string channelName = "ITTeam";
         const string alternativeChannelName = "SupportTeam";
@@ -340,22 +344,20 @@ public class MicrosoftTeamsSinkTest
             )
         );
 
-        //Act
-
+        // Act.
         var loggerForDefaultChannel = this.logger.ForContext(filterOnProperty, missingChannelName);
         loggerForDefaultChannel.Information("Demo for the default channel");
 
         foreach (var channelPair in channelDictionary)
         {
             var loggerForChannel = this.logger.ForContext(filterOnProperty, channelPair.Key);
-            loggerForChannel.Information("Demo for the channel {channel}", channelPair.Key);
+            loggerForChannel.Information("Demo for the channel {Channel}", channelPair.Key);
         }
 
         Thread.Sleep(1000);
         Log.CloseAndFlush();
 
-        //Assert
-
+        // Assert.
         Assert.IsTrue(
             mockServer
                 .LogEntries
@@ -384,7 +386,7 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesForMultipleChannelsUsingAppSettingsTwoChannelsExample()
     {
-        //Arrange
+        // Arrange.
         const string filterOnProperty = "MsTeams";
         const string channelName = "ITTeam";
         const string alternativeChannelName = "SupportTeam";
@@ -402,22 +404,20 @@ public class MicrosoftTeamsSinkTest
 
         this.logger = TestHelper.CreateLoggerFromConfiguration("appsettings.TwoChannelsExample.json");
 
-        //Act
-
+        // Act.
         var loggerForDefaultChannel = this.logger.ForContext(filterOnProperty, missingChannelName);
         loggerForDefaultChannel.Information("Demo for the default channel");
 
         foreach (var channelPair in channelDictionary)
         {
             var loggerForChannel = this.logger.ForContext(filterOnProperty, channelPair.Key);
-            loggerForChannel.Information("Demo for the channel {channel}", channelPair.Key);
+            loggerForChannel.Information("Demo for the channel {Channel}", channelPair.Key);
         }
 
         Thread.Sleep(1000);
         Log.CloseAndFlush();
 
-        //Assert
-        
+        // Assert.
         Assert.IsTrue(
             mockServer
                 .LogEntries
@@ -446,7 +446,7 @@ public class MicrosoftTeamsSinkTest
     [TestMethod]
     public void EmitMessagesForDefaultChannel()
     {
-        //Arrange
+        // Arrange.
         const string filterOnProperty = "MsTeams";
         const string channelName = "ITTeam";
         const string missingChannelName = "SupportTeam";
@@ -463,16 +463,14 @@ public class MicrosoftTeamsSinkTest
             )
         );
 
-        //Act
-
+        // Act.
         var loggerWithContext = this.logger.ForContext(filterOnProperty, missingChannelName);
         loggerWithContext.Information("Demo for a missing channel emiting to default");
 
         Thread.Sleep(1000);
         Log.CloseAndFlush();
 
-        //Assert
-
+        // Assert.
         Assert.IsTrue(
             mockServer
                 .LogEntries
