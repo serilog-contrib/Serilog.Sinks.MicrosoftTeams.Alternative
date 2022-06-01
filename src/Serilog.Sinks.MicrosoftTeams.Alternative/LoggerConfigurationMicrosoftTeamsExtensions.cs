@@ -40,7 +40,7 @@ public static class LoggerConfigurationMicrosoftTeamsExtensions
     /// <param name="buttons">The buttons to add to a message.</param>
     /// <param name="failureCallback">The failure callback.</param>
     /// <param name="queueLimit">The maximum number of events that should be stored in the batching queue.</param>
-    /// <param name="channelHandler">The configuration for sending events to multiple channels</param>
+    /// <param name="channelHandler">The configuration for sending events to multiple channels.</param>
     /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
     public static LoggerConfiguration MicrosoftTeams(
         this LoggerSinkConfiguration loggerSinkConfiguration,

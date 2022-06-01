@@ -105,7 +105,7 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     /// <returns>A <see cref="List{T}"/> of <see cref="MicrosoftExtendedLogEvent"/>.</returns>
     private IEnumerable<MicrosoftExtendedLogEvent> GetMessagesToSend(IEnumerable<LogEvent> events)
     {
-        var isFilterEnabled = this.options.ChannelHandler.GetIsFilterOnPropertyEnabled;
+        var isFilterEnabled = this.options.ChannelHandler.IsFilterOnPropertyEnabled;
         var messagesToSend = new List<MicrosoftExtendedLogEvent>();
 
         foreach (var logEvent in events)
@@ -115,7 +115,7 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
                 continue;
             }
 
-            // Ignore messages that do not comply with the filter
+            // Ignore messages that do not comply with the filter.
             if (isFilterEnabled && !logEvent.Properties.ContainsKey(this.options.ChannelHandler.FilterOnProperty))
             {
                 continue;
@@ -150,7 +150,7 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
     private async Task PostMessages(IEnumerable<MicrosoftExtendedLogEvent> messages)
     {
-        var isFilterEnabled = this.options.ChannelHandler.GetIsFilterOnPropertyEnabled;
+        var isFilterEnabled = this.options.ChannelHandler.IsFilterOnPropertyEnabled;
 
         foreach (var logEvent in messages)
         {
@@ -180,10 +180,10 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     /// <summary>
     ///     If support for multiple channels is enabled this will get
     ///     the corresponding Uri for the channel or the default Uri if
-    ///     there is no specific configuration for the event
+    ///     there is no specific configuration for the event.
     /// </summary>
-    /// <param name="logEvent">Event to check for the target channel</param>
-    /// <returns>Uri for the target channel</returns>
+    /// <param name="logEvent">Event to check for the target channel.</param>
+    /// <returns>Uri for the target channel.</returns>
     private string GetChannelUri(MicrosoftExtendedLogEvent logEvent)
     {
         var expectedKey = logEvent.LogEvent
@@ -191,7 +191,7 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
             .ToString()
             .Trim('"');
 
-        //Return specific channel uri if available
+        // Return the specific channel uri if available.
         if (this.options.ChannelHandler.ChannelList.ContainsKey(expectedKey))
         {
             return this.options.ChannelHandler.ChannelList[expectedKey];

@@ -42,6 +42,7 @@
 	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Alternative\Enumerations\MicrosoftTeamsColors.cs" />
 	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Alternative\Extensions\EnumerableExtensions.cs" />
 	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Alternative\MicrosoftExtendedLogEvent.cs" />
+      <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Alternative\MicrosoftTeamsSinkChannelHandlerOptions.cs" />
 	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Alternative\MicrosoftTeamsSinkOptions.cs" />
 	  <Compile Include="..\Serilog.Sinks.MicrosoftTeams.Alternative\Sinks\MicrosoftTeams\Alternative\MicrosoftTeamsSinkOptionsButton.cs" />
   </ItemGroup>

@@ -19,7 +19,7 @@ using WireMock.Server;
 public static class TestHelper
 {
     /// <summary>
-    /// The default port for the mock http server
+    /// The default port for the mock http server.
     /// </summary>
     private static readonly int MockServerPort = 63210;
 
@@ -90,7 +90,7 @@ public static class TestHelper
     /// <summary>
     /// Creates the logger with a channel handler.
     /// </summary>
-    /// <param name="channelHandler">Channel handler</param>
+    /// <param name="channelHandler">The channel handler.</param>
     /// <returns>An <see cref="ILogger"/>.</returns>
     public static ILogger CreateLoggerWithChannels(MicrosoftTeamsSinkChannelHandlerOptions channelHandler)
     {
@@ -103,9 +103,9 @@ public static class TestHelper
     }
 
     /// <summary>
-    /// Creates the logger from a appsettings file
+    /// Creates the logger from a appsettings file.
     /// </summary>
-    /// <param name="appsettingsPath">Path for the appsettings file to use</param>
+    /// <param name="appsettingsPath">The path for the appsettings file to use.</param>
     /// <returns>An <see cref="ILogger"/>.</returns>
     public static ILogger CreateLoggerFromConfiguration(string appsettingsPath)
     {
@@ -122,25 +122,23 @@ public static class TestHelper
     }
 
     /// <summary>
-    /// Creates a mock http server with the default channel
+    /// Creates a mock HTTP server with the default channel.
     /// </summary>
-    /// <returns>A mocked server</returns>
+    /// <returns>A mocked HTTP server.</returns>
     public static WireMockServer CreateMockServerWithDefaultChannel()
     {
         var server = WireMockServer.Start(MockServerPort);
         server.AddDefaultChannel();
-
         return server;
     }
 
     /// <summary>
-    /// Creates a clean mock http server
+    /// Creates a clean mock HTTP server.
     /// </summary>
-    /// <returns>A mocked server</returns>
+    /// <returns>A mocked HTTP server.</returns>
     public static WireMockServer CreateMockServer()
     {
         var server = WireMockServer.Start(MockServerPort);
-
         return server;
     }
 }
