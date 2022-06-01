@@ -1,9 +1,5 @@
 namespace Serilog.Sinks.MicrosoftTeams.Alternative.Tests.Extensions;
 
-using WireMock.RequestBuilders;
-using WireMock.ResponseBuilders;
-using WireMock.Server;
-
 internal static class WireMockExtensions
 {
     public static void AddDefaultChannel(this WireMockServer server)

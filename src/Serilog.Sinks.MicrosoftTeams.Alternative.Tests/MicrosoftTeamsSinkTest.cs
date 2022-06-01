@@ -9,8 +9,6 @@
 
 namespace Serilog.Sinks.MicrosoftTeams.Alternative.Tests;
 
-using Extensions;
-
 /// <summary>
 /// A test class to test the Microsoft Teams sink for basic functionality.
 /// </summary>

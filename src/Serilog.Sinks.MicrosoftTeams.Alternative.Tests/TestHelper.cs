@@ -9,10 +9,6 @@
 
 namespace Serilog.Sinks.MicrosoftTeams.Alternative.Tests;
 
-using Extensions;
-using Microsoft.Extensions.Configuration;
-using WireMock.Server;
-
 /// <summary>
 /// A helper class for the tests.
 /// </summary>
