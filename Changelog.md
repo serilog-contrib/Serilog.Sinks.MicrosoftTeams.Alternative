@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.2.16.0 (2022-06-01)** : Updated NuGet packages, added filter on property and multi channel support.
 * **Version 1.2.15.0 (2022-04-03)**: Updated NuGet packages, hopefully fixes https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/21.
 * **Version 1.2.14.0 (2022-03-02)** : Just a new version because of a NuGet upload issue.
 * **Version 1.2.13.0 (2022-02-02)** : Invalid version, something went wrong with NuGet. Don't use this version.
