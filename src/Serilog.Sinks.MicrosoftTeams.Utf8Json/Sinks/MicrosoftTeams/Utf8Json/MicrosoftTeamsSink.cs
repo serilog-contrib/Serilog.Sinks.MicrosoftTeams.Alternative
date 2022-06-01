@@ -209,7 +209,7 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
             return logEvent.LogEvent.RenderMessage(this.options.FormatProvider);
         }
 
-        var formatter = new MessageTemplateTextFormatter(this.options.OutputTemplate, this.options.FormatProvider);
+        var formatter = new MessageTemplateTextFormatter(this.options.OutputTemplate!, this.options.FormatProvider);
         var stringWriter = new StringWriter();
         formatter.Format(logEvent.LogEvent, stringWriter);
         return stringWriter.ToString();
@@ -227,7 +227,7 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
             return logEvent.LogEvent.RenderMessage(this.options.FormatProvider);
         }
 
-        var formatter = new MessageTemplateTextFormatter(this.options.TitleTemplate, this.options.FormatProvider);
+        var formatter = new MessageTemplateTextFormatter(this.options.TitleTemplate!, this.options.FormatProvider);
         var stringWriter = new StringWriter();
         formatter.Format(logEvent.LogEvent, stringWriter);
         return stringWriter.ToString();
