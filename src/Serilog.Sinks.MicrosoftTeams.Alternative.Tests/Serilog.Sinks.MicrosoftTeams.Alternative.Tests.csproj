@@ -27,7 +27,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
-    <PackageReference Include="WireMock.Net" Version="1.5.2" />
+    <PackageReference Include="WireMock.Net" Version="1.5.3" />
   </ItemGroup>
 
   <ItemGroup>
