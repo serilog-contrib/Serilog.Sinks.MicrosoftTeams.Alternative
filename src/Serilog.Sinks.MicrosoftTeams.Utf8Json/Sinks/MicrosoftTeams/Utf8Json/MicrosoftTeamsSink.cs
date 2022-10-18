@@ -111,7 +111,7 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
                 continue;
             }
 
-            var foundSameLogEvent = messagesToSend.Where(m => m.LogEvent?.Exception?.Message != null).FirstOrDefault(l => l.LogEvent.Exception.Message == logEvent.Exception.Message);
+            var foundSameLogEvent = messagesToSend.Where(m => m.LogEvent?.Exception?.Message is not null).FirstOrDefault(l => l.LogEvent.Exception.Message == logEvent.Exception.Message);
 
             if (foundSameLogEvent is null)
             {
@@ -252,7 +252,7 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
             Value = this.options.UseCodeTagsForMessage ? $"```{Environment.NewLine}{logEvent.LogEvent.MessageTemplate.Text}{Environment.NewLine}```" : logEvent.LogEvent.MessageTemplate.Text
         };
 
-        if (logEvent.LogEvent.Exception != null)
+        if (logEvent.LogEvent.Exception is not null)
         {
             yield return new MicrosoftTeamsMessageFact
             {
