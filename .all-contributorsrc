@@ -72,6 +72,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "mggrand",
+      "name": "Goman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32844137?v=4",
+      "profile": "https://goman.ch",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -79,5 +88,6 @@
   "projectOwner": "serilog-contrib",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }
