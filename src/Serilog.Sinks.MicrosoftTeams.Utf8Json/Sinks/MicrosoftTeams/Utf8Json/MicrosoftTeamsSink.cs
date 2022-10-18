@@ -254,7 +254,11 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
 
         if (logEvent.LogEvent.Exception != null)
         {
-            yield return new MicrosoftTeamsMessageFact { Name = "Exception", Value = logEvent.LogEvent.Exception.ToString() };
+            yield return new MicrosoftTeamsMessageFact
+            {
+                Name = "Exception",
+                Value = $"```{Environment.NewLine}{logEvent.LogEvent.Exception}{Environment.NewLine}```"
+            };
         }
 
         foreach (var property in logEvent.LogEvent.Properties)
