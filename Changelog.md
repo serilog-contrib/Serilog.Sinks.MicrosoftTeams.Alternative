@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.2.20.0 (2022-10-30)** : Updated nuget packages.
 * **Version 1.2.19.0 (2022-10-18)** : Wrap exception into code block (Thanks to [mggrand](https://github.com/mggrand)), updated NuGet packages.
 * **Version 1.2.18.0 (2022-08-31)** : Updated NuGet packages.
 * **Version 1.2.17.0 (2022-08-03)** : Updated NuGet packages.
