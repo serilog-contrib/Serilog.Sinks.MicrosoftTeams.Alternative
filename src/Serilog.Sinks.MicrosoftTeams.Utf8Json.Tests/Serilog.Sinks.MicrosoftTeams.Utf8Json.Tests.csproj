@@ -23,10 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Serilog.Sinks.MicrosoftTeams.Utf8Json\Serilog.Sinks.MicrosoftTeams.Utf8Json.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="TestException.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
