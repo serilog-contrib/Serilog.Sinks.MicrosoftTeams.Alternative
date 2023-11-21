@@ -18,11 +18,11 @@ public class MicrosoftTeamsSinkTest
     /// <summary>
     /// The buttons.
     /// </summary>
-    private readonly List<MicrosoftTeamsSinkOptionsButton> buttons = new()
-    {
+    private readonly List<MicrosoftTeamsSinkOptionsButton> buttons =
+    [
         new MicrosoftTeamsSinkOptionsButton { Name = "Google", Uri = "https://google.com" },
         new MicrosoftTeamsSinkOptionsButton { Name = "DuckDuckGo", Uri = "https://duckduckgo.com" }
-    };
+    ];
 
     /// <summary>
     /// The logger.

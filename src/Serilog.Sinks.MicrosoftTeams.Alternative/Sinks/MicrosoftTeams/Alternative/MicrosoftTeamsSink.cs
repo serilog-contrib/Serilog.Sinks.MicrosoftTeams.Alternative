@@ -121,7 +121,8 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
                 continue;
             }
 
-            var foundSameLogEvent = messagesToSend.Where(m => m.LogEvent?.Exception?.Message is not null).FirstOrDefault(l => l.LogEvent.Exception.Message == logEvent.Exception.Message);
+            var foundSameLogEvent = messagesToSend.Where(m => m.LogEvent?.Exception?.Message is not null)
+                .FirstOrDefault(m => m.LogEvent!.Exception!.Message == logEvent.Exception?.Message);
 
             if (foundSameLogEvent is null)
             {
@@ -186,15 +187,20 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     /// <returns>Uri for the target channel.</returns>
     private string GetChannelUri(MicrosoftExtendedLogEvent logEvent)
     {
+        if (!logEvent.LogEvent.Properties.ContainsKey(this.options.ChannelHandler.FilterOnProperty))
+        {
+            return this.options.WebHookUri;
+        }
+
         var expectedKey = logEvent.LogEvent
             .Properties[this.options.ChannelHandler.FilterOnProperty]
             .ToString()
             .Trim('"');
 
         // Return the specific channel uri if available.
-        if (this.options.ChannelHandler.ChannelList.ContainsKey(expectedKey))
+        if (this.options.ChannelHandler.ChannelList.TryGetValue(expectedKey, out string? value))
         {
-            return this.options.ChannelHandler.ChannelList[expectedKey];
+            return value;
         }
 
         return this.options.WebHookUri;
@@ -216,12 +222,12 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
             Color = GetAttachmentColor(logEvent.LogEvent.Level),
             Sections = this.options.OmitPropertiesSection ? new List<MicrosoftTeamsMessageSection>() : new[]
             {
-                    new MicrosoftTeamsMessageSection
-                    {
-                        Title = "Properties",
-                        Facts = this.GetFacts(logEvent).ToArray()
-                    }
-                },
+                new MicrosoftTeamsMessageSection
+                {
+                    Title = "Properties",
+                    Facts = this.GetFacts(logEvent).ToArray()
+                }
+            },
             PotentialActions = new List<MicrosoftTeamsMessageAction>()
         };
 
