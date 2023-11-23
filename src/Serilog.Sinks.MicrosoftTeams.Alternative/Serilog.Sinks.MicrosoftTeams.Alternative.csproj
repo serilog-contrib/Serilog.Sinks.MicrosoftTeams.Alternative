@@ -16,7 +16,7 @@
         <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative</RepositoryUrl>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>Github</RepositoryType>
-        <PackageReleaseNotes>Version 1.4.0.0 (2023-11-21): Updated NuGet packages, removed support for NetCore3.1, removed support for netstandard, added support for Net8.0.</PackageReleaseNotes>
+        <PackageReleaseNotes>Version 1.4.1.0 (2023-11-23): Tried to fix issue with System.Runtime, https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/30.</PackageReleaseNotes>
         <PackageLicenseFile>License.txt</PackageLicenseFile>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
