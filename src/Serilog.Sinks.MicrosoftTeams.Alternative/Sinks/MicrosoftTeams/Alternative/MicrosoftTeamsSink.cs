@@ -165,6 +165,11 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
                 var json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
                 var result = await this.client.PostAsync(webHookUri, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
 
+                if (result.StatusCode == HttpStatusCode.TooManyRequests)
+                {
+                    SelfLog.WriteLine("Too many requests");
+                }
+
                 if (!result.IsSuccessStatusCode)
                 {
                     throw new LoggingFailedException($"Received failed result {result.StatusCode} when posting events to Microsoft Teams.");
