@@ -21,5 +21,6 @@ FOR /d /r . %%d in (bin,obj) DO (
 @cd .\Serilog.Sinks.MicrosoftTeams.Alternative\bin\Release
 @ECHO.Build successful.
 dotnet nuget push *.nupkg -s "nuget.org" --skip-duplicate -k "%NUGET_API_KEY%"
+dotnet nuget push *.snupkg -s "nuget.org" --skip-duplicate -k "%NUGET_API_KEY%"
 @ECHO.Upload success. Press any key to exit.
 PAUSE
