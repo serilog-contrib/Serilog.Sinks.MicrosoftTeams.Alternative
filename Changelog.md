@@ -1,5 +1,6 @@
 Change history
 --------------
+* **Version 1.4.2.0 (2023-11-30)**: Fixed issue with System.Runtime, https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/30.
 * **Version 1.4.1.0 (2023-11-23)**: Tried to fix issue with System.Runtime, https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/30.
 * **Version 1.4.0.0 (2023-11-21)**: Updated NuGet packages, removed support for NetCore3.1, removed support for netstandard, added support for Net8.0.
 * **Version 1.3.0.0 (2022-11-20)**: Updated NuGet packages, removed support for Net5.0, added support for Net7.0.
