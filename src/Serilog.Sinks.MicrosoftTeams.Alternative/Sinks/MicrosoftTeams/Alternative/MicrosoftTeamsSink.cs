@@ -172,7 +172,7 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
 
                 if (!result.IsSuccessStatusCode)
                 {
-                    throw new LoggingFailedException($"Received failed result {result.StatusCode} when posting events to Microsoft Teams.");
+                    throw new LoggingException($"Received failed result {result.StatusCode} when posting events to Microsoft Teams.", result.StatusCode);
                 }
             }
             catch (Exception ex)

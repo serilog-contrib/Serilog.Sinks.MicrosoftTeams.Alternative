@@ -11,6 +11,7 @@ global using Serilog.Formatting.Display;
 global using Serilog.Sinks.MicrosoftTeams.Alternative;
 global using Serilog.Sinks.MicrosoftTeams.Alternative.Core;
 global using Serilog.Sinks.MicrosoftTeams.Alternative.Enumerations;
+global using Serilog.Sinks.MicrosoftTeams.Alternative.Exceptions;
 global using Serilog.Sinks.MicrosoftTeams.Alternative.Extensions;
 global using Serilog.Sinks.PeriodicBatching;
 #pragma warning restore IDE0065 // Die using-Anweisung wurde falsch platziert.
