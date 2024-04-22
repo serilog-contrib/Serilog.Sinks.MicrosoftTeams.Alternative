@@ -1,5 +1,6 @@
 Change history
 --------------
+* **Version 1.4.5.0 (2024-04-22)**: Updated NuGet packages, fixes https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/31.
 * **Version 1.4.4.0 (2024-03-03)**: Updated NuGet packages.
 * **Version 1.4.3.0 (2023-11-30)**: Added custom exception to handle error codes better in failure callback.
 * **Version 1.4.2.0 (2023-11-30)**: Fixed issue with System.Runtime, https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/30.
