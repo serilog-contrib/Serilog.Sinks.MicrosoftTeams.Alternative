@@ -43,6 +43,7 @@ public class MicrosoftTeamsSinkOptions
     /// <param name="minimumLogEventLevel">The minimum log event level to use.</param>
     /// <param name="omitPropertiesSection">A value indicating whether the properties section should be omitted or not.</param>
     /// <param name="useCodeTagsForMessage">A value indicating whether code tags are used for the message template or not.</param>
+    /// <param name="usePowerAutomateWorkflows">A value indicating whether Power Automate workflows are used or not.</param>
     /// <param name="proxy">The proxy address to use.</param>
     /// <param name="buttons">The buttons to add to a message.</param>
     /// <param name="failureCallback">The failure callback.</param>
@@ -58,6 +59,7 @@ public class MicrosoftTeamsSinkOptions
         LogEventLevel minimumLogEventLevel = LogEventLevel.Verbose,
         bool omitPropertiesSection = false,
         bool useCodeTagsForMessage = false,
+        bool usePowerAutomateWorkflows = false,
         string? proxy = null,
         IEnumerable<MicrosoftTeamsSinkOptionsButton>? buttons = null,
         Action<Exception>? failureCallback = null,
@@ -78,6 +80,7 @@ public class MicrosoftTeamsSinkOptions
         this.MinimumLogEventLevel = minimumLogEventLevel;
         this.OmitPropertiesSection = omitPropertiesSection;
         this.UseCodeTagsForMessage = useCodeTagsForMessage;
+        this.UsePowerAutomateWorkflows = usePowerAutomateWorkflows;
         this.Proxy = proxy;
         this.Buttons = buttons ?? new List<MicrosoftTeamsSinkOptionsButton>();
         this.FailureCallback = failureCallback;
@@ -129,6 +132,11 @@ public class MicrosoftTeamsSinkOptions
     /// Gets a value indicating whether code tags are used for the message template or not.
     /// </summary>
     public bool UseCodeTagsForMessage { get; }
+
+    /// <summary>
+    /// Gets a value indicating wheather Power Automate workflows are used or not.
+    /// </summary>
+    public bool UsePowerAutomateWorkflows { get; }
 
     /// <summary>
     /// Gets the proxy URL.
