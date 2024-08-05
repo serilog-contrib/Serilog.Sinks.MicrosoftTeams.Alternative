@@ -134,7 +134,7 @@ public class MicrosoftTeamsSinkOptions
     public bool UseCodeTagsForMessage { get; }
 
     /// <summary>
-    /// Gets a value indicating wheather Power Automate workflows are used or not.
+    /// Gets a value indicating wheather Power Automate workflows are used or not. (since O365 Incoming Webhooks are being shutdown)
     /// </summary>
     public bool UsePowerAutomateWorkflows { get; }
 
