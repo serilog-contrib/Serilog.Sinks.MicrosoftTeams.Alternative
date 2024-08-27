@@ -99,6 +99,22 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     }
 
     /// <summary>
+    /// Gets the adaptive text color of the attachment.
+    /// </summary>
+    /// <param name="level">The level.</param>
+    /// <returns>The attachment color as <see cref="AdaptiveCards.AdaptiveTextColor"/>.</returns>
+    private static AdaptiveCards.AdaptiveTextColor GetCardColor(LogEventLevel level)
+    {
+        return level switch
+        {
+            LogEventLevel.Information => AdaptiveCards.AdaptiveTextColor.Default,
+            LogEventLevel.Warning => AdaptiveCards.AdaptiveTextColor.Warning,
+            LogEventLevel.Error or LogEventLevel.Fatal => AdaptiveCards.AdaptiveTextColor.Attention,
+            _ => AdaptiveCards.AdaptiveTextColor.Default,
+        };
+    }
+
+    /// <summary>
     /// Gets the messages to send and groups them.
     /// </summary>
     /// <param name="events">The log events.</param>
@@ -161,8 +177,21 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
                     ? this.GetChannelUri(logEvent)
                     : this.options.WebHookUri;
 
-                var message = this.CreateMessage(logEvent);
-                var json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
+                string json = "";
+
+                if (this.options.UsePowerAutomateWorkflows)
+                {
+                    //JsonSerializerSettings.Converters.Add(new AdaptiveCards.AdaptiveCardConverter());
+
+                    var message = this.CreateMessage(logEvent);
+                    json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
+                }
+                else
+                {
+                    var message = this.CreateMessageCard(logEvent);
+                    json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
+                }
+
                 var result = await this.client.PostAsync(webHookUri, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
 
                 if (result.StatusCode == HttpStatusCode.TooManyRequests)
@@ -216,7 +245,7 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     /// </summary>
     /// <param name="logEvent">The log event.</param>
     /// <returns>A message card.</returns>
-    private MicrosoftTeamsMessageCard CreateMessage(MicrosoftExtendedLogEvent logEvent)
+    private MicrosoftTeamsMessageCard CreateMessageCard(MicrosoftExtendedLogEvent logEvent)
     {
         var renderedMessage = this.GetRenderedMessage(logEvent);
 
@@ -245,6 +274,67 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
         request.PotentialActions = new List<MicrosoftTeamsMessageAction>();
         this.options.Buttons!.ToList().ForEach(btn => request.PotentialActions.Add(new MicrosoftTeamsMessageAction("OpenUri", btn.Name, new MicrosoftTeamsMessageActionTargetUri(btn.Uri))));
         return request;
+    }
+
+    /// <summary>
+    /// Creates the message.
+    /// </summary>
+    /// <param name="logEvent">The log event.</param>
+    /// <returns>A message.</returns>
+    private MicrosoftTeamsMessage CreateMessage(MicrosoftExtendedLogEvent logEvent)
+    {
+        var renderedMessage = this.GetRenderedMessage(logEvent);
+
+        var message = new MicrosoftTeamsMessage();
+
+        var card = new AdaptiveCards.AdaptiveCard(new AdaptiveCards.AdaptiveSchemaVersion(1, 0))
+        {
+            Body = new List<AdaptiveCards.AdaptiveElement>
+            {
+                new AdaptiveCards.AdaptiveTextBlock
+                {
+                    Text = this.GetRenderedTitle(logEvent),
+                    Size = AdaptiveCards.AdaptiveTextSize.Medium,
+                    Weight = AdaptiveCards.AdaptiveTextWeight.Bolder,
+                    Style = AdaptiveCards.AdaptiveTextBlockStyle.Heading
+                },
+                new AdaptiveCards.AdaptiveTextBlock
+                {
+                    Text = this.options.UseCodeTagsForMessage ? $"```{Environment.NewLine}{renderedMessage}{Environment.NewLine}```" : renderedMessage,
+                    Wrap = true,
+                    Color = GetCardColor(logEvent.LogEvent.Level)
+                }
+            },
+            Actions = new List<AdaptiveCards.AdaptiveAction>()
+        };
+
+        message.Attachments.Add(new MicrosoftTeamsAttachment()
+        {
+            Content = card
+        });
+
+        if (!this.options.OmitPropertiesSection)
+        {
+            card.Body.Add(new AdaptiveCards.AdaptiveFactSet
+            {
+                Facts = this.GetFacts(logEvent).Select(f => new AdaptiveCards.AdaptiveFact(f.Name, f.Value)).ToList()
+            });
+        }
+
+        // Add static URL buttons from the options
+        if (this.options.Buttons.IsNullOrEmpty())
+        {
+            return message;
+        }
+
+        card.Actions = new List<AdaptiveCards.AdaptiveAction>();
+        this.options.Buttons!.ToList().ForEach(btn => card.Actions.Add(new AdaptiveCards.AdaptiveOpenUrlAction
+        {
+            Title = btn.Name,
+            Url = new Uri(btn.Uri)
+        }));
+
+        return message;
     }
 
     /// <summary>

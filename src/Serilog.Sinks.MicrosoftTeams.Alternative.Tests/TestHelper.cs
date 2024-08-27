@@ -43,12 +43,30 @@ public static class TestHelper
     /// Creates the logger.
     /// </summary>
     /// <param name="omitPropertiesSection">A value indicating whether the properties should be omitted or not.</param>
+    /// <param name="usePowerAutomateWorkflows">A value indicating wheather to use power automate workflow</param>
     /// <returns>An <see cref="ILogger"/>.</returns>
-    public static ILogger CreateLogger(bool omitPropertiesSection = false)
+    public static ILogger CreateLogger(bool omitPropertiesSection = false, bool usePowerAutomateWorkflows = false)
     {
         var logger = new LoggerConfiguration()
             .MinimumLevel.Verbose()
-            .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHook, "Integration Tests", omitPropertiesSection: omitPropertiesSection))
+            .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHook, "Integration Tests", omitPropertiesSection: omitPropertiesSection, usePowerAutomateWorkflows: usePowerAutomateWorkflows))
+            .CreateLogger();
+
+        return logger;
+    }
+
+    /// <summary>
+    /// Creates logger with Url
+    /// </summary>
+    /// <param name="url"></param>
+    /// <param name="omitPropertiesSection"></param>
+    /// <param name="usePowerAutomateWorkflows"></param>
+    /// <returns></returns>
+    public static ILogger CreateLoggerWithUrl(string url, bool omitPropertiesSection = false, bool usePowerAutomateWorkflows = false)
+    {
+        var logger = new LoggerConfiguration()
+            .MinimumLevel.Verbose()
+            .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(url, "Integration Tests", omitPropertiesSection: omitPropertiesSection, usePowerAutomateWorkflows: usePowerAutomateWorkflows))
             .CreateLogger();
 
         return logger;
