@@ -17,7 +17,7 @@
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>Github</RepositoryType>
         <PackageReleaseNotes>Version 1.4.7.0 (2024-06-04): Updated NuGet packages, fixes https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/32.</PackageReleaseNotes>
-        <PackageLicenseFile>License.txt</PackageLicenseFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
