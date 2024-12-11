@@ -483,4 +483,29 @@ public class MicrosoftTeamsSinkTest
             mockServer.LogEntries.Count(),
             "Wrong number of events sent to teams");
     }
+
+    /// <summary>
+    /// Tests the emitting of messages to the default channel when using power automate workflow
+    /// </summary>
+    [TestMethod]
+    public void EmitMessagesWithPowerAutomateWorkflow()
+    {
+        using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
+        this.logger = TestHelper.CreateLogger(false, true);
+        this.logger.Error("Message text {Property}", 4);
+        Thread.Sleep(2000);
+        Log.CloseAndFlush();
+
+        Assert.IsTrue(
+            mockServer
+                .LogEntries
+                .All(t => t.PartialMatchResult.IsPerfectMatch),
+            "Invalid requests made to the mock server"
+        );
+
+        Assert.AreEqual(
+            1,
+            mockServer.LogEntries.Count(),
+            "Wrong number of events sent to teams");
+    }
 }

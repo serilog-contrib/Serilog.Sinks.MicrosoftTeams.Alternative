@@ -16,8 +16,8 @@
         <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative</RepositoryUrl>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>Github</RepositoryType>
-        <PackageReleaseNotes>Version 1.4.7.0 (2024-06-04): Updated NuGet packages, fixes https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/32.</PackageReleaseNotes>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReleaseNotes>Version 1.4.8.0 (2024-08-27): Updated NuGet packages, fixes https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/33. Add option to use PowerAutomate Workflow and update card JSON structure.</PackageReleaseNotes>
+        <PackageLicenseFile>License.txt</PackageLicenseFile>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -31,6 +31,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AdaptiveCards" Version="3.1.0" />
         <PackageReference Include="GitVersion.MsBuild" Version="5.12.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
