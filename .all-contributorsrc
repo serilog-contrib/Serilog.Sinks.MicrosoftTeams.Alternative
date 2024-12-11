@@ -81,6 +81,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "veraw",
+      "name": "Wayne Vera",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2069157?v=4",
+      "profile": "https://github.com/veraw",
+      "contributions": [
+        "code",
+        "doc",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -89,5 +100,6 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true,
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs"
 }
