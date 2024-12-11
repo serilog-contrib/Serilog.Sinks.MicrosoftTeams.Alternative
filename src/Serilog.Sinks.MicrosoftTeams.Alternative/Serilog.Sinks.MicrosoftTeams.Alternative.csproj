@@ -16,7 +16,7 @@
         <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative</RepositoryUrl>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>Github</RepositoryType>
-        <PackageReleaseNotes>Version 1.4.8.0 (2024-08-27): Updated NuGet packages, fixes https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/33. Add option to use PowerAutomate Workflow and update card JSON structure.</PackageReleaseNotes>
+        <PackageReleaseNotes>Version 1.4.8.0 (2024-12-11): Removed support for Net6.0, added support for Net9.0, updated NuGet packages, fixes https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/33. Add option to use PowerAutomate Workflow and update card JSON structure.</PackageReleaseNotes>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
