@@ -82,7 +82,7 @@ public class MicrosoftTeamsSinkOptions
         this.UseCodeTagsForMessage = useCodeTagsForMessage;
         this.UsePowerAutomateWorkflows = usePowerAutomateWorkflows;
         this.Proxy = proxy;
-        this.Buttons = buttons ?? new List<MicrosoftTeamsSinkOptionsButton>();
+        this.Buttons = buttons ?? [];
         this.FailureCallback = failureCallback;
         this.QueueLimit = queueLimit ?? DefaultQueueLimit;
         this.ChannelHandler = channelHandler ?? new MicrosoftTeamsSinkChannelHandlerOptions();
@@ -134,7 +134,7 @@ public class MicrosoftTeamsSinkOptions
     public bool UseCodeTagsForMessage { get; }
 
     /// <summary>
-    /// Gets a value indicating wheather Power Automate workflows are used or not. (since O365 Incoming Webhooks are being shutdown)
+    /// A value indicating whether Power Automate workflows are used or not (since O365 Incoming Webhooks are being shutdown).
     /// </summary>
     public bool UsePowerAutomateWorkflows { get; }
 

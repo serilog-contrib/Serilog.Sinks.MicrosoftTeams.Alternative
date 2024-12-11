@@ -24,7 +24,7 @@ public class MicrosoftTeamsMessageAction
     {
         this.Type = type;
         this.Name = name;
-        this.Targets = new List<MicrosoftTeamsMessageActionTarget> { target };
+        this.Targets = [target];
     }
 
     /// <summary>

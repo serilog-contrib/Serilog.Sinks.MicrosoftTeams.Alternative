@@ -224,7 +224,7 @@ public class MicrosoftTeamsSinkTest
     {
         // Arrange.
         const string filterOnProperty = "MsTeams";
-        
+
         var logLevels = Enum.GetValues<LogEventLevel>();
         using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         int counter = 0;
@@ -364,7 +364,7 @@ public class MicrosoftTeamsSinkTest
                 .All(t => t.PartialMatchResult.IsPerfectMatch),
             "Invalid requests made to the mock server"
         );
-        
+
         foreach (var channelPair in channelDictionary)
         {
             Assert.AreEqual(
@@ -452,7 +452,7 @@ public class MicrosoftTeamsSinkTest
         const string missingChannelName = "SupportTeam";
 
         using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
-        
+
         this.logger = TestHelper.CreateLoggerWithChannels(
             new MicrosoftTeamsSinkChannelHandlerOptions(
                 filterOnProperty,
@@ -485,7 +485,7 @@ public class MicrosoftTeamsSinkTest
     }
 
     /// <summary>
-    /// Tests the emitting of messages to the default channel when using power automate workflow
+    /// Tests the emitting of messages to the default channel when using Power Automate workflows.
     /// </summary>
     [TestMethod]
     public void EmitMessagesWithPowerAutomateWorkflow()
@@ -508,4 +508,16 @@ public class MicrosoftTeamsSinkTest
             mockServer.LogEntries.Count(),
             "Wrong number of events sent to teams");
     }
+
+    ///// <summary>
+    ///// Tests the emitting of messages with the possibility to debug.
+    ///// </summary>
+    //[TestMethod]
+    //public async Task TestWithDebugging()
+    //{
+        //var webHook = Environment.GetEnvironmentVariable("MicrosoftTeamsWebhookUrlPowerAutomate") ?? string.Empty;
+        //var sink = new MicrosoftTeamsSink(new MicrosoftTeamsSinkOptions(webHook, usePowerAutomateWorkflows: true));
+        //var data = new List<LogEvent> { new(DateTimeOffset.Now, LogEventLevel.Information, null, new MessageTemplate("Test", []), []) };
+        //await sink.EmitBatchAsync(data);
+    //}
 }

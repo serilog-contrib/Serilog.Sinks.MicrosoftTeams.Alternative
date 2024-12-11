@@ -48,11 +48,11 @@ internal class MicrosoftTeamsMessageCard
     /// Gets or sets the sections of the card.
     /// </summary>
     [JsonProperty("sections")]
-    public IList<MicrosoftTeamsMessageSection> Sections { get; set; } = new List<MicrosoftTeamsMessageSection>();
+    public IList<MicrosoftTeamsMessageSection> Sections { get; set; } = [];
 
     /// <summary>
     /// Gets or sets the potential action buttons.
     /// </summary>
     [JsonProperty("potentialAction")]
-    public IList<MicrosoftTeamsMessageAction> PotentialActions { get; set; } = new List<MicrosoftTeamsMessageAction>();
+    public IList<MicrosoftTeamsMessageAction> PotentialActions { get; set; } = [];
 }

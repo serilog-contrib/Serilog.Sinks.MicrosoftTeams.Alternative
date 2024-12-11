@@ -119,7 +119,7 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     /// </summary>
     /// <param name="events">The log events.</param>
     /// <returns>A <see cref="List{T}"/> of <see cref="MicrosoftExtendedLogEvent"/>.</returns>
-    private IEnumerable<MicrosoftExtendedLogEvent> GetMessagesToSend(IEnumerable<LogEvent> events)
+    private List<MicrosoftExtendedLogEvent> GetMessagesToSend(IEnumerable<LogEvent> events)
     {
         var isFilterEnabled = this.options.ChannelHandler.IsFilterOnPropertyEnabled;
         var messagesToSend = new List<MicrosoftExtendedLogEvent>();
@@ -177,12 +177,10 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
                     ? this.GetChannelUri(logEvent)
                     : this.options.WebHookUri;
 
-                string json = "";
+                var json = string.Empty;
 
                 if (this.options.UsePowerAutomateWorkflows)
                 {
-                    //JsonSerializerSettings.Converters.Add(new AdaptiveCards.AdaptiveCardConverter());
-
                     var message = this.CreateMessage(logEvent);
                     json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
                 }
@@ -192,17 +190,22 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
                     json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
                 }
 
-                var result = await this.client.PostAsync(webHookUri, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
+                var result = await this.client
+                    .PostAsync(webHookUri, new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json))
+                    .ConfigureAwait(false);
 
                 if (result.StatusCode == HttpStatusCode.TooManyRequests)
                 {
-                    SelfLog.WriteLine("Too many requests");
+                    SelfLog.WriteLine(SinkConstants.TooManyRequestsMessage);
                 }
 
                 if (!result.IsSuccessStatusCode)
                 {
-                    throw new LoggingException($"Received failed result {result.StatusCode} when posting events to Microsoft Teams.", result.StatusCode);
+                    throw new LoggingException($"Received failed result {result.StatusCode} when posting events to Microsoft Teams.",
+                        result.StatusCode);
                 }
+
+                SelfLog.WriteLine($"Status code: {result.StatusCode}");
             }
             catch (Exception ex)
             {
@@ -252,27 +255,41 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
         var request = new MicrosoftTeamsMessageCard
         {
             Title = this.GetRenderedTitle(logEvent),
-            Text = this.options.UseCodeTagsForMessage ? $"```{Environment.NewLine}{renderedMessage}{Environment.NewLine}```" : renderedMessage,
+            Text = this.options.UseCodeTagsForMessage
+                ? $"```{Environment.NewLine}{renderedMessage}{Environment.NewLine}```"
+                : renderedMessage,
             Color = GetAttachmentColor(logEvent.LogEvent.Level),
-            Sections = this.options.OmitPropertiesSection ? new List<MicrosoftTeamsMessageSection>() : new[]
-            {
-                new MicrosoftTeamsMessageSection
+            Sections = this.options.OmitPropertiesSection
+                ? new List<MicrosoftTeamsMessageSection>()
+                : new[]
                 {
-                    Title = "Properties",
-                    Facts = this.GetFacts(logEvent).ToArray()
-                }
-            },
-            PotentialActions = new List<MicrosoftTeamsMessageAction>()
+                    new MicrosoftTeamsMessageSection
+                    {
+                        Title = SinkConstants.Properties,
+                        Facts = this.GetFacts(logEvent).ToArray()
+                    }
+                },
+            PotentialActions = []
         };
 
-        // Add static URL buttons from the options
+        // Add static URL buttons from the options.
         if (this.options.Buttons.IsNullOrEmpty())
         {
             return request;
         }
 
-        request.PotentialActions = new List<MicrosoftTeamsMessageAction>();
-        this.options.Buttons!.ToList().ForEach(btn => request.PotentialActions.Add(new MicrosoftTeamsMessageAction("OpenUri", btn.Name, new MicrosoftTeamsMessageActionTargetUri(btn.Uri))));
+        request.PotentialActions = [];
+
+        foreach (var button in this.options.Buttons!)
+        {
+            var action = new MicrosoftTeamsMessageAction(
+                SinkConstants.OpenUri,
+                button.Name,
+                new MicrosoftTeamsMessageActionTargetUri(button.Uri)
+            );
+            request.PotentialActions.Add(action);
+        }
+
         return request;
     }
 
@@ -284,13 +301,12 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     private MicrosoftTeamsMessage CreateMessage(MicrosoftExtendedLogEvent logEvent)
     {
         var renderedMessage = this.GetRenderedMessage(logEvent);
-
         var message = new MicrosoftTeamsMessage();
 
         var card = new AdaptiveCards.AdaptiveCard(new AdaptiveCards.AdaptiveSchemaVersion(1, 0))
         {
-            Body = new List<AdaptiveCards.AdaptiveElement>
-            {
+            Body =
+            [
                 new AdaptiveCards.AdaptiveTextBlock
                 {
                     Text = this.GetRenderedTitle(logEvent),
@@ -300,12 +316,14 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
                 },
                 new AdaptiveCards.AdaptiveTextBlock
                 {
-                    Text = this.options.UseCodeTagsForMessage ? $"```{Environment.NewLine}{renderedMessage}{Environment.NewLine}```" : renderedMessage,
+                    Text = this.options.UseCodeTagsForMessage
+                        ? $"```{Environment.NewLine}{renderedMessage}{Environment.NewLine}```"
+                        : renderedMessage,
                     Wrap = true,
                     Color = GetCardColor(logEvent.LogEvent.Level)
                 }
-            },
-            Actions = new List<AdaptiveCards.AdaptiveAction>()
+            ],
+            Actions = []
         };
 
         message.Attachments.Add(new MicrosoftTeamsAttachment()
@@ -321,18 +339,23 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
             });
         }
 
-        // Add static URL buttons from the options
+        // Add static URL buttons from the options.
         if (this.options.Buttons.IsNullOrEmpty())
         {
             return message;
         }
 
-        card.Actions = new List<AdaptiveCards.AdaptiveAction>();
-        this.options.Buttons!.ToList().ForEach(btn => card.Actions.Add(new AdaptiveCards.AdaptiveOpenUrlAction
+        card.Actions = [];
+
+        foreach (var button in this.options.Buttons!)
         {
-            Title = btn.Name,
-            Url = new Uri(btn.Uri)
-        }));
+            var action = new AdaptiveCards.AdaptiveOpenUrlAction
+            {
+                Title = button.Name,
+                Url = new Uri(button.Uri)
+            };
+            card.Actions.Add(action);
+        }
 
         return message;
     }
@@ -382,13 +405,13 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     {
         yield return new MicrosoftTeamsMessageFact
         {
-            Name = "Level",
+            Name = SinkConstants.Level,
             Value = logEvent.LogEvent.Level.ToString()
         };
 
         yield return new MicrosoftTeamsMessageFact
         {
-            Name = "MessageTemplate",
+            Name = SinkConstants.MessageTemplate,
             Value = this.options.UseCodeTagsForMessage ? $"```{Environment.NewLine}{logEvent.LogEvent.MessageTemplate.Text}{Environment.NewLine}```" : logEvent.LogEvent.MessageTemplate.Text
         };
 
@@ -396,7 +419,7 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
         {
             yield return new MicrosoftTeamsMessageFact
             {
-                Name = "Exception",
+                Name = SinkConstants.Exception,
                 Value = $"```{Environment.NewLine}{logEvent.LogEvent.Exception}{Environment.NewLine}```"
             };
         }
@@ -414,13 +437,13 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
         {
             yield return new MicrosoftTeamsMessageFact
             {
-                Name = "First occurrence",
+                Name = SinkConstants.FirstOccurence,
                 Value = logEvent.FirstOccurrence.ToString("dd.MM.yyyy HH:mm:sszzz", this.options.FormatProvider)
             };
 
             yield return new MicrosoftTeamsMessageFact
             {
-                Name = "Last occurrence",
+                Name = SinkConstants.LastOccurence,
                 Value = logEvent.LastOccurrence.ToString("dd.MM.yyyy HH:mm:sszzz", this.options.FormatProvider)
             };
         }
@@ -428,7 +451,7 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
         {
             yield return new MicrosoftTeamsMessageFact
             {
-                Name = "Occurred on",
+                Name = SinkConstants.OccuredOn,
                 Value = logEvent.FirstOccurrence.ToString("dd.MM.yyyy HH:mm:sszzz", this.options.FormatProvider)
             };
         }

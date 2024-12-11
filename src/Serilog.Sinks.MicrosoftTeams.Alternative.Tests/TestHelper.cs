@@ -25,6 +25,11 @@ public static class TestHelper
     private static readonly string TestWebHook = Environment.GetEnvironmentVariable("MicrosoftTeamsWebhookUrl") ?? $"http://localhost:{MockServerPort}";
 
     /// <summary>
+    /// The test web hook URL for Power Automate.
+    /// </summary>
+    private static readonly string TestWebHookPowerAutomate = Environment.GetEnvironmentVariable("MicrosoftTeamsWebhookUrlPowerAutomate") ?? $"http://localhost:{MockServerPort}";
+
+    /// <summary>
     /// Creates the logger.
     /// </summary>
     /// <param name="titleTemplate">The title template.</param>
@@ -43,25 +48,35 @@ public static class TestHelper
     /// Creates the logger.
     /// </summary>
     /// <param name="omitPropertiesSection">A value indicating whether the properties should be omitted or not.</param>
-    /// <param name="usePowerAutomateWorkflows">A value indicating wheather to use power automate workflow</param>
+    /// <param name="usePowerAutomateWorkflows">A value indicating whether Power Automate workflows are used or not.</param>
     /// <returns>An <see cref="ILogger"/>.</returns>
     public static ILogger CreateLogger(bool omitPropertiesSection = false, bool usePowerAutomateWorkflows = false)
     {
-        var logger = new LoggerConfiguration()
+        if (usePowerAutomateWorkflows)
+        {
+            var logger = new LoggerConfiguration()
+                .MinimumLevel.Verbose()
+                .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHookPowerAutomate, "Integration Tests", omitPropertiesSection: omitPropertiesSection, usePowerAutomateWorkflows: usePowerAutomateWorkflows))
+                .CreateLogger();
+
+            return logger;
+        }
+
+        var logger2 = new LoggerConfiguration()
             .MinimumLevel.Verbose()
             .WriteTo.MicrosoftTeams(new MicrosoftTeamsSinkOptions(TestWebHook, "Integration Tests", omitPropertiesSection: omitPropertiesSection, usePowerAutomateWorkflows: usePowerAutomateWorkflows))
             .CreateLogger();
 
-        return logger;
+        return logger2;
     }
 
     /// <summary>
-    /// Creates logger with Url
+    /// Creates the logger with an URL.
     /// </summary>
-    /// <param name="url"></param>
-    /// <param name="omitPropertiesSection"></param>
-    /// <param name="usePowerAutomateWorkflows"></param>
-    /// <returns></returns>
+    /// <param name="url">The URL.</param>
+    /// <param name="omitPropertiesSection">A value indicating whether the properties should be omitted or not.</param>
+    /// <param name="usePowerAutomateWorkflows">A value indicating whether Power Automate workflows are used or not.</param>
+    /// <returns>An <see cref="ILogger"/>.</returns>
     public static ILogger CreateLoggerWithUrl(string url, bool omitPropertiesSection = false, bool usePowerAutomateWorkflows = false)
     {
         var logger = new LoggerConfiguration()

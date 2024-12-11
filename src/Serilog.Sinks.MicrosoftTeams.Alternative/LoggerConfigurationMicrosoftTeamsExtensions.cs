@@ -37,7 +37,7 @@ public static class LoggerConfigurationMicrosoftTeamsExtensions
     /// <param name = "proxy" > The proxy address to use.</param>
     /// <param name="omitPropertiesSection">Indicates whether the properties section should be omitted or not.</param>
     /// <param name="useCodeTagsForMessage">A value indicating whether code tags are used for the message template or not.</param>
-    /// <param name="usePowerAutomateWorkflow">A value indicating whether to use power automate workflow when sending message or not.</param>
+    /// <param name="usePowerAutomateWorkflow">A value indicating whether Power Automate workflows are used or not.</param>
     /// <param name="buttons">The buttons to add to a message.</param>
     /// <param name="failureCallback">The failure callback.</param>
     /// <param name="queueLimit">The maximum number of events that should be stored in the batching queue.</param>

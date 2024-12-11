@@ -24,5 +24,5 @@ internal class MicrosoftTeamsMessageSection
     /// Gets or sets message section facts.
     /// </summary>
     [JsonProperty("facts")]
-    public IList<MicrosoftTeamsMessageFact> Facts { get; set; } = new List<MicrosoftTeamsMessageFact>();
+    public IList<MicrosoftTeamsMessageFact> Facts { get; set; } = [];
 }
