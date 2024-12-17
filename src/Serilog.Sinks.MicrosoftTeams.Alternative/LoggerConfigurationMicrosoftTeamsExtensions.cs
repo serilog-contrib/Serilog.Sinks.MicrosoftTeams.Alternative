@@ -37,7 +37,7 @@ public static class LoggerConfigurationMicrosoftTeamsExtensions
     /// <param name = "proxy" > The proxy address to use.</param>
     /// <param name="omitPropertiesSection">Indicates whether the properties section should be omitted or not.</param>
     /// <param name="useCodeTagsForMessage">A value indicating whether code tags are used for the message template or not.</param>
-    /// <param name="usePowerAutomateWorkflow">A value indicating whether Power Automate workflows are used or not.</param>
+    /// <param name="usePowerAutomateWorkflows">A value indicating whether Power Automate workflows are used or not.</param>
     /// <param name="buttons">The buttons to add to a message.</param>
     /// <param name="failureCallback">The failure callback.</param>
     /// <param name="queueLimit">The maximum number of events that should be stored in the batching queue.</param>
@@ -55,7 +55,7 @@ public static class LoggerConfigurationMicrosoftTeamsExtensions
         string? proxy = null,
         bool omitPropertiesSection = false,
         bool useCodeTagsForMessage = false,
-        bool usePowerAutomateWorkflow = false,
+        bool usePowerAutomateWorkflows = false,
         IEnumerable<MicrosoftTeamsSinkOptionsButton>? buttons = null,
         Action<Exception>? failureCallback = null,
         int? queueLimit = null,
@@ -71,7 +71,7 @@ public static class LoggerConfigurationMicrosoftTeamsExtensions
             restrictedToMinimumLevel,
             omitPropertiesSection,
             useCodeTagsForMessage,
-            usePowerAutomateWorkflow,
+            usePowerAutomateWorkflows,
             proxy,
             buttons,
             failureCallback,
