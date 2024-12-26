@@ -12,7 +12,7 @@ Serilog.Sinks.MicrosoftTeams.Alternative is a library to save logging informatio
 [![Known Vulnerabilities](https://snyk.io/test/github/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/badge.svg)](https://snyk.io/test/github/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative)
 [![Gitter](https://badges.gitter.im/Serilog-Sinks-MicrosoftTeams/community.svg)](https://gitter.im/Serilog-Sinks-MicrosoftTeams/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Available for
@@ -55,6 +55,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/veraw"><img src="https://avatars.githubusercontent.com/u/2069157?v=4?s=100" width="100px;" alt="Wayne Vera"/><br /><sub><b>Wayne Vera</b></sub></a><br /><a href="https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/commits?author=veraw" title="Code">💻</a> <a href="https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/commits?author=veraw" title="Documentation">📖</a> <a href="https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/commits?author=veraw" title="Tests">⚠️</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/jordan-reato"><img src="https://avatars.githubusercontent.com/u/48877695?v=4?s=100" width="100px;" alt="jordan-reato"/><br /><sub><b>jordan-reato</b></sub></a><br /><a href="https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/commits?author=jordan-reato" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
