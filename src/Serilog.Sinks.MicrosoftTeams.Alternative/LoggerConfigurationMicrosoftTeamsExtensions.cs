@@ -34,7 +34,7 @@ public static class LoggerConfigurationMicrosoftTeamsExtensions
     /// <param name="formatProvider">The format provider used for formatting the message.</param>
     /// <param name="restrictedToMinimumLevel"><see cref="LogEventLevel"/> value that specifies minimum logging
     /// level that will be allowed to be logged.</param>
-    /// <param name = "proxy" > The proxy address to use.</param>
+    /// <param name="proxy"> The proxy address to use.</param>
     /// <param name="omitPropertiesSection">Indicates whether the properties section should be omitted or not.</param>
     /// <param name="useCodeTagsForMessage">A value indicating whether code tags are used for the message template or not.</param>
     /// <param name="usePowerAutomateWorkflows">A value indicating whether Power Automate workflows are used or not.</param>

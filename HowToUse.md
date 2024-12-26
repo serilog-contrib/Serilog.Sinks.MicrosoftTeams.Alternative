@@ -20,9 +20,10 @@ The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks
 |outputTemplate|The output template for a log event.|`outputTemplate:"{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}"`|`null`|
 |formatProvider|The `IFormatProvider` to use. Supplies culture-specific formatting information. Check https://docs.microsoft.com/en-us/dotnet/api/system.iformatprovider?view=net-5.0.|`new CultureInfo("de-DE")`|`null`|
 |restrictedToMinimumLevel|The minimum level of the logging.|`restrictedToMinimumLevel: LogEventLevel.Verbose`|`LogEventLevel.Verbose`|
+|proxy|The proxy addresss used.|`proxy: "http://test.de/proxy"`|`null`|
 |omitPropertiesSection|Indicates whether the properties section should be omitted or not.|`omitPropertiesSection: true`|`false`|
 |useCodeTagsForMessage|A value indicating whether code tags are used for the message template or not. This is useful if you have complex messages that might get formatted as unwanted markdown elements.|`useCodeTagsForMessage:true`|`false`|
-|proxy|The proxy addresss used.|`proxy: "http://test.de/proxy"`|`null`|
+|usePowerAutomateWorkflows|A value indicating whether Power Automate workflows are used or not.|`usePowerAutomateWorkflows:true`|`false`|
 |buttons|Option to add static clickable buttons to each message.|`buttons: new[] { new MicrosoftTeamsSinkOptionsButton("Google", "https://google.de") }`|`null`|
 |failureCallback|Adds an option to add a failure callback action.|`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`|`null`|
 |queueLimit|The maximum number of events that should be stored in the batching queue.|`queueLimit: 10`|`int.MaxValue` or `2147483647`|
