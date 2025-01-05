@@ -10,7 +10,7 @@ Serilog.Sinks.MicrosoftTeams.Alternative is a library to save logging informatio
 [![Nuget](https://img.shields.io/badge/Serilog.Sinks.MicrosoftTeams.Alternative-Nuget-brightgreen.svg)](https://www.nuget.org/packages/Serilog.Sinks.MicrosoftTeams.Alternative/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Serilog.Sinks.MicrosoftTeams.Alternative.svg)](https://www.nuget.org/packages/Serilog.Sinks.MicrosoftTeams.Alternative/)
 [![Known Vulnerabilities](https://snyk.io/test/github/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/badge.svg)](https://snyk.io/test/github/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative)
-[![Gitter](https://badges.gitter.im/Serilog-Sinks-MicrosoftTeams/community.svg)](https://gitter.im/Serilog-Sinks-MicrosoftTeams/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Gitter](https://img.shields.io/matrix/Serilog-Sinks-MicrosoftTeams_community%3Agitter.im?server_fqdn=matrix.org)](https://matrix.to/#/#Serilog-Sinks-MicrosoftTeams_community:gitter.im)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
