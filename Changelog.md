@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.5.0.0 (2025-03-24)** : Fixes https://github.com/serilog-contrib/Serilog.Sinks.Postgresql.Alternative/issues/83, updates NuGet packages, deprecates `failureCallback`.
 * **Version 1.4.9.0 (2024-12-26)**: Fixed issue with Serilog.Configuration, fixes https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/pull/37. Smaller changes in docs.
 * **Version 1.4.8.0 (2024-12-11)**: Removed support for Net6.0, added support for Net9.0, updated NuGet packages, fixes https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/33. Add option to use PowerAutomate Workflow and update card JSON structure.
 * **Version 1.4.7.0 (2024-06-04)**: Updated NuGet packages, fixes https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/32.

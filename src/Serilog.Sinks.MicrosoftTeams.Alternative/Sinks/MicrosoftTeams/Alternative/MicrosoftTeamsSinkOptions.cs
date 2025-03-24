@@ -83,7 +83,10 @@ public class MicrosoftTeamsSinkOptions
         this.UsePowerAutomateWorkflows = usePowerAutomateWorkflows;
         this.Proxy = proxy;
         this.Buttons = buttons ?? [];
+        // Todo: Remove this in next version!
+#pragma warning disable CS0618 // Typ oder Element ist veraltet
         this.FailureCallback = failureCallback;
+#pragma warning restore CS0618 // Typ oder Element ist veraltet
         this.QueueLimit = queueLimit ?? DefaultQueueLimit;
         this.ChannelHandler = channelHandler ?? new MicrosoftTeamsSinkChannelHandlerOptions();
     }
@@ -151,6 +154,7 @@ public class MicrosoftTeamsSinkOptions
     /// <summary>
     /// Gets the failure callback.
     /// </summary>
+    [Obsolete("Use fallback logging instead. Check https://nblumhardt.com/2024/10/fallback-logging/.")]
     public Action<Exception>? FailureCallback { get; }
 
     /// <summary>

@@ -25,7 +25,7 @@ The project can be found on [nuget](https://www.nuget.org/packages/Serilog.Sinks
 |useCodeTagsForMessage|A value indicating whether code tags are used for the message template or not. This is useful if you have complex messages that might get formatted as unwanted markdown elements.|`useCodeTagsForMessage:true`|`false`|
 |usePowerAutomateWorkflows|A value indicating whether Power Automate workflows are used or not.|`usePowerAutomateWorkflows:true`|`false`|
 |buttons|Option to add static clickable buttons to each message.|`buttons: new[] { new MicrosoftTeamsSinkOptionsButton("Google", "https://google.de") }`|`null`|
-|failureCallback|Adds an option to add a failure callback action.|`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`|`null`|
+|~~failureCallback~~|~~Adds an option to add a failure callback action.~~  (Deprecated, use fallback logging instead.Check https://nblumhardt.com/2024/10/fallback-logging/.)|~~`failureCallback: e => Console.WriteLine($"Sink error: {e.Message}")`~~|~~`null`~~|
 |queueLimit|The maximum number of events that should be stored in the batching queue.|`queueLimit: 10`|`int.MaxValue` or `2147483647`|
 |channelHandler|Configuration for dispatching events to multiple channels.|See [Support for multiple channels](#support-for-multiple-channels)|`null`|
 
