@@ -39,7 +39,6 @@ public static class LoggerConfigurationMicrosoftTeamsExtensions
     /// <param name="useCodeTagsForMessage">A value indicating whether code tags are used for the message template or not.</param>
     /// <param name="usePowerAutomateWorkflows">A value indicating whether Power Automate workflows are used or not.</param>
     /// <param name="buttons">The buttons to add to a message.</param>
-    /// <param name="failureCallback">The failure callback.</param>
     /// <param name="queueLimit">The maximum number of events that should be stored in the batching queue.</param>
     /// <param name="channelHandler">The configuration for sending events to multiple channels.</param>
     /// <returns>Instance of <see cref="LoggerConfiguration"/> object.</returns>
@@ -57,7 +56,6 @@ public static class LoggerConfigurationMicrosoftTeamsExtensions
         bool useCodeTagsForMessage = false,
         bool usePowerAutomateWorkflows = false,
         IEnumerable<MicrosoftTeamsSinkOptionsButton>? buttons = null,
-        Action<Exception>? failureCallback = null,
         int? queueLimit = null,
         MicrosoftTeamsSinkChannelHandlerOptions? channelHandler = null)
     {
@@ -74,7 +72,6 @@ public static class LoggerConfigurationMicrosoftTeamsExtensions
             usePowerAutomateWorkflows,
             proxy,
             buttons,
-            failureCallback,
             queueLimit,
             channelHandler);
         return loggerSinkConfiguration.MicrosoftTeams(microsoftTeamsSinkOptions, restrictedToMinimumLevel);

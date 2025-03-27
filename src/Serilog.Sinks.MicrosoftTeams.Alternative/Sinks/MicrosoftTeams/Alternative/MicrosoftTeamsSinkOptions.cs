@@ -46,7 +46,6 @@ public class MicrosoftTeamsSinkOptions
     /// <param name="usePowerAutomateWorkflows">A value indicating whether Power Automate workflows are used or not.</param>
     /// <param name="proxy">The proxy address to use.</param>
     /// <param name="buttons">The buttons to add to a message.</param>
-    /// <param name="failureCallback">The failure callback.</param>
     /// <param name="queueLimit">The maximum number of events that should be stored in the batching queue.</param>
     /// <param name="channelHandler">The configuration for sending events to multiple channels.</param>
     public MicrosoftTeamsSinkOptions(
@@ -62,7 +61,6 @@ public class MicrosoftTeamsSinkOptions
         bool usePowerAutomateWorkflows = false,
         string? proxy = null,
         IEnumerable<MicrosoftTeamsSinkOptionsButton>? buttons = null,
-        Action<Exception>? failureCallback = null,
         int? queueLimit = null,
         MicrosoftTeamsSinkChannelHandlerOptions? channelHandler = null)
     {
@@ -83,10 +81,6 @@ public class MicrosoftTeamsSinkOptions
         this.UsePowerAutomateWorkflows = usePowerAutomateWorkflows;
         this.Proxy = proxy;
         this.Buttons = buttons ?? [];
-        // Todo: Remove this in next version!
-#pragma warning disable CS0618 // Typ oder Element ist veraltet
-        this.FailureCallback = failureCallback;
-#pragma warning restore CS0618 // Typ oder Element ist veraltet
         this.QueueLimit = queueLimit ?? DefaultQueueLimit;
         this.ChannelHandler = channelHandler ?? new MicrosoftTeamsSinkChannelHandlerOptions();
     }
@@ -150,12 +144,6 @@ public class MicrosoftTeamsSinkOptions
     /// Gets the buttons to add to a message.
     /// </summary>
     public IEnumerable<MicrosoftTeamsSinkOptionsButton>? Buttons { get; }
-
-    /// <summary>
-    /// Gets the failure callback.
-    /// </summary>
-    [Obsolete("Use fallback logging instead. Check https://nblumhardt.com/2024/10/fallback-logging/.")]
-    public Action<Exception>? FailureCallback { get; }
 
     /// <summary>
     /// Gets the maximum number of events that should be stored in the batching queue.

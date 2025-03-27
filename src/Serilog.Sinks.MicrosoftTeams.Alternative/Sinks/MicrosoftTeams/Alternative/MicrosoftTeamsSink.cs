@@ -171,50 +171,39 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
 
         foreach (var logEvent in messages)
         {
-            try
-            {
-                var webHookUri = isFilterEnabled
+            var webHookUri = isFilterEnabled
                     ? this.GetChannelUri(logEvent)
                     : this.options.WebHookUri;
 
-                var json = string.Empty;
+            var json = string.Empty;
 
-                if (this.options.UsePowerAutomateWorkflows)
-                {
-                    var message = this.CreateMessage(logEvent);
-                    json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
-                }
-                else
-                {
-                    var message = this.CreateMessageCard(logEvent);
-                    json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
-                }
-
-                var result = await this.client
-                    .PostAsync(webHookUri, new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json))
-                    .ConfigureAwait(false);
-
-                if (result.StatusCode == HttpStatusCode.TooManyRequests)
-                {
-                    SelfLog.WriteLine(SinkConstants.TooManyRequestsMessage);
-                }
-
-                if (!result.IsSuccessStatusCode)
-                {
-                    throw new LoggingException($"Received failed result {result.StatusCode} when posting events to Microsoft Teams.",
-                        result.StatusCode);
-                }
-
-                SelfLog.WriteLine($"Status code: {result.StatusCode}");
-            }
-            catch (Exception ex)
+            if (this.options.UsePowerAutomateWorkflows)
             {
-#pragma warning disable CS0618 // Typ oder Element ist veraltet
-                // Todo: Remove this in next version!
-                this.options.FailureCallback?.Invoke(ex);
-#pragma warning restore CS0618 // Typ oder Element ist veraltet
-                throw;
+                var message = this.CreateMessage(logEvent);
+                json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
             }
+            else
+            {
+                var message = this.CreateMessageCard(logEvent);
+                json = JsonConvert.SerializeObject(message, JsonSerializerSettings);
+            }
+
+            var result = await this.client
+                .PostAsync(webHookUri, new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json))
+                .ConfigureAwait(false);
+
+            if (result.StatusCode == HttpStatusCode.TooManyRequests)
+            {
+                SelfLog.WriteLine(SinkConstants.TooManyRequestsMessage);
+            }
+
+            if (!result.IsSuccessStatusCode)
+            {
+                throw new LoggingException($"Received failed result {result.StatusCode} when posting events to Microsoft Teams.",
+                    result.StatusCode);
+            }
+
+            SelfLog.WriteLine($"Status code: {result.StatusCode}");
         }
     }
 
