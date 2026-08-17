@@ -169,11 +169,16 @@ Do not silently "clean up" these, they are existing behaviour:
 - **The contributor table is generated.** The block between the `ALL-CONTRIBUTORS-LIST` markers in
   `README.md` and the file `.all-contributorsrc` belong to the all-contributors bot. Do not edit
   them by hand.
-- **`origin` points at the old repository name.** The remote is
-  `https://github.com/SeppPenner/Serilog.Sinks.MicrosoftTeams`, every URL in the code and the
-  documentation points at `serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative`. GitHub
-  redirects the old path, so fetch and push work, but do not "fix" URLs in files to match the
-  remote, it is the remote that is out of date.
+- **The repository was renamed and transferred.** It started as
+  `SeppPenner/Serilog.Sinks.MicrosoftTeams` and lives at
+  `serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative` since version 1.2.7.0. GitHub answers
+  the old path with a 301 and git follows it, so an old clone keeps working and only prints "This
+  repository moved" on every push. If a clone still has the old URL, fix the clone
+  (`git remote set-url`), never the URLs in the files.
+- **`BuildAndPushPackage.bat` must not echo the API key.** The script runs with `@ECHO on`, so every
+  line without a leading `@` ends up in the console output, including the expanded
+  `%NUGET_API_KEY%`. The two `dotnet nuget push` lines therefore carry an `@`. Keep it that way, and
+  do not paste console output of that script anywhere.
 - **The two batch files must run from the repository root.** Both start with `cd .\src`, that path
   is relative to the working directory, not to the script.
 - **The changelog version has four parts, the tag has three.** `1.5.0.0` in `Changelog.md` and in
