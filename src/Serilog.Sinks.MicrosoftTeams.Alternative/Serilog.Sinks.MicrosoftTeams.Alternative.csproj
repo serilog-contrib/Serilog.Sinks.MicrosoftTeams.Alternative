@@ -16,7 +16,7 @@
         <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative</RepositoryUrl>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>Github</RepositoryType>
-        <PackageReleaseNotes>Version 1.5.0.0 (2025-03-24): Fixes https://github.com/serilog-contrib/Serilog.Sinks.Postgresql.Alternative/issues/83, updates NuGet packages, deprecates `failureCallback`.</PackageReleaseNotes>
+        <PackageReleaseNotes>Version 1.6.0.0 (2026-08-17): Removed support for Net9.0, added support for Net10.0, removed the `failureCallback` option, removed the `System.Net.Http` dependency, updated NuGet packages. Fixed the first and last occurrence timestamps losing the offset of the log event, the `HttpClient` of the sink never being disposed and the swapped arguments of the empty webhook check.</PackageReleaseNotes>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>

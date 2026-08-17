@@ -1,6 +1,7 @@
 Change history
 --------------
 
+* **Version 1.6.0.0 (2026-08-17)**: Removed support for Net9.0, added support for Net10.0, removed the `failureCallback` option, removed the `System.Net.Http` dependency, updated NuGet packages. Fixed the first and last occurrence timestamps losing the offset of the log event, the `HttpClient` of the sink never being disposed and the swapped arguments of the empty webhook check.
 * **Version 1.5.0.0 (2025-03-24)** : Fixes https://github.com/serilog-contrib/Serilog.Sinks.Postgresql.Alternative/issues/83, updates NuGet packages, deprecates `failureCallback`.
 * **Version 1.4.9.0 (2024-12-26)**: Fixed issue with Serilog.Configuration, fixes https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/pull/37. Smaller changes in docs.
 * **Version 1.4.8.0 (2024-12-11)**: Removed support for Net6.0, added support for Net9.0, updated NuGet packages, fixes https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/33. Add option to use PowerAutomate Workflow and update card JSON structure.
