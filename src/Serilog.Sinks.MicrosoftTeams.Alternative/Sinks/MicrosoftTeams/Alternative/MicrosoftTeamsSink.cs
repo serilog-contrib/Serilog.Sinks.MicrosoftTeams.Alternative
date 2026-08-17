@@ -12,7 +12,7 @@ namespace Serilog.Sinks.MicrosoftTeams.Alternative;
 /// <summary>
 /// Implements <see cref="IBatchedLogEventSink"/> and provides means needed for sending Serilog log events to Microsoft Teams.
 /// </summary>
-public class MicrosoftTeamsSink : IBatchedLogEventSink
+public class MicrosoftTeamsSink : IBatchedLogEventSink, IDisposable
 {
     /// <summary>
     /// The json serializer settings.
@@ -75,11 +75,22 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
     /// <inheritdoc cref="IBatchedLogEventSink" />
     /// <summary>
     /// Allows sinks to perform periodic work without requiring additional threads or
-    /// timers (thus avoiding additional flush/shut-down complexity).   
+    /// timers (thus avoiding additional flush/shut-down complexity).
     /// </summary>
     public Task OnEmptyBatchAsync()
     {
         return Task.CompletedTask;
+    }
+
+    /// <inheritdoc cref="IDisposable" />
+    /// <summary>
+    /// Disposes the <see cref="HttpClient"/> owned by this sink. The surrounding
+    /// <see cref="PeriodicBatchingSink"/> calls this when it is disposed itself.
+    /// </summary>
+    public void Dispose()
+    {
+        this.client.Dispose();
+        GC.SuppressFinalize(this);
     }
 
     /// <summary>
@@ -142,7 +153,7 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
 
             if (foundSameLogEvent is null)
             {
-                messagesToSend.Add(new MicrosoftExtendedLogEvent(logEvent.Timestamp.DateTime, logEvent.Timestamp.DateTime, logEvent));
+                messagesToSend.Add(new MicrosoftExtendedLogEvent(logEvent.Timestamp, logEvent.Timestamp, logEvent));
             }
             else
             {
@@ -269,8 +280,6 @@ public class MicrosoftTeamsSink : IBatchedLogEventSink
         {
             return request;
         }
-
-        request.PotentialActions = [];
 
         foreach (var button in this.options.Buttons!)
         {

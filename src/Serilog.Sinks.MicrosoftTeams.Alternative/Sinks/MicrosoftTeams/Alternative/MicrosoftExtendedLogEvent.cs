@@ -16,11 +16,26 @@ public class MicrosoftExtendedLogEvent
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="MicrosoftExtendedLogEvent"/> class.
+    /// The occurrences are interpreted as local time, use the
+    /// <see cref="DateTimeOffset"/> overload to keep the offset of the log event.
     /// </summary>
     /// <param name="firstOccurrence">The first occurrence.</param>
     /// <param name="lastOccurrence">The last occurrence.</param>
     /// <param name="logEvent">The log event.</param>
     public MicrosoftExtendedLogEvent(DateTime firstOccurrence, DateTime lastOccurrence, LogEvent logEvent)
+    {
+        this.FirstOccurrence = firstOccurrence;
+        this.LastOccurrence = lastOccurrence;
+        this.LogEvent = logEvent;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MicrosoftExtendedLogEvent"/> class.
+    /// </summary>
+    /// <param name="firstOccurrence">The first occurrence.</param>
+    /// <param name="lastOccurrence">The last occurrence.</param>
+    /// <param name="logEvent">The log event.</param>
+    public MicrosoftExtendedLogEvent(DateTimeOffset firstOccurrence, DateTimeOffset lastOccurrence, LogEvent logEvent)
     {
         this.FirstOccurrence = firstOccurrence;
         this.LastOccurrence = lastOccurrence;

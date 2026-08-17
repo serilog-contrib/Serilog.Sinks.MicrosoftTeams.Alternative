@@ -102,7 +102,7 @@ public static class LoggerConfigurationMicrosoftTeamsExtensions
 
         if (string.IsNullOrWhiteSpace(microsoftTeamsSinkOptions.WebHookUri))
         {
-            throw new ArgumentNullException("The webhook URI is empty.", nameof(microsoftTeamsSinkOptions.WebHookUri));
+            throw new ArgumentException("The webhook URI is empty.", nameof(microsoftTeamsSinkOptions));
         }
 
         var batchingOptions = new PeriodicBatchingSinkOptions()
