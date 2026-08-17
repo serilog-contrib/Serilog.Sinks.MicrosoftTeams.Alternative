@@ -11,9 +11,9 @@ build produces a `.nupkg` and a `.snupkg`). The project is a maintained fork of
 One solution `src/Serilog.Sinks.MicrosoftTeams.Alternative.sln` with exactly two projects:
 
 - `src/Serilog.Sinks.MicrosoftTeams.Alternative/Serilog.Sinks.MicrosoftTeams.Alternative.csproj`,
-  the library, multi-targeting `net8.0;net9.0`.
+  the library, multi-targeting `net8.0;net10.0`.
 - `src/Serilog.Sinks.MicrosoftTeams.Alternative.Tests/Serilog.Sinks.MicrosoftTeams.Alternative.Tests.csproj`,
-  MSTest plus WireMock.Net, single target `net8.0`.
+  MSTest plus WireMock.Net, single target `net10.0`, `IsPackable=false`.
 
 Layout inside `src/Serilog.Sinks.MicrosoftTeams.Alternative`:
 
@@ -84,11 +84,11 @@ dotnet test src/Serilog.Sinks.MicrosoftTeams.Alternative.sln
 - Versions come from GitVersion.MsBuild out of the git tags, for example `1.5.1-1` for the first
   commit after tag `1.5.0`. Never edit a version property or an assembly version by hand.
 - The library multi-targets, so `dotnet build` produces `bin/Release/net8.0` and
-  `bin/Release/net9.0` plus the package next to them in `bin/Release`.
-- Tests are MSTest with WireMock.Net, in the single test project. `dotnet test` runs 13 tests. They
-  need no internet, but they do need the local TCP port **63210**, and they are wall clock bound:
-  every test sleeps between one and several seconds, a full run takes well over half a minute.
-  Never claim a test run happened without running it.
+  `bin/Release/net10.0` plus the package next to them in `bin/Release`.
+- Tests are MSTest with WireMock.Net, in the single test project. `dotnet test` runs 13 tests in
+  about three seconds. They need no internet, but they do need the local TCP port **63210**, and
+  they only pass when the two webhook environment variables are unset, see "Known quirks". Never
+  claim a test run happened without running it.
 - A behaviour change that the WireMock tests cannot see (the actual card rendering in Teams) is
   verified by setting `MicrosoftTeamsWebhookUrl` or `MicrosoftTeamsWebhookUrlPowerAutomate` and
   looking at the channel. Read the warning about those variables under "Known quirks" first.
@@ -146,10 +146,17 @@ Do not silently "clean up" these, they are existing behaviour:
   earlier one of the same batch when both exception messages are equal, no matter how different the
   rendered messages are. The merged event keeps the first one's text and only widens the first and
   last occurrence. With the default `BatchSizeLimit` of 1 this never happens.
-- **`System.Net.Http` 4.3.4 is referenced on purpose.** On modern target frameworks that package is
-  a facade that does nothing, it was added in version 1.4.1.0/1.4.2.0 against the `System.Runtime`
-  loading issue [#30](https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/30).
-  Removing it looks tempting and has broken consumers before.
+- **`System.Net.Http` is deliberately not referenced any more.** The package was added in version
+  1.4.1.0/1.4.2.0 against the `System.Runtime` loading issue
+  [#30](https://github.com/serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative/issues/30). On
+  net8.0 and later the framework provides those assemblies, the reference did nothing, and the Net
+  10 SDK rejects it with `NU1510`. Do not add it back, add a `NoWarn` for it even less.
+- **The tests close their logger, they do not sleep.** Every test ends with `CloseLogger`, which
+  disposes the logger and thereby flushes the batching sink. `Thread.Sleep` plus
+  `Log.CloseAndFlush()` used to stand there, which was wrong twice over: `Log.Logger` is never
+  assigned by these tests, and one second is not enough to drain a queue that the sink empties one
+  event per second. Leftover events then arrived at the mock server of the following test and made
+  its count assertion fail.
 - **The `Serilog004` pragmas in the tests are required.** Several tests build their message template
   from a `Guid` at runtime, which the Serilog analyzer rejects. The pragma pairs sit around exactly
   those calls, do not widen them to whole files.

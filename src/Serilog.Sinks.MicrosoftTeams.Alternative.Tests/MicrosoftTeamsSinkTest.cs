@@ -58,13 +58,12 @@ public class MicrosoftTeamsSinkTest
             Thread.Sleep(500);
         }
 
-        Thread.Sleep(1000);
-        Log.CloseAndFlush();
+        this.CloseLogger();
 
         Assert.IsTrue(
             mockServer
                 .LogEntries
-                .All(t => t.PartialMatchResult.IsPerfectMatch),
+                .All(t => t.PartialMatchResult?.IsPerfectMatch ?? false),
             "Invalid requests made to the mock server"
         );
 
@@ -83,13 +82,12 @@ public class MicrosoftTeamsSinkTest
         using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLogger(true);
         this.logger.Debug("Message text {Property}", 4);
-        Thread.Sleep(1000);
-        Log.CloseAndFlush();
+        this.CloseLogger();
 
         Assert.IsTrue(
             mockServer
                 .LogEntries
-                .All(t => t.PartialMatchResult.IsPerfectMatch),
+                .All(t => t.PartialMatchResult?.IsPerfectMatch ?? false),
             "Invalid requests made to the mock server"
         );
 
@@ -108,13 +106,12 @@ public class MicrosoftTeamsSinkTest
         using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(0));
         this.logger.Debug("Message text {Property}", 1);
-        Thread.Sleep(1000);
-        Log.CloseAndFlush();
+        this.CloseLogger();
 
         Assert.IsTrue(
             mockServer
                 .LogEntries
-                .All(t => t.PartialMatchResult.IsPerfectMatch),
+                .All(t => t.PartialMatchResult?.IsPerfectMatch ?? false),
             "Invalid requests made to the mock server"
         );
 
@@ -133,13 +130,12 @@ public class MicrosoftTeamsSinkTest
         using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(1));
         this.logger.Debug("Message text {Property}", 2);
-        Thread.Sleep(1000);
-        Log.CloseAndFlush();
+        this.CloseLogger();
 
         Assert.IsTrue(
             mockServer
                 .LogEntries
-                .All(t => t.PartialMatchResult.IsPerfectMatch),
+                .All(t => t.PartialMatchResult?.IsPerfectMatch ?? false),
             "Invalid requests made to the mock server"
         );
 
@@ -158,13 +154,12 @@ public class MicrosoftTeamsSinkTest
         using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLoggerWithButtons(this.buttons.Take(2));
         this.logger.Debug("Message text {Property}", 3);
-        Thread.Sleep(1000);
-        Log.CloseAndFlush();
+        this.CloseLogger();
 
         Assert.IsTrue(
             mockServer
                 .LogEntries
-                .All(t => t.PartialMatchResult.IsPerfectMatch),
+                .All(t => t.PartialMatchResult?.IsPerfectMatch ?? false),
             "Invalid requests made to the mock server"
         );
 
@@ -187,8 +182,7 @@ public class MicrosoftTeamsSinkTest
 #pragma warning disable Serilog004 // Constant MessageTemplate verifier
         this.logger.Debug(data);
 #pragma warning restore Serilog004 // Constant MessageTemplate verifier
-        Thread.Sleep(1000);
-        Log.CloseAndFlush();
+        this.CloseLogger();
     }
 
     /// <summary>
@@ -200,13 +194,12 @@ public class MicrosoftTeamsSinkTest
         using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLogger("My title: {Tenant}");
         this.logger.Debug("Message text {Property} for tenant {Tenant}", 1, "Tenant1");
-        Thread.Sleep(1000);
-        Log.CloseAndFlush();
+        this.CloseLogger();
 
         Assert.IsTrue(
             mockServer
                 .LogEntries
-                .All(t => t.PartialMatchResult.IsPerfectMatch),
+                .All(t => t.PartialMatchResult?.IsPerfectMatch ?? false),
             "Invalid requests made to the mock server"
         );
 
@@ -254,14 +247,13 @@ public class MicrosoftTeamsSinkTest
             counter++;
         }
 
-        Thread.Sleep(1000);
-        Log.CloseAndFlush();
+        this.CloseLogger();
 
         // Assert.
         Assert.IsTrue(
             mockServer
                 .LogEntries
-                .All(t => t.PartialMatchResult.IsPerfectMatch),
+                .All(t => t.PartialMatchResult?.IsPerfectMatch ?? false),
             "Invalid requests made to the mock server"
         );
 
@@ -298,14 +290,13 @@ public class MicrosoftTeamsSinkTest
         var loggerWithContext = this.logger.ForContext(filterOnProperty, channelName);
         loggerWithContext.Information("Demo for a specific channel");
 
-        Thread.Sleep(1000);
-        Log.CloseAndFlush();
+        this.CloseLogger();
 
         // Assert.
         Assert.IsTrue(
             mockServer
                 .LogEntries
-                .All(t => t.PartialMatchResult.IsPerfectMatch),
+                .All(t => t.PartialMatchResult?.IsPerfectMatch ?? false),
             "Invalid requests made to the mock server"
         );
 
@@ -354,14 +345,13 @@ public class MicrosoftTeamsSinkTest
             loggerForChannel.Information("Demo for the channel {Channel}", channelPair.Key);
         }
 
-        Thread.Sleep(1000);
-        Log.CloseAndFlush();
+        this.CloseLogger();
 
         // Assert.
         Assert.IsTrue(
             mockServer
                 .LogEntries
-                .All(t => t.PartialMatchResult.IsPerfectMatch),
+                .All(t => t.PartialMatchResult?.IsPerfectMatch ?? false),
             "Invalid requests made to the mock server"
         );
 
@@ -369,7 +359,7 @@ public class MicrosoftTeamsSinkTest
         {
             Assert.AreEqual(
                 1,
-                mockServer.LogEntries.Count(t => t.RequestMessage.Url == channelPair.Value),
+                mockServer.LogEntries.Count(t => t.RequestMessage?.Url == channelPair.Value),
                 $"Wrong event count for the channel {channelPair.Key}"
             );
         }
@@ -414,14 +404,13 @@ public class MicrosoftTeamsSinkTest
             loggerForChannel.Information("Demo for the channel {Channel}", channelPair.Key);
         }
 
-        Thread.Sleep(1000);
-        Log.CloseAndFlush();
+        this.CloseLogger();
 
         // Assert.
         Assert.IsTrue(
             mockServer
                 .LogEntries
-                .All(t => t.PartialMatchResult.IsPerfectMatch),
+                .All(t => t.PartialMatchResult?.IsPerfectMatch ?? false),
             "Invalid requests made to the mock server"
         );
 
@@ -429,7 +418,7 @@ public class MicrosoftTeamsSinkTest
         {
             Assert.AreEqual(
                 1,
-                mockServer.LogEntries.Count(t => t.RequestMessage.Url == channelPair.Value),
+                mockServer.LogEntries.Count(t => t.RequestMessage?.Url == channelPair.Value),
                 $"Wrong event count for the channel {channelPair.Key}"
             );
         }
@@ -467,14 +456,13 @@ public class MicrosoftTeamsSinkTest
         var loggerWithContext = this.logger.ForContext(filterOnProperty, missingChannelName);
         loggerWithContext.Information("Demo for a missing channel emiting to default");
 
-        Thread.Sleep(1000);
-        Log.CloseAndFlush();
+        this.CloseLogger();
 
         // Assert.
         Assert.IsTrue(
             mockServer
                 .LogEntries
-                .All(t => t.PartialMatchResult.IsPerfectMatch),
+                .All(t => t.PartialMatchResult?.IsPerfectMatch ?? false),
             "Invalid requests made to the mock server"
         );
 
@@ -493,13 +481,12 @@ public class MicrosoftTeamsSinkTest
         using var mockServer = TestHelper.CreateMockServerWithDefaultChannel();
         this.logger = TestHelper.CreateLogger(false, true);
         this.logger.Error("Message text {Property}", 4);
-        Thread.Sleep(2000);
-        Log.CloseAndFlush();
+        this.CloseLogger();
 
         Assert.IsTrue(
             mockServer
                 .LogEntries
-                .All(t => t.PartialMatchResult.IsPerfectMatch),
+                .All(t => t.PartialMatchResult?.IsPerfectMatch ?? false),
             "Invalid requests made to the mock server"
         );
 
@@ -507,6 +494,17 @@ public class MicrosoftTeamsSinkTest
             1,
             mockServer.LogEntries.Count(),
             "Wrong number of events sent to teams");
+    }
+
+    /// <summary>
+    /// Closes the logger of the running test and waits until every queued event has been sent.
+    /// Without this, the batching sink of one test keeps posting into the mock server of the next
+    /// one, because all tests share the same port.
+    /// </summary>
+    private void CloseLogger()
+    {
+        (this.logger as IDisposable)?.Dispose();
+        this.logger = null;
     }
 
     ///// <summary>
