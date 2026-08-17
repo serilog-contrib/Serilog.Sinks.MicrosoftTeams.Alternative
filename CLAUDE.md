@@ -48,9 +48,6 @@ Layout inside `src/Serilog.Sinks.MicrosoftTeams.Alternative.Tests`:
 - `appsettings.TwoChannelsExample.json` and `TestException.txt`: copied to the output directory with
   `CopyToOutputDirectory=Always`.
 - `GlobalUsings.cs`: all usings of the test project.
-- `Serilog - Backup.Sinks.MicrosoftTeams.Alternative.Tests.csproj`: a Visual Studio leftover that is
-  tracked by mistake. It is not part of the solution and holds the package versions of 2022. It has
-  no business here, remove it.
 
 Repository root: `README.md` (badges, target frameworks, contributor table), `HowToUse.md` (the
 actual user documentation with the option table), `Changelog.md`, `Updating.md` (the five step
