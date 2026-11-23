@@ -186,23 +186,54 @@ Do not silently "clean up" these, they are existing behaviour:
 
 ## Releasing
 
+**Every new version is released completely.** Changelog, README, nuget.org, GitHub Packages and a
+GitHub release belong to every version, none of these steps is optional and none of them waits for
+a separate request.
+
 1. Make the change.
 2. Add an entry at the top of `Changelog.md` in the existing format:
    `* **Version 1.6.0.0 (2026-08-17)**: Short description.`
 3. Put the same text into `PackageReleaseNotes` in
    `src/Serilog.Sinks.MicrosoftTeams.Alternative/Serilog.Sinks.MicrosoftTeams.Alternative.csproj`,
    in the format `Version 1.6.0.0 (2026-08-17): Short description.`.
-4. Commit that.
-5. Tag the commit with the plain version number, no `v` prefix (`1.5.0`, `1.4.9`, ...). The existing
+4. Update `README.md` for every version, the part above `## Contributors`. The `## Available for`
+   list has to match the target frameworks, and nothing there may describe a state the package has
+   left behind.
+5. Commit that.
+6. Tag the commit with the plain version number, no `v` prefix (`1.5.0`, `1.4.9`, ...). The existing
    tags are lightweight tags, create new ones the same way.
-6. Push the commits and the tag.
-7. Only now run `BuildAndPushPackage.bat` from the repository root. It deletes every `bin` and `obj`
+7. Push the commits and the tag.
+8. Only now run `BuildAndPushPackage.bat` from the repository root. It deletes every `bin` and `obj`
    below `src`, builds in Release and pushes `*.nupkg` and `*.snupkg` to nuget.org with
-   `%NUGET_API_KEY%`.
+   `%NUGET_API_KEY%`. Call it with its full path: the Claude Code shell sets
+   `NoDefaultCurrentDirectoryInExePath=1`, so cmd does not find a bare `BuildAndPushPackage.bat` in
+   the current directory. Its `dotnet restore` has no explicit source and fails with `NU1301` while
+   the private feed of the machine is unreachable, then run its steps by hand with
+   `--source https://api.nuget.org/v3/index.json` on the restore. A push to nuget.org cannot be
+   taken back, the version is burned even after unlisting. nuget.org needs a few minutes to
+   validate a new version before it is listed.
+9. Publish the same `.nupkg` from `src/Serilog.Sinks.MicrosoftTeams.Alternative/bin/Release` to
+   GitHub Packages, `https://nuget.pkg.github.com/serilog-contrib/index.json`. The script does not
+   do that. The API key is a GitHub token with the scope `write:packages`, for example from
+   `gh auth token`. If `gh auth status` lists no `write:packages`, the user has to run
+   `gh auth refresh -h github.com -s write:packages,read:packages`, it needs a browser login.
+   GitHub Packages takes no symbol packages, push the `.nupkg` only.
+10. Create the GitHub release:
+    `gh release create 1.6.0 -R serilog-contrib/Serilog.Sinks.MicrosoftTeams.Alternative --verify-tag --latest --title "Version 1.6.0.0 (2026-08-17)" --notes-file <file>`.
+    The notes are the changelog sentence plus the line
+    `NuGet: https://www.nuget.org/packages/Serilog.Sinks.MicrosoftTeams.Alternative/1.6.0`. Write
+    credits as `` `@name` `` in backticks, a bare `@name` notifies that person again.
 
 The tag has to exist **before** the package build, otherwise GitVersion burns a prerelease version
 such as `1.6.0-1+Branch.master.Sha...` into the published package. `Updating.md` describes the same
 order in shorter words.
+
+Every tag has a GitHub release, the history was completed on 2026-11-23. Versions 1.0.0 to 1.2.5
+were published under the former package id `HaemmerElectronics.SeppPenner.Serilog.Sinks.MicrosoftTeams`,
+the current id starts with 1.2.6. They are not missing on nuget.org, never push them under the
+current id. On nuget.org the id `Serilog.Sinks.MicrosoftTeams` belongs to an unrelated package
+(0.1.0 to 0.2.1), never push to it. GitHub Packages holds a stray 1.2.6 under that id, leave it
+alone.
 
 ## Git
 
