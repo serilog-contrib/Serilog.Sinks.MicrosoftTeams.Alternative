@@ -11,9 +11,9 @@ build produces a `.nupkg` and a `.snupkg`). The project is a maintained fork of
 One solution `src/Serilog.Sinks.MicrosoftTeams.Alternative.sln` with exactly two projects:
 
 - `src/Serilog.Sinks.MicrosoftTeams.Alternative/Serilog.Sinks.MicrosoftTeams.Alternative.csproj`,
-  the library, multi-targeting `net8.0;net10.0`.
+  the library, multi-targeting `net10.0;net11.0`.
 - `src/Serilog.Sinks.MicrosoftTeams.Alternative.Tests/Serilog.Sinks.MicrosoftTeams.Alternative.Tests.csproj`,
-  MSTest plus WireMock.Net, single target `net10.0`, `IsPackable=false`.
+  MSTest plus WireMock.Net, single target `net11.0`, `IsPackable=false`.
 
 Layout inside `src/Serilog.Sinks.MicrosoftTeams.Alternative`:
 
@@ -83,8 +83,8 @@ dotnet test src/Serilog.Sinks.MicrosoftTeams.Alternative.sln
   missing XML doc comment (`CS1591`) is a build error, not a hint.
 - Versions come from GitVersion.MsBuild out of the git tags, for example `1.5.1-1` for the first
   commit after tag `1.5.0`. Never edit a version property or an assembly version by hand.
-- The library multi-targets, so `dotnet build` produces `bin/Release/net8.0` and
-  `bin/Release/net10.0` plus the package next to them in `bin/Release`.
+- The library multi-targets, so `dotnet build` produces `bin/Release/net10.0` and
+  `bin/Release/net11.0` plus the package next to them in `bin/Release`.
 - Tests are MSTest with WireMock.Net, in the single test project. `dotnet test` runs 13 tests in
   about three seconds. They need no internet, but they do need the local TCP port **63210**, and
   they only pass when the two webhook environment variables are unset, see "Known quirks". Never
